@@ -1,7 +1,7 @@
 {
-  "name": "betaflight-configurator",
-  "productName": "Betaflight Configurator",
-  "description": "Crossplatform configuration tool for Betaflight flight control system.",
+  "name": "heliflight-configurator",
+  "productName": "Heliflight Configurator",
+  "description": "Crossplatform configuration tool for Heliflight flight control system.",
   "version": "10.7.1",
   "main": "main.html",
   "chromium-args" : "--disable-features=nw2",
@@ -20,7 +20,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "github.com/betaflight/betaflight-configurator"
+    "url": "github.com/heliflight/heliflight-configurator"
   },
   "webview": {
     "partitions": [
@@ -37,7 +37,7 @@
       }
     ]
   },
-  "author": "The Betaflight open source project.",
+  "author": "The Heliflight open source project.",
   "license": "GPL-3.0",
   "engines": {
     "node": "10.x"

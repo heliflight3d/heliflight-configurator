@@ -2,10 +2,10 @@
     "manifest_version": 2,
     "minimum_chrome_version": "49",
     "version": "10.7.1",
-    "author": "Betaflight Squad",
-    "name": "Betaflight - Configurator",
-    "short_name": "Betaflight",
-    "description": "Crossplatform configuration tool for Betaflight flight control system",
+    "author": "Heliflight Squad",
+    "name": "Heliflight - Configurator",
+    "short_name": "Heliflight",
+    "description": "Crossplatform configuration tool for Heliflight flight control system",
 
     "offline_enabled": true,
 
