@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Heliflight Configurator
+Comment=Crossplatform configuration tool for the Heliflight flight control system
+Exec=/opt/heliflight/heliflight-configurator/heliflight-configurator
+Icon=/opt/heliflight/heliflight-configurator/icon/bf_icon_128.png
+Terminal=false
+Type=Application
+Categories=Utility

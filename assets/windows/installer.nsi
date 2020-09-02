@@ -10,14 +10,14 @@
 # ${SOURCE_FOLDER} - Source folder for the application files
 
 # Some definitions
-!define SOURCE_FILES          "..\..\${SOURCE_FOLDER}\betaflight-configurator\${PLATFORM}\*"
-!define APP_NAME              "Betaflight Configurator"
-!define COMPANY_NAME          "The Betaflight open source project."
-!define GROUP_NAME            "Betaflight"
-!define FOLDER_NAME           "Betaflight-Configurator"
-!define FILE_NAME_INSTALLER   "betaflight-configurator-installer_${VERSION}_${PLATFORM}.exe"
-!define FILE_NAME_UNINSTALLER "uninstall-betaflight-configurator.exe"
-!define FILE_NAME_EXECUTABLE  "betaflight-configurator.exe"
+!define SOURCE_FILES          "..\..\${SOURCE_FOLDER}\heliflight-configurator\${PLATFORM}\*"
+!define APP_NAME              "Heliflight Configurator"
+!define COMPANY_NAME          "The Heliflight open source project."
+!define GROUP_NAME            "Heliflight"
+!define FOLDER_NAME           "Heliflight-Configurator"
+!define FILE_NAME_INSTALLER   "heliflight-configurator-installer_${VERSION}_${PLATFORM}.exe"
+!define FILE_NAME_UNINSTALLER "uninstall-heliflight-configurator.exe"
+!define FILE_NAME_EXECUTABLE  "heliflight-configurator.exe"
 !define LICENSE               "..\..\LICENSE"
 !define MUI_WELCOMEFINISHPAGE_BITMAP ".\bf_installer.bmp"
 

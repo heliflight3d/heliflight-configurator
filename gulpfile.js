@@ -40,7 +40,7 @@ const RELEASE_DIR = './release/';
 const CORDOVA_DIR = './cordova/';
 const CORDOVA_DIST_DIR = './dist_cordova/';
 
-const LINUX_INSTALL_DIR = '/opt/betaflight';
+const LINUX_INSTALL_DIR = '/opt/heliflight';
 
 // Global variable to hold the change hash from when we get it, to when we use it.
 var gitChangeSetId;
@@ -49,7 +49,7 @@ var nwBuilderOptions = {
     version: '0.44.2',
     files: './dist/**/*',
     macIcns: './src/images/bf_icon.icns',
-    macPlist: { 'CFBundleDisplayName': 'Betaflight Configurator'},
+    macPlist: { 'CFBundleDisplayName': 'Heliflight Configurator'},
     winIco: './src/images/bf_icon.ico',
     zip: false
 };
@@ -565,7 +565,7 @@ function release_zip(arch, appDirectory) {
     const output = getReleaseFilename(arch, 'zip');
     const base = path.join(appDirectory, pkg.name, arch);
 
-    return compressFiles(src, base, output, 'Betaflight Configurator');
+    return compressFiles(src, base, output, 'Heliflight Configurator');
 }
 
 // Create distribution package for chromeos platform
@@ -694,10 +694,10 @@ function release_osx64(appDirectory) {
             target: path.join(RELEASE_DIR, getReleaseFilename('macOS', 'dmg')),
             basepath: path.join(appDirectory, pkg.name, 'osx64'),
             specification: {
-                title: 'Betaflight Configurator',
+                title: 'Heliflight Configurator',
                 contents: [
                     { 'x': 448, 'y': 342, 'type': 'link', 'path': '/Applications' },
-                    { 'x': 192, 'y': 344, 'type': 'file', 'path': pkg.name + '.app', 'name': 'Betaflight Configurator.app' }
+                    { 'x': 192, 'y': 344, 'type': 'file', 'path': pkg.name + '.app', 'name': 'Heliflight Configurator.app' }
                 ],
                 background: path.join(__dirname, 'assets/osx/dmg-background.png'),
                 format: 'UDZO',

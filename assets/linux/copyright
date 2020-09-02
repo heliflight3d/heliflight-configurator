@@ -1,9 +1,9 @@
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
-Upstream-Name: Betaflight Configurator
-Source: https://github.com/betaflight/betaflight-configurator
+Upstream-Name: Heliflight Configurator
+Source: https://github.com/heliflight/heliflight-configurator
 
 Files: *
-Copyright: Copyright 2018 The Betaflight open source project
+Copyright: Copyright 2018 The Heliflight open source project
 License: GPL-3
 
 License: GPL-3
