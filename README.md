@@ -1,16 +1,15 @@
-# Betaflight Configurator
+# HeliFlight Configurator
 
-![Betaflight](http://static.rcgroups.net/forums/attachments/6/1/0/3/7/6/a9088900-228-bf_logo.jpg)
+HeliFlight Configurator is a crossplatform configuration tool for the HeliFlight flight control system.
 
-[![Crowdin](https://d322cqt584bo4o.cloudfront.net/betaflight-configurator/localized.svg)](https://crowdin.com/project/betaflight-configurator) [![Build Status](https://travis-ci.com/betaflight/betaflight-configurator.svg?branch=master)](https://travis-ci.com/betaflight/betaflight-configurator) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=betaflight_betaflight-configurator&metric=alert_status)](https://sonarcloud.io/dashboard?id=betaflight_betaflight-configurator) [![Build Status](https://dev.azure.com/Betaflight/Betaflight%20Nightlies/_apis/build/status/betaflight.betaflight-configurator?branchName=master)](https://dev.azure.com/Betaflight/Betaflight%20Nightlies/_build/latest?definitionId=1&branchName=master)
+It runs as an app within Google Chrome and allows you to configure the HeliFlight firmware.
 
-Betaflight Configurator is a crossplatform configuration tool for the Betaflight flight control system.
+There is also now a standalone version available, since Google Chrome Apps are getting deprecated on platforms that aren't Chrome OS.
 
-It runs as an app within Google Chrome and allows you to configure the Betaflight software running on any [supported Betaflight target](https://github.com/betaflight/betaflight/tree/master/src/main/target).
+HeliFlight Configurator is forked from Betaflight Configurator.
 
-There is also now a standalone version available, since Google Chrome Apps are getting deprecated on platforms that aren't Chrome OS. [Downloads are available in Releases.](https://github.com/betaflight/betaflight-configurator/releases)
 
-Various types of aircraft are supported by the tool and by Betaflight, e.g. quadcopters, hexacopters, octocopters and fixed-wing aircraft.
+## Betaflight README below
 
 ## Authors
 
