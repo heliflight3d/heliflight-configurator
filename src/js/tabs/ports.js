@@ -34,27 +34,14 @@ TABS.ports.initialize = function (callback, scrollPosition) {
 
     if (semver.gte(CONFIG.apiVersion, "1.31.0")) {
         functionRules.push({ name: 'ESC_SENSOR', groups: ['sensors'], maxPorts: 1 });
-        functionRules.push({ name: 'TBS_SMARTAUDIO', groups: ['peripherals'], maxPorts: 1 });
-    }
-
-    if (semver.gte(CONFIG.apiVersion, "1.27.0")) {
-        functionRules.push({ name: 'IRC_TRAMP', groups: ['peripherals'], maxPorts: 1 });
     }
 
     if (semver.gte(CONFIG.apiVersion, "1.32.0")) {
         functionRules.push({ name: 'TELEMETRY_IBUS', groups: ['telemetry'], maxPorts: 1 });
     }
 
-    if (semver.gte(CONFIG.apiVersion, "1.36.0")) {
-        functionRules.push({ name: 'RUNCAM_DEVICE_CONTROL', groups: ['peripherals'], maxPorts: 1 });
-    }
-
     if (semver.gte(CONFIG.apiVersion, "1.37.0")) {
         functionRules.push({ name: 'LIDAR_TF', groups: ['peripherals'], maxPorts: 1 });
-    }
-
-    if (semver.gte(CONFIG.apiVersion, API_VERSION_1_43)) {
-        functionRules.push({ name: 'FRSKY_OSD', groups: ['peripherals'], maxPorts: 1 });
     }
 
     for (var i = 0; i < functionRules.length; i++) {
