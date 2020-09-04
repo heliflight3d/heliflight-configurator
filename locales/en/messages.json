@@ -3,7 +3,7 @@
         "message": "0"
     },
     "windowTitle": {
-        "message": "Betaflight Configurator",
+        "message": "HeliFlight Configurator",
         "description": "Title of the application window, usually not translated"
     },
     "yes": {
@@ -247,10 +247,10 @@
         "message": "Show update notifications for unstable versions of the configurator"
     },
     "configuratorUpdateNotice": {
-        "message": "You are using an outdated version of the <b>Betaflight Configurator</b>.<br>$t(configuratorUpdateHelp.message)"
+        "message": "You are using an outdated version of the <b>HeliFlight Configurator</b>.<br>$t(configuratorUpdateHelp.message)"
     },
     "configuratorUpdateHelp": {
-        "message": "Using a newer version of the firmware with an outdated version of Configurator means that changing some settings will result in a <strong>corrupted firmware configuration and a non-working craft</strong>. Furthermore, some features of the firmware will only be configurable in CLI.<br><strong>Betaflight Configurator version <b>$1</b> is available for download online</strong>, please visit <a href=\"$2\" target=\"_blank\" rel=\"noopener noreferrer\">this page</a> to download and install the latest version with fixes and improvements.<br>Please close the configurator window before updating."
+        "message": "Using a newer version of the firmware with an outdated version of Configurator means that changing some settings will result in a <strong>corrupted firmware configuration and a non-working craft</strong>. Furthermore, some features of the firmware will only be configurable in CLI.<br><strong>HeliFlight Configurator version <b>$1</b> is available for download online</strong>, please visit <a href=\"$2\" target=\"_blank\" rel=\"noopener noreferrer\">this page</a> to download and install the latest version with fixes and improvements.<br>Please close the configurator window before updating."
     },
     "configuratorUpdateWebsite": {
         "message": "Go to Release Website"
@@ -308,9 +308,6 @@
     "tabSetup": {
         "message": "Setup"
     },
-    "tabSetupOSD": {
-        "message": "OSD Setup"
-    },
     "tabConfiguration": {
         "message": "Configuration"
     },
@@ -334,12 +331,6 @@
     },
     "tabTransponder": {
         "message": "Race Transponder"
-    },
-    "tabOsd": {
-        "message": "OSD"
-    },
-    "tabVtx": {
-        "message": "Video Transmitter"
     },
     "tabPower": {
         "message": "Power & Battery"
@@ -506,7 +497,7 @@
         "message": "This firmware version is <span class=\"message-negative\">not supported</span>. Please upgrade to firmware that supports api version <strong>$1</strong> or higher. Use CLI for backup before flashing. CLI backup/restore procedure is in the documention.<br />Alternatively download and use an old version of the configurator if you are not ready to upgrade."
     },
     "firmwareTypeNotSupported": {
-        "message": "Non - Betaflight firmware is <span class=\"message-negative\">not supported</span>, except for CLI mode."
+        "message": "Non - HeliFlight firmware is <span class=\"message-negative\">not supported</span>, except for CLI mode."
     },
     "firmwareUpgradeRequired": {
         "message": "The firmware on this device needs upgrading to a newer version. Use CLI for backup before flashing. CLI backup/restore procedure is in the documention.<br />Alternatively download and use an old version of the configurator if you are not ready to upgrade."
@@ -566,7 +557,7 @@
     },
 
     "tabSwitchUpgradeRequired": {
-        "message": "You need to <strong>upgrade</strong> your firmware to the latest version of Betaflight before you can use the $1 tab."
+        "message": "You need to <strong>upgrade</strong> your firmware to the latest version of HeliFlight before you can use the $1 tab."
     },
     "firmwareVersion": {
         "message": "Firmware Version: <strong>$1</strong>"
@@ -658,23 +649,20 @@
     },
 
     "defaultWelcomeIntro": {
-        "message": "Welcome to <strong>Betaflight - Configurator</strong>, a utility designed to simplify updating, configuring and tuning of your flight controller."
+        "message": "Welcome to <strong>HeliFlight - Configurator</strong>, a utility designed to simplify updating, configuring and tuning of your flight controller."
     },
 
     "defaultWelcomeHead": {
         "message": "Hardware"
     },
     "defaultWelcomeText": {
-        "message": "The application supports all hardware that can run Betaflight. Check flash tab for full list of hardware.<br /><br /> <a href=\"https://github.com/betaflight/blackbox-log-viewer/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Download Betaflight Blackbox Log Viewer</a><br /><br />The firmware source code can be downloaded from <a href=\"https://github.com/betaflight/betaflight\" target=\"_blank\" rel=\"noopener noreferrer\">here</a><br /><br />The latest <b>STM USB VCP Drivers</b> can be downloaded from <a href=\"http://www.st.com/web/en/catalog/tools/PF257938\" target=\"_blank\" rel=\"noopener noreferrer\">here</a><br />For legacy hardware using a CP210x USB to serial chip:<br />The latest <b>CP210x Drivers</b> can be downloaded from <a href=\"https://www.silabs.com/products/development-tools/software/usb-to-uart-bridge-vcp-drivers\" target=\"_blank\" rel=\"noopener noreferrer\">here</a><br />The latest <b>Zadig</b> for Windows USB driver installation can be downloaded from <a href=\"http://zadig.akeo.ie/\" target=\"_blank\" rel=\"noopener noreferrer\">here</a><br />"
+        "message": "The application supports all hardware that can run HeliFlight. Check flash tab for full list of hardware.<br /><br /> <a href=\"https://github.com/HeliFlight/blackbox-log-viewer/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Download HeliFlight Blackbox Log Viewer</a><br /><br />The firmware source code can be downloaded from <a href=\"https://github.com/HeliFlight/HeliFlight\" target=\"_blank\" rel=\"noopener noreferrer\">here</a><br /><br />The latest <b>STM USB VCP Drivers</b> can be downloaded from <a href=\"http://www.st.com/web/en/catalog/tools/PF257938\" target=\"_blank\" rel=\"noopener noreferrer\">here</a><br />For legacy hardware using a CP210x USB to serial chip:<br />The latest <b>CP210x Drivers</b> can be downloaded from <a href=\"https://www.silabs.com/products/development-tools/software/usb-to-uart-bridge-vcp-drivers\" target=\"_blank\" rel=\"noopener noreferrer\">here</a><br />The latest <b>Zadig</b> for Windows USB driver installation can be downloaded from <a href=\"http://zadig.akeo.ie/\" target=\"_blank\" rel=\"noopener noreferrer\">here</a><br />"
     },
     "defaultContributingHead": {
         "message": "Contributing"
     },
     "defaultContributingText": {
-        "message": "If you would like to help make Betaflight even better you can help in many ways, including:<br /><ul><li>using your knowledge of Betaflight to create or update content on <a href=\"https://github.com/betaflight/betaflight/wiki\" target=\"_blank\" rel=\"noopener noreferrer\">our Wiki</a>, or answering other users' questions in online forums;</li><li><a href=\"https://github.com/betaflight/betaflight/blob/master/docs/development/Development.md\" target=\"_blank\" rel=\"noopener noreferrer\">contributing code</a> to the firmware and Configurator - new features, fixes, improvements;</li><li>testing <a href=\"https://github.com/Betaflight/betaflight/pulls\" target=\"_blank\" rel=\"noopener noreferrer\">new features and fixes</a> and providing feedback;</li><li>helping other users solve the problems they report in <a href=\"https://github.com/betaflight/betaflight/issues\" target=\"_blank\" rel=\"noopener noreferrer\">our issue tracker</a>, and participating in discussions on feature requests;</li><li><a href=\"https://github.com/betaflight/betaflight/tree/master/README.md#Translators\" target=\"_blank\" rel=\"noopener noreferrer\">translating</a> Betaflight Configurator into a new language, or helping to maintain the existing translations.</li></ul>"
-    },
-    "defaultFacebookText": {
-        "message": "We also have a <a href=\"https://www.facebook.com/groups/betaflightgroup/\" target=\"_blank\" rel=\"noopener noreferrer\">Facebook Group</a>.<br />Join us to get a place to talk about Betaflight, ask configuration questions, or just hang out with fellow pilots."
+        "message": "If you would like to help make HeliFlight even better you can help in many ways, including:<br /><ul><li>using your knowledge of HeliFlight to create or update content on <a href=\"https://github.com/heliflight/heliflight/wiki\" target=\"_blank\" rel=\"noopener noreferrer\">our Wiki</a>, or answering other users' questions in online forums;</li><li><a href=\"https://github.com/HeliFlight/HeliFlight/blob/master/docs/development/Development.md\" target=\"_blank\" rel=\"noopener noreferrer\">contributing code</a> to the firmware and Configurator - new features, fixes, improvements;</li><li>testing <a href=\"https://github.com/HeliFlight/HeliFlight/pulls\" target=\"_blank\" rel=\"noopener noreferrer\">new features and fixes</a> and providing feedback;</li><li>helping other users solve the problems they report in <a href=\"https://github.com/HeliFlight/HeliFlight/issues\" target=\"_blank\" rel=\"noopener noreferrer\">our issue tracker</a>, and participating in discussions on feature requests;</li><li><a href=\"https://github.com/HeliFlight/HeliFlight/tree/master/README.md#Translators\" target=\"_blank\" rel=\"noopener noreferrer\">translating</a> HeliFlight Configurator into a new language, or helping to maintain the existing translations.</li></ul>"
     },
     "defaultChangelogHead": {
         "message": "Configurator - Changelog"
@@ -682,17 +670,14 @@
     "defaultButtonFirmwareFlasher": {
         "message": "Firmware Flasher"
     },
-    "defaultDonateHead": {
-        "message": "Open Source / Donation Notice"
-    },
     "defaultDonateText": {
-        "message": "<p><strong>Betaflight</strong> is a flight controller software that is <strong>open source</strong> and is available free of charge <strong>without warranty</strong> to all users.</p><p>If you found the Betaflight or Betaflight Configurator useful, please consider <strong>supporting</strong> its development by donating.</p>"
+        "message": "<p><strong>HeliFlight</strong> is a flight controller software that is <strong>open source</strong> and is available free of charge <strong>without warranty</strong> to all users.</p><p>If you found the HeliFlight or HeliFlight Configurator useful, please consider <strong>supporting</strong> its development by donating.</p>"
     },
     "defaultDonateBottom": {
         "message": "<p>If you want to contribute financially on an ongoing basis, you should consider becoming a patron for us on $t(patreonLink.message).</p>"
     },
     "patreonLink": {
-        "message": "<a href=\"https://www.patreon.com/betaflight\" target=\"_blank\" rel=\"noopener noreferrer\">Patreon</a>",
+        "message": "<a href=\"https://www.patreon.com/HeliFlight\" target=\"_blank\" rel=\"noopener noreferrer\">Patreon</a>",
         "description": "Patreon is name, and should not require translation"
     },
     "defaultDonate": {
@@ -705,13 +690,13 @@
         "message": "Documentation / Manual"
     },
     "defaultDocumentation": {
-        "message": "Betaflight documentation is available in release notes and wiki.<br /><br />"
+        "message": "HeliFlight documentation is available in release notes and wiki.<br /><br />"
     },
     "defaultDocumentation1": {
-        "message": "The Betaflight wiki is a great resource for information, it can be found <a href=\"https://github.com/betaflight/betaflight/wiki\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>."
+        "message": "The HeliFlight wiki is a great resource for information, it can be found <a href=\"https://github.com/HeliFlight/HeliFlight/wiki\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>."
     },
     "defaultDocumentation2": {
-        "message": "The release notes for the firmware can be read at GitHub releases page, <a href=\"https://github.com/Betaflight/Betaflight/releases\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>."
+        "message": "The release notes for the firmware can be read at GitHub releases page, <a href=\"https://github.com/HeliFlight/HeliFlight/releases\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>."
     },
     "defaultSupportHead": {
         "message": "Support"
@@ -726,23 +711,23 @@
         "message": "For support please search the forums and wiki first or contact your vendor.<br /><br />"
     },
     "defaultSupport1": {
-        "message": "<a href=\"http://www.rcgroups.com/forums/showthread.php?t=2464844&page=1\" target=\"_blank\" rel=\"noopener noreferrer\">RC Groups thread</a>"
+        "message": "<a href=\"https://www.rcgroups.com/forums/showthread.php?3535457&page=1\" target=\"_blank\" rel=\"noopener noreferrer\">RC Groups thread</a>"
     },
     "defaultSupport2": {
-        "message": "<a href=\"http://betaflight.info\" target=\"_blank\" rel=\"noopener noreferrer\">Betaflight Wiki</a>"
+        "message": "<a href=\"http://HeliFlight.info\" target=\"_blank\" rel=\"noopener noreferrer\">HeliFlight Wiki</a>"
     },
     "defaultSupport3": {
-        "message": "<a href=\"https://www.youtube.com/playlist?list=PLwoDb7WF6c8kdK6yHr7vhsU9iRTr5HxP4\" target=\"_blank\" rel=\"noopener noreferrer\">Joshua Bardwell Betaflight Videos</a>"
+        "message": "<a href=\"https://www.youtube.com/playlist?list=PLwoDb7WF6c8kdK6yHr7vhsU9iRTr5HxP4\" target=\"_blank\" rel=\"noopener noreferrer\">Joshua Bardwell HeliFlight Videos</a>"
     },
     "defaultSupport4": {
-        "message": "<a href=\"https://github.com/Betaflight\" target=\"_blank\" rel=\"noopener noreferrer\">GitHub</a>"
+        "message": "<a href=\"https://github.com/HeliFlight\" target=\"_blank\" rel=\"noopener noreferrer\">GitHub</a>"
     },
     "defaultSupport5": {
-        "message": "<a href=\"https://slack.betaflight.com\" target=\"_blank\" rel=\"noopener noreferrer\">Betaflight devs on slack</a>"
+        "message": "<a href=\"https://slack.HeliFlight.com\" target=\"_blank\" rel=\"noopener noreferrer\">HeliFlight devs on slack</a>"
     },
 
     "initialSetupBackupAndRestoreApiVersion": {
-        "message": "<span class=\"message-negative\">Backup and restore functionality disabled.</span> You have firmware with API version <span class=\"message-negative\">$1</span>, backup and restore requires <span class=\"message-positive\">$2</span>.  Please backup your settings via the CLI, see Betaflight documentation for procedure."
+        "message": "<span class=\"message-negative\">Backup and restore functionality disabled.</span> You have firmware with API version <span class=\"message-negative\">$1</span>, backup and restore requires <span class=\"message-positive\">$2</span>.  Please backup your settings via the CLI, see HeliFlight documentation for procedure."
     },
     "initialSetupButtonCalibrateAccel": {
         "message": "Calibrate Accelerometer"
@@ -939,7 +924,7 @@
         "description": "Message that pops up to describe the BST arming disable flag"
     },
     "initialSetupArmingDisableFlagsTooltipMSP": {
-        "message": "MSP connection is active, probably with this Betaflight Configurator",
+        "message": "MSP connection is active, probably with this HeliFlight Configurator",
         "description": "Message that pops up to describe the MSP arming disable flag"
     },
     "initialSetupArmingDisableFlagsTooltipPARALYZE": {
@@ -1306,7 +1291,7 @@
         "message": "Beacon Tone"
     },
     "configurationDshotBeaconHelp": {
-        "message": "The Dshot beacon uses the ESCs and motors to produce sound. This means that the Dshot beacon cannot be used when the motors are spinning. In Betaflight 3.4 and newer, when arming is attempted while the Dshot beacon is active, there is a 2 second delay after the last Dshot beacon tone before the craft is armed. This is to prevent the Dshot beacon functionality from interfering with the Dshot commands sent when arming.<br/><strong>Warning:</strong> Since the Dshot beacon is running current through your motors when active, this can result in excessive heat production and damage to your motors and / or ESCs if the beacon strength is set too high. Use BLHeli Configurator or the BLHeli Suite to adjust and test the beacon strength."
+        "message": "The Dshot beacon uses the ESCs and motors to produce sound. This means that the Dshot beacon cannot be used when the motors are spinning. In HeliFlight 3.4 and newer, when arming is attempted while the Dshot beacon is active, there is a 2 second delay after the last Dshot beacon tone before the craft is armed. This is to prevent the Dshot beacon functionality from interfering with the Dshot commands sent when arming.<br/><strong>Warning:</strong> Since the Dshot beacon is running current through your motors when active, this can result in excessive heat production and damage to your motors and / or ESCs if the beacon strength is set too high. Use BLHeli Configurator or the BLHeli Suite to adjust and test the beacon strength."
     },
     "configurationBeeper": {
         "message": "Beeper Configuration"
@@ -2024,7 +2009,7 @@
     },
 
     "receiverMspWarningText": {
-        "message": "These sticks allow Betaflight to be armed and tested without a transmitter or receiver being present. However, <strong>this feature is not intended for flight and propellers must not be attached.</strong><br><br>This feature does not guarantee reliable control of your craft. <strong>Serious injury is likely to result if propellers are left on.</strong>"
+        "message": "These sticks allow HeliFlight to be armed and tested without a transmitter or receiver being present. However, <strong>this feature is not intended for flight and propellers must not be attached.</strong><br><br>This feature does not guarantee reliable control of your craft. <strong>Serious injury is likely to result if propellers are left on.</strong>"
     },
     "receiverMspEnableButton": {
         "message": "Enable controls"
@@ -2804,7 +2789,7 @@
         "message": "Select your board to see available online firmware releases - Select the correct firmware appropriate for your board."
     },
     "firmwareFlasherOnlineSelectBoardHint": {
-        "message": "Starting with Betaflight 4.1, Betaflight is introducing support for <strong>Unified Targets</strong>. The concept of Unified Targets means that the same firmware .hex file can be used for all boards using the same MCU (F4, F7). To make the different boards work with the same firmware, a specific configuration file is deployed alongside the firmware when a Unified Target is flashed.<br>This version of Betaflight configurator supports flashing of Unified Targets with the respective board specific configurations in one step. The different firmware types that are available for each board are shown in the drop-down as follows:<br><br><strong>&lt;board name&gt;</strong> or<br><strong>&lt;board name&gt; (Legacy)</strong>:<br>non-unified target, or pre-4.1 versions of the firmware for Unified Targets.<br><br><strong>&lt;board name&gt; (&lt;manufacturer id&gt;)</strong>:<br>(4 character manufacturer id)<br>Unified Target.<br><br><strong>Please use Unified Targets where available.</strong> If you encounter problems using a Unified Target, please open an <a href=\"https://github.com/betaflight/betaflight/issues\" target=\"_blank\" rel=\"noopener noreferrer\">issue</a> and then use the non-unified target until the issue has been resolved."
+        "message": "Starting with HeliFlight 4.1, HeliFlight is introducing support for <strong>Unified Targets</strong>. The concept of Unified Targets means that the same firmware .hex file can be used for all boards using the same MCU (F4, F7). To make the different boards work with the same firmware, a specific configuration file is deployed alongside the firmware when a Unified Target is flashed.<br>This version of HeliFlight configurator supports flashing of Unified Targets with the respective board specific configurations in one step. The different firmware types that are available for each board are shown in the drop-down as follows:<br><br><strong>&lt;board name&gt;</strong> or<br><strong>&lt;board name&gt; (Legacy)</strong>:<br>non-unified target, or pre-4.1 versions of the firmware for Unified Targets.<br><br><strong>&lt;board name&gt; (&lt;manufacturer id&gt;)</strong>:<br>(4 character manufacturer id)<br>Unified Target.<br><br><strong>Please use Unified Targets where available.</strong> If you encounter problems using a Unified Target, please open an <a href=\"https://github.com/HeliFlight/HeliFlight/issues\" target=\"_blank\" rel=\"noopener noreferrer\">issue</a> and then use the non-unified target until the issue has been resolved."
     },
     "firmwareFlasherOnlineSelectFirmwareVersionDescription": {
         "message": "Select firmware version for your board."
@@ -2912,13 +2897,13 @@
         "message": "Message:"
     },
     "firmwareFlasherWarningText": {
-        "message": "Please do <span class=\"message-negative\">not</span> try to flash <strong>non-Betaflight</strong> hardware with this firmware flasher.<br />Do <span class=\"message-negative\">not</span> <strong>disconnect</strong> the board or <strong>turn off</strong> your computer while flashing.<br /><br /><strong>Note: </strong>STM32 bootloader is stored in ROM, it cannot be bricked.<br /><strong>Note: </strong><span class=\"message-negative\">Auto-Connect</span> is always disabled while you are inside firmware flasher.<br /><strong>Note: </strong>Make sure you have a backup; some upgrades/downgrades will wipe your configuration.<br /><strong>Note:</strong> If you have problems flashing <strong>try disconnecting all cables from your FC</strong> first, try rebooting, upgrade chrome, upgrade drivers.<br /><strong>Note:</strong> When flashing boards that have directly connected USB sockets (most newer boards) ensure you have read the USB Flashing section of the Betaflight manual and have the correct software and drivers installed"
+        "message": "Please do <span class=\"message-negative\">not</span> try to flash <strong>non-HeliFlight</strong> hardware with this firmware flasher.<br />Do <span class=\"message-negative\">not</span> <strong>disconnect</strong> the board or <strong>turn off</strong> your computer while flashing.<br /><br /><strong>Note: </strong>STM32 bootloader is stored in ROM, it cannot be bricked.<br /><strong>Note: </strong><span class=\"message-negative\">Auto-Connect</span> is always disabled while you are inside firmware flasher.<br /><strong>Note: </strong>Make sure you have a backup; some upgrades/downgrades will wipe your configuration.<br /><strong>Note:</strong> If you have problems flashing <strong>try disconnecting all cables from your FC</strong> first, try rebooting, upgrade chrome, upgrade drivers.<br /><strong>Note:</strong> When flashing boards that have directly connected USB sockets (most newer boards) ensure you have read the USB Flashing section of the HeliFlight manual and have the correct software and drivers installed"
     },
     "firmwareFlasherRecoveryHead": {
         "message": "<strong>Recovery / Lost communication</strong>"
     },
     "firmwareFlasherRecoveryText": {
-        "message": "If you have lost communication with your board follow these steps to restore communication: <ul><li>Power off</li><li>Enable 'No reboot sequence', enable 'Full chip erase'.</li><li>Jumper the BOOT pins or hold BOOT button.</li><li>Power on (activity LED will NOT flash if done correctly).</li><li>Install all STM32 drivers and Zadig if required (see <a href=\"https://github.com/betaflight/betaflight/wiki/Installing-Betaflight\"target=\"_blank\" rel=\"noopener noreferrer\">USB Flashing</a> section of Betaflight manual).</li><li>Close configurator, Close all running chrome instances, Close all Chrome apps, Restart Configurator.</li><li>Release BOOT button if your FC has one.</li><li>Flash with correct firmware (using manual baud rate if specified in your FC's manual).</li><li>Power off.</li><li>Remove BOOT jumper.</li><li>Power on (activity LED should flash).</li><li>Connect normally.</li></ul>"
+        "message": "If you have lost communication with your board follow these steps to restore communication: <ul><li>Power off</li><li>Enable 'No reboot sequence', enable 'Full chip erase'.</li><li>Jumper the BOOT pins or hold BOOT button.</li><li>Power on (activity LED will NOT flash if done correctly).</li><li>Install all STM32 drivers and Zadig if required (see <a href=\"https://github.com/HeliFlight/HeliFlight/wiki/Installing-HeliFlight\"target=\"_blank\" rel=\"noopener noreferrer\">USB Flashing</a> section of HeliFlight manual).</li><li>Close configurator, Close all running chrome instances, Close all Chrome apps, Restart Configurator.</li><li>Release BOOT button if your FC has one.</li><li>Flash with correct firmware (using manual baud rate if specified in your FC's manual).</li><li>Power off.</li><li>Remove BOOT jumper.</li><li>Power on (activity LED should flash).</li><li>Connect normally.</li></ul>"
     },
     "firmwareFlasherButtonLeave": {
         "message": "Leave Firmware Flasher"
@@ -3309,7 +3294,7 @@
         "message": "RC Expo Power"
     },
     "pidTuningRcExpoPowerHelp": {
-        "message": "The exponent that is used when calculating RC Expo. In Betaflight versions prior to 3.0, value is fixed at 3."
+        "message": "The exponent that is used when calculating RC Expo. In HeliFlight versions prior to 3.0, value is fixed at 3."
     },
     "pidTuningLevel": {
         "message": "Angle/Horizon"
@@ -3681,7 +3666,7 @@
         "message": "Dynamic Idle Value [* 100 RPM]"
     },
     "pidTuningIdleMinRpmHelp": {
-        "message": "Dynamic Idle improves control at low rpm and reduces risk of motor desyncs. It corrects problems caused by airflow speeding up or slowing down the props, improving PID authority, stability, motor braking and responsiveness. The Dynamic Idle rpm should be set to be about 20% below the rpm of your Dshot Idle value (see the $t(tabMotorTesting.message) tab). Usually there is no need to change your DShot idle value from defaults. For longer inverted hang time, DShot idle value and Minimum rpm should be lowered together.<br><br>Visit <a href=\"https://github.com/betaflight/betaflight/wiki/Tuning-Dynamic-Idle\"target=\"_blank\" rel=\"noopener noreferrer\">this wiki entry</a> for more info."
+        "message": "Dynamic Idle improves control at low rpm and reduces risk of motor desyncs. It corrects problems caused by airflow speeding up or slowing down the props, improving PID authority, stability, motor braking and responsiveness. The Dynamic Idle rpm should be set to be about 20% below the rpm of your Dshot Idle value (see the $t(tabMotorTesting.message) tab). Usually there is no need to change your DShot idle value from defaults. For longer inverted hang time, DShot idle value and Minimum rpm should be lowered together.<br><br>Visit <a href=\"https://github.com/HeliFlight/HeliFlight/wiki/Tuning-Dynamic-Idle\"target=\"_blank\" rel=\"noopener noreferrer\">this wiki entry</a> for more info."
     },
     "pidTuningAcroTrainerAngleLimit": {
         "message": "Acro Trainer Angle Limit"
@@ -3693,7 +3678,7 @@
         "message": "Integrated Yaw"
     },
     "pidTuningIntegratedYawCaution": {
-        "message": "<span class=\"message-negative\">CAUTION</span>: if you enable this feature, you must adjust the YAW PID accordingly. More info <a href=\"https://github.com/betaflight/betaflight/wiki/Integrated-Yaw\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>"
+        "message": "<span class=\"message-negative\">CAUTION</span>: if you enable this feature, you must adjust the YAW PID accordingly. More info <a href=\"https://github.com/HeliFlight/HeliFlight/wiki/Integrated-Yaw\" target=\"_blank\" rel=\"noopener noreferrer\">here</a>"
     },
     "pidTuningIntegratedYawHelp": {
         "message": "Integrated Yaw is a feature which corrects a fundamental issue with quad control: while the pitch and roll axis are controlled by the thrust differentials the props generate yaw is different. Integrated Yaw fixes this by integrating the output of the yaw pid before applying them to the mixer. This normalizes the way the pids work. You can now tune as any other axis. It requires use of absolute control since no I is needed with Integrated Yaw."
@@ -3703,7 +3688,7 @@
         "message": "Arbitrary board rotation in degrees, to allow mounting it sideways / upside down / rotated etc. When running external sensors, use the sensor alignments (Gyro, Acc, Mag) to define sensor position independent from board orientation. "
     },
     "failsafeFeaturesHelpOld": {
-        "message": "Failsafe configuration has changed considerably. Use Betaflight <strong>v1.12.0+</strong> to enable the improved configuration panel."
+        "message": "Failsafe configuration has changed considerably. Use HeliFlight <strong>v1.12.0+</strong> to enable the improved configuration panel."
     },
     "failsafePaneTitleOld": {
         "message": "Receiver failsafe"
@@ -3859,7 +3844,7 @@
         "message": "Save"
     },
     "powerFirmwareUpgradeRequired": {
-        "message": "Firmware upgrade <span class=\"message-negative\">required</span>. Battery/Amperage/Voltage configurations using API &lt; 1.33.0 (Betaflight release &lt;= 3.17) is not supported."
+        "message": "Firmware upgrade <span class=\"message-negative\">required</span>. Battery/Amperage/Voltage configurations using API &lt; 1.33.0 (HeliFlight release &lt;= 3.17) is not supported."
     },
     "powerBatteryVoltageMeterSource": {
         "message": "Voltage Meter Source"
@@ -4134,7 +4119,7 @@
         "message": "<strong>Note:</strong> OSD preview may not show the actual font that is installed on the flight controller. The layout of individual elements may look different when older versions of the firmware are used - please check the look through your goggles before flying."
     },
     "osdSetupUnsupportedNote1": {
-        "message": "Your flight controller isn't responding to OSD commands. This probably means that it does not have an integrated BetaFlight OSD."
+        "message": "Your flight controller isn't responding to OSD commands. This probably means that it does not have an integrated HeliFlight OSD."
     },
     "osdSetupUnsupportedNote2": {
         "message": "Note that some flight controllers have an onboard <a href=\"https://www.youtube.com/watch?v=ikKH_6SQ-Tk\" target=\"_blank\" rel=\"noopener noreferrer\">MinimOSD</a> that can be flashed and configured with <a href=\"https://github.com/ShikOfTheRa/scarab-osd/releases/latest\" target='_blank'>scarab-osd</a>, however the MinimOSD cannot be configured through this interface."
@@ -4963,10 +4948,10 @@
     },
 
     "osdDescribeFontVersion1": {
-        "message": "Font version: 1 (Betaflight 4.0 or older)"
+        "message": "Font version: 1 (HeliFlight 4.0 or older)"
     },
     "osdDescribeFontVersion2": {
-        "message": "Font version: 2 (Betaflight 4.1 or newer)"
+        "message": "Font version: 2 (HeliFlight 4.1 or newer)"
     },
     "osdDescribeFontVersionCUSTOM": {
         "message": "Font version: user provided"
@@ -5189,7 +5174,7 @@
     },
 
     "vtxHelp": {
-        "message": "Here you can configure the values for your Video Transmitter (VTX). You can view and change the transmission values, including the VTX Tables, if the flight controller and the VTX support it.<br>To set up your VTX use the following steps:<br>1. Go to <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://github.com/betaflight/betaflight/wiki/VTX-tables\">this</a> page;<br>2. Find the appropriate VTX configuration file for your country and your VTX model and download it;<br>3. Click '$t(vtxButtonLoadFile.message)' below, select the VTX configuration file, load it;<br>4. Verify that the settings are correct;<br>5. Click '$t(vtxButtonSave.message)' to store the VTX settings on the flight controller.<br>6. Optionally click '$t(vtxButtonSaveLua.message)' to save a lua configuration file you can use with the betaflight lua scripts (See more <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://github.com/betaflight/betaflight-tx-lua-scripts/\">here</a>.)",
+        "message": "Here you can configure the values for your Video Transmitter (VTX). You can view and change the transmission values, including the VTX Tables, if the flight controller and the VTX support it.<br>To set up your VTX use the following steps:<br>1. Go to <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://github.com/HeliFlight/HeliFlight/wiki/VTX-tables\">this</a> page;<br>2. Find the appropriate VTX configuration file for your country and your VTX model and download it;<br>3. Click '$t(vtxButtonLoadFile.message)' below, select the VTX configuration file, load it;<br>4. Verify that the settings are correct;<br>5. Click '$t(vtxButtonSave.message)' to store the VTX settings on the flight controller.<br>6. Optionally click '$t(vtxButtonSaveLua.message)' to save a lua configuration file you can use with the HeliFlight lua scripts (See more <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://github.com/HeliFlight/HeliFlight-tx-lua-scripts/\">here</a>.)",
         "description": "Introduction message in the VTX tab"
     },
     "vtxMessageNotSupported": {
@@ -5357,7 +5342,7 @@
         "description": "Help for the number of power levels field of the VTX Table element in the VTX tab"
     },
     "vtxTablePowerLevelsTableHelp": {
-        "message": "This table represents the different values of power that can be used for the VTX. They are divided into two: <br><b>- $t(vtxTablePowerLevelsValue.message):</b> each power level requires a value that is defined by the hardware manufacturer. Ask your manufacturer for the correct value or consult the Betaflight wiki of VTX Tables to grab some samples. <br><b>- $t(vtxTablePowerLevelsLabel.message):</b> you can put here the label you want for each power level value. It can be numbers (25, 200, 600, 1.2), letters (OFF, MIN, MAX) or a mix of them. <br><br>You must configure <b>only</b> the power levels that are legal at your country.",
+        "message": "This table represents the different values of power that can be used for the VTX. They are divided into two: <br><b>- $t(vtxTablePowerLevelsValue.message):</b> each power level requires a value that is defined by the hardware manufacturer. Ask your manufacturer for the correct value or consult the HeliFlight wiki of VTX Tables to grab some samples. <br><b>- $t(vtxTablePowerLevelsLabel.message):</b> you can put here the label you want for each power level value. It can be numbers (25, 200, 600, 1.2), letters (OFF, MIN, MAX) or a mix of them. <br><br>You must configure <b>only</b> the power levels that are legal at your country.",
         "description": "Help for the table of power levels (value-label) that appears in the VTX tab"
     },
     "vtxTablePowerLevelsValue": {
@@ -5393,7 +5378,7 @@
         "description": "Text of one of the titles of the VTX Table element in the VTX tab"
     },
     "vtxTableBandsChannelsTableHelp": {
-        "message": "This table represents all the frequencies that can be used for your VTX. You can have several bands and for each band you must configure:<br><b>- $t(vtxTableBandTitleName.message):</b> Name that you want to assign to this band, like BOSCAM_A, FATSHARK or RACEBAND.<br><b>- $t(vtxTableBandTitleLetter.message):</b> Short letter that references the band.<br><b>- $t(vtxTableBandTitleFactory.message):</b> This indicates if it is a factory band. If enabled Betaflight sends to the VTX a band and channel number. The VTX will then use its built-in frequency table and the frequencies configured here are only to show the value in the OSD and other places. If it is not enabled, then Betaflight will send to the VTX the real frequency configured here.<br><b>- Frequencies:</b> Frequencies for this band.<br><br>Remember that not all frequencies are legal at your country. You must put a value of <b>zero</b> to each frequency index that you are not allowed to use to disable it.",
+        "message": "This table represents all the frequencies that can be used for your VTX. You can have several bands and for each band you must configure:<br><b>- $t(vtxTableBandTitleName.message):</b> Name that you want to assign to this band, like BOSCAM_A, FATSHARK or RACEBAND.<br><b>- $t(vtxTableBandTitleLetter.message):</b> Short letter that references the band.<br><b>- $t(vtxTableBandTitleFactory.message):</b> This indicates if it is a factory band. If enabled HeliFlight sends to the VTX a band and channel number. The VTX will then use its built-in frequency table and the frequencies configured here are only to show the value in the OSD and other places. If it is not enabled, then HeliFlight will send to the VTX the real frequency configured here.<br><b>- Frequencies:</b> Frequencies for this band.<br><br>Remember that not all frequencies are legal at your country. You must put a value of <b>zero</b> to each frequency index that you are not allowed to use to disable it.",
         "description": "Help for the table of bands-channels that appears in the VTX tab"
     },
 
@@ -5430,7 +5415,7 @@
         "description": "Save Lua script button in the VTX tab"
     },
     "vtxLuaFileHelp" :{
-        "message": "The '$t(vtxButtonSaveLua.message)' button will allow you to save a <i>craftname</i>.lua file containing the vtx table configuration that can be used with the betaflight lua scripts. (See more <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://github.com/betaflight/betaflight-tx-lua-scripts/\">here</a>.)",
+        "message": "The '$t(vtxButtonSaveLua.message)' button will allow you to save a <i>craftname</i>.lua file containing the vtx table configuration that can be used with the HeliFlight lua scripts. (See more <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://github.com/HeliFlight/HeliFlight-tx-lua-scripts/\">here</a>.)",
         "description": "Tooltip message for the Save Lua script button in the VTX tab"
     },
     "vtxButtonLoadFile": {
@@ -5580,7 +5565,7 @@
         "message": "<b>Derivative from Error</b> provides more direct stick response and is mostly prefered for Racing.<br><br><b>Derivative from Measurement</b> provides smoother stick response what is more usefull for freestyling"
     },
     "pidTuningPidControllerTip": {
-        "message": "<b>Legacy vs Betaflight (float):</b> PID scaling and PID logic is exactly the same. Not necessarily retune needed. Legacy is old betaflight evolved rewrite, which is basic PID controller based on integer math. Betaflight PID controller uses floating point math and has many new features specifically designed for multirotor applications <br> <b>Float vs Integer:</b> PID scaling and PID logic is exactly the same. No retune needed. F1 boards have no onboard FPU and floating point math increases CPU load and integer math will improve performance, but float math might gain slightly more precision."
+        "message": "<b>Legacy vs HeliFlight (float):</b> PID scaling and PID logic is exactly the same. Not necessarily retune needed. Legacy is old HeliFlight evolved rewrite, which is basic PID controller based on integer math. HeliFlight PID controller uses floating point math and has many new features specifically designed for multirotor applications <br> <b>Float vs Integer:</b> PID scaling and PID logic is exactly the same. No retune needed. F1 boards have no onboard FPU and floating point math increases CPU load and integer math will improve performance, but float math might gain slightly more precision."
     },
     "pidTuningFilterTip": {
         "message": "<b>Gyro Soft Filter:</b> Lowpass filter for gyro. Use lower value for more filtering.<br><b>D Term Filter:</b> Lowpass filter for Dterm. Can affect D tuning. Use lower value for more filtering. <br><b>Yaw Filter:</b> Filters yaw output. It can help on setups with noisy yaw axis."
