@@ -602,6 +602,23 @@ function bytesToSize(bytes) {
     return outputBytes;
 }
 
+function updateTabList(features) {
+
+        $('#tabs ul.mode-connected li.tab_failsafe').show();
+        $('#tabs ul.mode-connected li.tab_adjustments').show();
+        $('#tabs ul.mode-connected li.tab_servos').show();
+        $('#tabs ul.mode-connected li.tab_sensors').show();
+        $('#tabs ul.mode-connected li.tab_logging').show();
+        $('#tabs ul.mode-connected li.tab_gps').show();
+        $('#tabs ul.mode-connected li.tab_led_strip').show();
+        $('#tabs ul.mode-connected li.tab_transponder').show();
+        $('#tabs ul.mode-connected li.tab_power').show();
+    
+}
+
+
+
+
 function zeroPad(value, width) {
 
     let valuePadded = String(value);
