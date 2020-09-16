@@ -2,8 +2,8 @@
 
 TABS.firmware_flasher = {
     releases: null,
-    releaseChecker: new ReleaseChecker('firmware', 'https://api.github.com/repos/betaflight/betaflight/releases'),
-    jenkinsLoader: new JenkinsLoader('https://ci.betaflight.tech'),
+    releaseChecker: new ReleaseChecker('firmware', 'https://api.github.com/repos/heliflight3d/heliflight/releases'),
+    jenkinsLoader: new JenkinsLoader('https://ci.heliflight3d.com'),
     gitHubApi: new GitHubApi(),
     localFirmwareLoaded: false,
     selectedBoard: undefined,
