@@ -616,9 +616,6 @@ function updateTabList(features) {
     
 }
 
-
-
-
 function zeroPad(value, width) {
 
     let valuePadded = String(value);
