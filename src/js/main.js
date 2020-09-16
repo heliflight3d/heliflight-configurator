@@ -321,20 +321,8 @@ function startProcess() {
                     case 'ports':
                         TABS.ports.initialize(content_ready);
                         break;
-                    case 'led_strip':
-                        TABS.led_strip.initialize(content_ready);
-                        break;
                     case 'failsafe':
                         TABS.failsafe.initialize(content_ready);
-                        break;
-                    case 'transponder':
-                        TABS.transponder.initialize(content_ready);
-                        break;
-                    case 'osd':
-                        TABS.osd.initialize(content_ready);
-                        break;
-                    case 'vtx':
-                        TABS.vtx.initialize(content_ready);
                         break;
                     case 'power':
                         TABS.power.initialize(content_ready);
@@ -342,10 +330,6 @@ function startProcess() {
                     case 'setup':
                         TABS.setup.initialize(content_ready);
                         break;
-                    case 'setup_osd':
-                        TABS.setup_osd.initialize(content_ready);
-                        break;
-
                     case 'configuration':
                         TABS.configuration.initialize(content_ready);
                         break;
@@ -484,24 +468,6 @@ function startProcess() {
         }
     });
 
-    ConfigStorage.get('permanentExpertMode', function (result) {
-        const experModeCheckbox = 'input[name="expertModeCheckbox"]';
-        if (result.permanentExpertMode) {
-            $(experModeCheckbox).prop('checked', true);
-        }
-
-        $(experModeCheckbox).change(function () {
-            const checked = $(this).is(':checked');
-            checkSetupAnalytics(function (analyticsService) {
-                analyticsService.setDimension(analyticsService.DIMENSIONS.CONFIGURATOR_EXPERT_MODE, checked ? 'On' : 'Off');
-            });
-
-            if (FEATURE_CONFIG && FEATURE_CONFIG.features !== 0) {
-                updateTabList(FEATURE_CONFIG.features);
-            }
-        }).change();
-    });
-
     ConfigStorage.get('cliAutoComplete', function (result) {
         CliAutoComplete.setEnabled(typeof result.cliAutoComplete == 'undefined' || result.cliAutoComplete); // On by default
     });
@@ -541,7 +507,7 @@ function setDarkTheme(enabled) {
 }
 
 function checkForConfiguratorUpdates() {
-    const releaseChecker = new ReleaseChecker('configurator', 'https://api.github.com/repos/betaflight/betaflight-configurator/releases');
+    const releaseChecker = new ReleaseChecker('configurator', 'https://api.github.com/repos/heliflight3d/heliflight-configurator/releases');
 
     releaseChecker.loadReleaseData(notifyOutdatedVersion);
 }
@@ -630,62 +596,16 @@ function bytesToSize(bytes) {
     return outputBytes;
 }
 
-function isExpertModeEnabled() {
-    return $('input[name="expertModeCheckbox"]').is(':checked');
-}
-
 function updateTabList(features) {
 
-    if (isExpertModeEnabled()) {
         $('#tabs ul.mode-connected li.tab_failsafe').show();
         $('#tabs ul.mode-connected li.tab_adjustments').show();
         $('#tabs ul.mode-connected li.tab_servos').show();
         $('#tabs ul.mode-connected li.tab_sensors').show();
         $('#tabs ul.mode-connected li.tab_logging').show();
-    } else {
-        $('#tabs ul.mode-connected li.tab_failsafe').hide();
-        $('#tabs ul.mode-connected li.tab_adjustments').hide();
-        $('#tabs ul.mode-connected li.tab_servos').hide();
-        $('#tabs ul.mode-connected li.tab_sensors').hide();
-        $('#tabs ul.mode-connected li.tab_logging').hide();
-    }
-
-    if (features.isEnabled('GPS') && isExpertModeEnabled()) {
         $('#tabs ul.mode-connected li.tab_gps').show();
-    } else {
-        $('#tabs ul.mode-connected li.tab_gps').hide();
-    }
-
-    if (features.isEnabled('LED_STRIP')) {
-        $('#tabs ul.mode-connected li.tab_led_strip').show();
-    } else {
-        $('#tabs ul.mode-connected li.tab_led_strip').hide();
-    }
-
-    if (features.isEnabled('TRANSPONDER')) {
-        $('#tabs ul.mode-connected li.tab_transponder').show();
-    } else {
-        $('#tabs ul.mode-connected li.tab_transponder').hide();
-    }
-
-    if (features.isEnabled('OSD')) {
-        $('#tabs ul.mode-connected li.tab_osd').show();
-    } else {
-        $('#tabs ul.mode-connected li.tab_osd').hide();
-    }
-
-    if (semver.gte(CONFIG.apiVersion, "1.36.0")) {
         $('#tabs ul.mode-connected li.tab_power').show();
-    } else {
-        $('#tabs ul.mode-connected li.tab_power').hide();
-    }
-
-    if (semver.gte(CONFIG.apiVersion, "1.42.0")) {
-        $('#tabs ul.mode-connected li.tab_vtx').show();
-    } else {
-        $('#tabs ul.mode-connected li.tab_vtx').hide();
-    }
-
+    
 }
 
 function zeroPad(value, width) {

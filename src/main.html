@@ -19,7 +19,6 @@
     <link type="text/css" rel="stylesheet" href="./css/tabs/servos.css" media="all"/>
     <link type="text/css" rel="stylesheet" href="./css/tabs/gps.css" media="all"/>
     <link type="text/css" rel="stylesheet" href="./css/tabs/motors.css" media="all"/>
-    <link type="text/css" rel="stylesheet" href="./css/tabs/led_strip.css" media="all"/>
     <link type="text/css" rel="stylesheet" href="./css/tabs/sensors.css" media="all"/>
     <link type="text/css" rel="stylesheet" href="./css/tabs/cli.css" media="all"/>
     <link type="text/css" rel="stylesheet" href="./css/tabs/logging.css" media="all"/>
@@ -28,10 +27,7 @@
     <link type="text/css" rel="stylesheet" href="./css/tabs/adjustments.css" media="all"/>
     <link type="text/css" rel="stylesheet" href="./css/tabs/auxiliary.css" media="all"/>
     <link type="text/css" rel="stylesheet" href="./css/tabs/failsafe.css" media="all"/>
-    <link type="text/css" rel="stylesheet" href="./css/tabs/osd.css" media="all"/>
-    <link type="text/css" rel="stylesheet" href="./css/tabs/vtx.css" media="all"/>
     <link type="text/css" rel="stylesheet" href="./css/tabs/power.css" media="all"/>
-    <link type="text/css" rel="stylesheet" href="./css/tabs/transponder.css" media="all"/>
     <link type="text/css" rel="stylesheet" href="./css/tabs/privacy_policy.css" media="all"/>
     <link type="text/css" rel="stylesheet" href="./css/tabs/options.css" media="all"/>
     <link type="text/css" rel="stylesheet" href="./css/opensans_webfontkit/fonts.css" media="all"/>
@@ -113,7 +109,6 @@
     <script type="text/javascript" src="./js/tabs/servos.js"></script>
     <script type="text/javascript" src="./js/tabs/gps.js"></script>
     <script type="text/javascript" src="./js/tabs/motors.js"></script>
-    <script type="text/javascript" src="./js/tabs/led_strip.js"></script>
     <script type="text/javascript" src="./js/tabs/sensors.js"></script>
     <script type="text/javascript" src="./js/tabs/cli.js"></script>
     <script type="text/javascript" src="./js/tabs/logging.js"></script>
@@ -124,7 +119,6 @@
     <script type="text/javascript" src="./js/tabs/options.js"></script>
     <script type="text/javascript" src="./js/LogoManager.js"></script>
     <script type="text/javascript" src="./js/tabs/power.js"></script>
-    <script type="text/javascript" src="./js/tabs/transponder.js"></script>
     <script type="text/javascript" src="./node_modules/jquery-textcomplete/dist/jquery.textcomplete.min.js"></script>
     <script type="text/javascript" src="./js/CliAutoComplete.js"></script>
     <script type="text/javascript" src="./js/DarkTheme.js"></script>
@@ -228,12 +222,6 @@
                         <div class="legend" i18n="sensorDataFlashFreeSpace"></div>
                     </li>
                 </ul>
-                <div id="expertMode" align="center">
-                    <label>
-                        <input name="expertModeCheckbox" class="togglesmall" type="checkbox"/>
-                        <span i18n="expertMode"></span>
-                    </label>
-                </div>
             </div>
         </div>
         <div id="header_btns">
@@ -301,10 +289,6 @@
                     <li class="tab_servos"><a href="#" i18n="tabServos" class="tabicon ic_servo" i18n_title="tabServos"></a></li>
                     <li class="tab_gps"><a href="#" i18n="tabGPS" class="tabicon ic_gps" i18n_title="tabGPS"></a></li>
                     <li class="tab_motors"><a href="#" i18n="tabMotorTesting" class="tabicon ic_motor" i18n_title="tabMotorTesting"></a>
-                    </li>
-                    <li class="tab_transponder"><a href="#" i18n="tabTransponder" class="tabicon ic_transponder"
-                                                   i18n_title="tabTransponder"></a></li>
-                    <li class="tab_led_strip"><a href="#" i18n="tabLedStrip" class="tabicon ic_led" i18n_title="tabLedStrip"></a>
                     </li>
                     <li class="tab_sensors"><a href="#" i18n="tabRawSensorData" class="tabicon ic_sensors"
                                                i18n_title="tabRawSensorData"></a></li>
