@@ -541,7 +541,7 @@ function setDarkTheme(enabled) {
 }
 
 function checkForConfiguratorUpdates() {
-    const releaseChecker = new ReleaseChecker('configurator', 'https://api.github.com/repos/betaflight/betaflight-configurator/releases');
+    const releaseChecker = new ReleaseChecker('configurator', 'https://api.github.com/repos/heliflight3d/heliflight-configurator/releases');
 
     releaseChecker.loadReleaseData(notifyOutdatedVersion);
 }
@@ -631,7 +631,7 @@ function bytesToSize(bytes) {
 }
 
 function isExpertModeEnabled() {
-    return $('input[name="expertModeCheckbox"]').is(':checked');
+    return (true);
 }
 
 function updateTabList(features) {
@@ -642,50 +642,11 @@ function updateTabList(features) {
         $('#tabs ul.mode-connected li.tab_servos').show();
         $('#tabs ul.mode-connected li.tab_sensors').show();
         $('#tabs ul.mode-connected li.tab_logging').show();
-    } else {
-        $('#tabs ul.mode-connected li.tab_failsafe').hide();
-        $('#tabs ul.mode-connected li.tab_adjustments').hide();
-        $('#tabs ul.mode-connected li.tab_servos').hide();
-        $('#tabs ul.mode-connected li.tab_sensors').hide();
-        $('#tabs ul.mode-connected li.tab_logging').hide();
-    }
-
-    if (features.isEnabled('GPS') && isExpertModeEnabled()) {
         $('#tabs ul.mode-connected li.tab_gps').show();
-    } else {
-        $('#tabs ul.mode-connected li.tab_gps').hide();
-    }
-
-    if (features.isEnabled('LED_STRIP')) {
         $('#tabs ul.mode-connected li.tab_led_strip').show();
-    } else {
-        $('#tabs ul.mode-connected li.tab_led_strip').hide();
-    }
-
-    if (features.isEnabled('TRANSPONDER')) {
         $('#tabs ul.mode-connected li.tab_transponder').show();
-    } else {
-        $('#tabs ul.mode-connected li.tab_transponder').hide();
-    }
-
-    if (features.isEnabled('OSD')) {
-        $('#tabs ul.mode-connected li.tab_osd').show();
-    } else {
-        $('#tabs ul.mode-connected li.tab_osd').hide();
-    }
-
-    if (semver.gte(CONFIG.apiVersion, "1.36.0")) {
         $('#tabs ul.mode-connected li.tab_power').show();
-    } else {
-        $('#tabs ul.mode-connected li.tab_power').hide();
     }
-
-    if (semver.gte(CONFIG.apiVersion, "1.42.0")) {
-        $('#tabs ul.mode-connected li.tab_vtx').show();
-    } else {
-        $('#tabs ul.mode-connected li.tab_vtx').hide();
-    }
-
 }
 
 function zeroPad(value, width) {
