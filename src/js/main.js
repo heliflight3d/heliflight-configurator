@@ -330,22 +330,12 @@ function startProcess() {
                     case 'transponder':
                         TABS.transponder.initialize(content_ready);
                         break;
-                    case 'osd':
-                        TABS.osd.initialize(content_ready);
-                        break;
-                    case 'vtx':
-                        TABS.vtx.initialize(content_ready);
-                        break;
                     case 'power':
                         TABS.power.initialize(content_ready);
                         break;
                     case 'setup':
                         TABS.setup.initialize(content_ready);
                         break;
-                    case 'setup_osd':
-                        TABS.setup_osd.initialize(content_ready);
-                        break;
-
                     case 'configuration':
                         TABS.configuration.initialize(content_ready);
                         break;
@@ -484,24 +474,6 @@ function startProcess() {
         }
     });
 
-    ConfigStorage.get('permanentExpertMode', function (result) {
-        const experModeCheckbox = 'input[name="expertModeCheckbox"]';
-        if (result.permanentExpertMode) {
-            $(experModeCheckbox).prop('checked', true);
-        }
-
-        $(experModeCheckbox).change(function () {
-            const checked = $(this).is(':checked');
-            checkSetupAnalytics(function (analyticsService) {
-                analyticsService.setDimension(analyticsService.DIMENSIONS.CONFIGURATOR_EXPERT_MODE, checked ? 'On' : 'Off');
-            });
-
-            if (FEATURE_CONFIG && FEATURE_CONFIG.features !== 0) {
-                updateTabList(FEATURE_CONFIG.features);
-            }
-        }).change();
-    });
-
     ConfigStorage.get('cliAutoComplete', function (result) {
         CliAutoComplete.setEnabled(typeof result.cliAutoComplete == 'undefined' || result.cliAutoComplete); // On by default
     });
@@ -628,25 +600,6 @@ function bytesToSize(bytes) {
     }
 
     return outputBytes;
-}
-
-function isExpertModeEnabled() {
-    return (true);
-}
-
-function updateTabList(features) {
-
-    if (isExpertModeEnabled()) {
-        $('#tabs ul.mode-connected li.tab_failsafe').show();
-        $('#tabs ul.mode-connected li.tab_adjustments').show();
-        $('#tabs ul.mode-connected li.tab_servos').show();
-        $('#tabs ul.mode-connected li.tab_sensors').show();
-        $('#tabs ul.mode-connected li.tab_logging').show();
-        $('#tabs ul.mode-connected li.tab_gps').show();
-        $('#tabs ul.mode-connected li.tab_led_strip').show();
-        $('#tabs ul.mode-connected li.tab_transponder').show();
-        $('#tabs ul.mode-connected li.tab_power').show();
-    }
 }
 
 function zeroPad(value, width) {
