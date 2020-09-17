@@ -321,6 +321,9 @@ function startProcess() {
                     case 'ports':
                         TABS.ports.initialize(content_ready);
                         break;
+                    case 'led_strip':
+                        TABS.led_strip.initialize(content_ready);
+                        break;
                     case 'failsafe':
                         TABS.failsafe.initialize(content_ready);
                         break;
@@ -604,6 +607,7 @@ function updateTabList(features) {
         $('#tabs ul.mode-connected li.tab_sensors').show();
         $('#tabs ul.mode-connected li.tab_logging').show();
         $('#tabs ul.mode-connected li.tab_gps').show();
+        $('#tabs ul.mode-connected li.tab_led_strip').show();
         $('#tabs ul.mode-connected li.tab_power').show();
     
 }
