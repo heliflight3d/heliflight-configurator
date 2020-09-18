@@ -548,8 +548,6 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
             $('div.checkboxDshotBidir').toggle(protocolConfigured && semver.gte(CONFIG.apiVersion, "1.42.0") && digitalProtocol);
             $('div.motorPoles').toggle(protocolConfigured && rpmFeaturesVisible && semver.gte(CONFIG.apiVersion, "1.42.0"));
 
-            $('.escMotorStop').toggle(protocolConfigured);
-
             $('#escProtocolDisabled').toggle(!protocolConfigured);
 
             //trigger change unsyncedPWMSwitch to show/hide Motor PWM freq input
