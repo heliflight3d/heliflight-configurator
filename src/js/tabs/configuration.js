@@ -931,7 +931,7 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
             $('div.cycles').show();
         }
 
-        if(semver.gte(CONFIG.apiVersion, "1.37.0") || !isExpertModeEnabled()) {
+        if(semver.gte(CONFIG.apiVersion, "1.37.0")) {
             $('input[id="disarmkillswitch"]').prop('checked', true);
             $('div.disarm').hide();
         }
