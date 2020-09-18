@@ -602,7 +602,7 @@ TABS.receiver.initModelPreview = function () {
     if (CONFIG.flightControllerIdentifier == 'CLFL' && semver.lt(CONFIG.apiVersion, '2.0.0')) {
         useOldRateCurve = true;
     }
-    if (CONFIG.flightControllerIdentifier == 'HLFL' && semver.lt(CONFIG.flightControllerVersion, '2.8.0')) {
+    if (CONFIG.flightControllerIdentifier == 'BTFL' && semver.lt(CONFIG.flightControllerVersion, '2.8.0')) {
         useOldRateCurve = true;
     }
 
