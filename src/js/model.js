@@ -95,8 +95,6 @@ Model.prototype.loadJSON = function (model_file, callback) {
     loader.load('./resources/models/' + model_file + '.gltf', function (gltf) {
 
         var model = gltf.scene;
-        
-        model.scale.set(50, 50, 50);
 
         callback(model);
     });
