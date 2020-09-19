@@ -10,37 +10,6 @@
 
         <div class="grid-row">
             <div class="grid-col col6">
-                <!-- MIXER -->
-                <div class="mixer">
-                    <div class="gui_box grey">
-                        <div class="gui_box_titlebar">
-                            <div class="spacer_box_title" i18n="configurationMixer"></div>
-                        </div>
-                        <div class="spacer_box">
-                            <div class="grid-row">
-                                <div class="grid-col col6 mixerPreview">
-                                    <img src="./resources/motor_order/custom.svg" />
-                                </div>
-                                <div class="grid-col col6">
-                                    <select class="mixerList">
-                                        <!-- list generated here -->
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="spacer_box reverseMotor">
-                            <div class="topBorderLine">
-                                <div style="float: left; height: 20px; margin-right: 15px; margin-left: 3px;">
-                                    <input type="checkbox" id="reverseMotorSwitch" class="toggle" />
-                                </div>
-                                <span class="freelabel" i18n="configurationReverseMotorSwitch"></span>
-                                <div class="helpicon cf_tip" i18n_title="configurationReverseMotorSwitchHelp"></div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
                 <!-- SYSTEM CONFIGURATION -->
                 <div class="systemconfig">
                     <div class="gui_box grey">
@@ -91,30 +60,6 @@
                                     </div>
                                     <span class="freelabel" i18n="configurationMagHardware"></span>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="gui_box grey miscSettings">
-                        <div class="gui_box_titlebar">
-                            <div class="spacer_box_title" i18n="configurationPersonalization"></div>
-                        </div>
-                        <div class="spacer_box">
-                            <div class="number">
-                                <label> <input type="text" name="craftName" maxlength="32" style="width:100px;"/> <span
-                                    i18n="craftName"></span>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="gui_box grey miscSettings">
-                        <div class="gui_box_titlebar">
-                            <div class="spacer_box_title" i18n="configurationCamera"></div>
-                        </div>
-                        <div class="spacer_box">
-                            <div class="number fpvCamAngleDegrees">
-                                <label> <input type="number" name="fpvCamAngleDegrees" step="1" min="0" max="50" /> <span
-                                    i18n="configurationFpvCamAngleDegrees"></span>
-                                </label>
                             </div>
                         </div>
                     </div>
@@ -172,11 +117,6 @@
                                     </label>
                                 </div>
                             </div>
-                            <table class="featuresMultiple">
-                                <tbody class="features escMotorStop">
-                                <!-- table generated here -->
-                                </tbody>
-                            </table>
                             <table class="featuresMultiple">
                                 <tbody class="features escSensor">
                                 <!-- table generated here -->
@@ -463,46 +403,6 @@
                 </div>
             </div>
             <div class="grid-col col6">
-                <!-- 3D -->
-                <div class="3d">
-                    <div class="gui_box grey">
-                        <div class="gui_box_titlebar">
-                            <div class="spacer_box_title" i18n="configuration3d"></div>
-                        </div>
-                        <div class="spacer_box">
-                            <table cellpadding="0" cellspacing="0">
-                                <thead>
-                                <tr>
-                                    <th i18n="configurationFeatureEnabled"></th>
-                                    <th i18n="configurationFeatureDescription"></th>
-                                    <th i18n="configurationFeatureName"></th>
-                                </tr>
-                                </thead>
-                                <tbody class="features 3D" style="margin-bottom:10px;">
-                                <!-- table generated here -->
-                                </tbody>
-                            </table>
-                            <div class="_3dSettings">
-                                <div class="number">
-                                    <label> <input type="number" name="3ddeadbandlow" step="1" min="1250" max="1600" /> <span
-                                        i18n="configuration3dDeadbandLow"></span>
-                                    </label>
-                                </div>
-                                <div class="number">
-                                    <label> <input type="number" name="3ddeadbandhigh" step="1" min="1400" max="1750" /> <span
-                                        i18n="configuration3dDeadbandHigh"></span>
-                                    </label>
-                                </div>
-                                <div class="number">
-                                    <label> <input type="number" name="3dneutral" step="1" min="1400" max="1600" /> <span
-                                        i18n="configuration3dNeutral"></span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
                 <!-- GPS -->
                 <div class="gps">
                     <div class="gui_box grey gps">
