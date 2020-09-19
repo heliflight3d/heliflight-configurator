@@ -46,6 +46,9 @@ var Model = function (wrapper, canvas) {
     // initialize render size for current canvas size
     this.renderer.setSize(this.wrapper.width() * 2, this.wrapper.height() * 2);
 
+    // Set output encoding for GLTF model format
+    this.renderer.outputEncoding = THREE.sRGBEncoding;
+
     // load the model including materials
     var model_file = useWebGLRenderer ? mixerList[MIXER_CONFIG.mixer - 1].model : 'fallback';
 
@@ -87,13 +90,13 @@ var Model = function (wrapper, canvas) {
 };
 
 Model.prototype.loadJSON = function (model_file, callback) {
-    var loader = new THREE.JSONLoader();
+    var loader = new THREE.GLTFLoader();
 
-    loader.load('./resources/models/' + model_file + '.json', function (geometry, materials) {
-        var modelMaterial = new THREE.MeshFaceMaterial(materials),
-            model         = new THREE.Mesh(geometry, modelMaterial);
+    loader.load('./resources/models/' + model_file + '.gltf', function (gltf) {
 
-        model.scale.set(15, 15, 15);
+        var model = gltf.scene;
+        
+        model.scale.set(50, 50, 50);
 
         callback(model);
     });
