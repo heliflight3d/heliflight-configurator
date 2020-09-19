@@ -32,22 +32,20 @@ var mixerList = [
 
 // 3D model
 var Model = function (wrapper, canvas) {
-    var useWebGLRenderer = this.canUseWebGLRenderer();
-
+ 
     this.wrapper = wrapper;
     this.canvas = canvas;
 
-    if (useWebGLRenderer) {
-        this.renderer = new THREE.WebGLRenderer({ canvas: this.canvas[0], alpha: true, antialias: true });
-    } else {
-        this.renderer = new THREE.CanvasRenderer({ canvas: this.canvas[0], alpha: true });
-    }
+    this.renderer = new THREE.WebGLRenderer({ canvas: this.canvas[0], alpha: true, antialias: true });
 
     // initialize render size for current canvas size
     this.renderer.setSize(this.wrapper.width() * 2, this.wrapper.height() * 2);
 
-    // load the model including materials
-    var model_file = useWebGLRenderer ? mixerList[MIXER_CONFIG.mixer - 1].model : 'fallback';
+    // Set output encoding for GLTF model format
+    this.renderer.outputEncoding = THREE.sRGBEncoding;
+
+    // load the model based on mixer - might also be useful for Helis
+    var model_file = mixerList[MIXER_CONFIG.mixer - 1].model;
 
     // Temporary workaround for 'custom' model until akfreak's custom model is merged.
     if (model_file == 'custom') { model_file = 'fallback'; }
@@ -87,25 +85,14 @@ var Model = function (wrapper, canvas) {
 };
 
 Model.prototype.loadJSON = function (model_file, callback) {
-    var loader = new THREE.JSONLoader();
+    var loader = new THREE.GLTFLoader();
 
-    loader.load('./resources/models/' + model_file + '.json', function (geometry, materials) {
-        var modelMaterial = new THREE.MeshFaceMaterial(materials),
-            model         = new THREE.Mesh(geometry, modelMaterial);
+    loader.load('./resources/models/' + model_file + '.gltf', function (gltf) {
 
-        model.scale.set(15, 15, 15);
+        var model = gltf.scene;
 
         callback(model);
     });
-};
-
-Model.prototype.canUseWebGLRenderer = function () {
-    // webgl capability detector
-    // it would seem the webgl "enabling" through advanced settings will be ignored in the future
-    // and webgl will be supported if gpu supports it by default (canary 40.0.2175.0), keep an eye on this one
-    var detector_canvas = document.createElement('canvas');
-
-    return window.WebGLRenderingContext && (detector_canvas.getContext('webgl') || detector_canvas.getContext('experimental-webgl'));
 };
 
 Model.prototype.rotateTo = function (x, y, z) {
@@ -146,8 +133,7 @@ Model.prototype.resize = function () {
 };
 
 Model.prototype.dispose = function () {
-    if (this.canUseWebGLRenderer()) {
-        this.renderer.forceContextLoss();
-        this.renderer.dispose();
-    }
+    this.renderer.forceContextLoss();
+    this.renderer.dispose();
+ 
 };
