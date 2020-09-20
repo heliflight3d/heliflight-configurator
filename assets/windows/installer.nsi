@@ -11,7 +11,7 @@
 
 # Some definitions
 !define SOURCE_FILES          "..\..\${SOURCE_FOLDER}\heliflight-configurator\${PLATFORM}\*"
-!define APP_NAME              "HeliHlight Configurator"
+!define APP_NAME              "HeliFlight Configurator"
 !define COMPANY_NAME          "The HeliFlight Open Source Project."
 !define GROUP_NAME            "HeliFlight"
 !define FOLDER_NAME           "Heliflight-Configurator"
