@@ -11,23 +11,23 @@
 
 # Some definitions
 !define SOURCE_FILES          "..\..\${SOURCE_FOLDER}\heliflight-configurator\${PLATFORM}\*"
-!define APP_NAME              "Heliflight Configurator"
-!define COMPANY_NAME          "The Heliflight open source project."
-!define GROUP_NAME            "Heliflight"
+!define APP_NAME              "HeliHlight Configurator"
+!define COMPANY_NAME          "The HeliFlight Open Source Project."
+!define GROUP_NAME            "HeliFlight"
 !define FOLDER_NAME           "Heliflight-Configurator"
 !define FILE_NAME_INSTALLER   "heliflight-configurator-installer_${VERSION}_${PLATFORM}.exe"
 !define FILE_NAME_UNINSTALLER "uninstall-heliflight-configurator.exe"
 !define FILE_NAME_EXECUTABLE  "heliflight-configurator.exe"
 !define LICENSE               "..\..\LICENSE"
-!define MUI_WELCOMEFINISHPAGE_BITMAP ".\bf_installer.bmp"
+!define MUI_WELCOMEFINISHPAGE_BITMAP ".\hf_installer.bmp"
 
 
 Name "${APP_NAME}"
 BrandingText "${COMPANY_NAME}"
 
 # set the icon
-!define MUI_ICON ".\bf_installer_icon.ico"
-!define MUI_UNICON ".\bf_uninstaller_icon.ico"
+!define MUI_ICON ".\hf_installer_icon.ico"
+!define MUI_UNICON ".\hf_installer_icon.ico"
 
 #Define uninstall list name
 !define UninstName "uninbf00"
@@ -159,9 +159,9 @@ Section
 
     # create shortcuts in the start menu and on the desktop
     CreateDirectory "$SMPROGRAMS\${GROUP_NAME}\${FOLDER_NAME}"    
-    CreateShortCut "$SMPROGRAMS\${GROUP_NAME}\${FOLDER_NAME}\${APP_NAME}.lnk" "$INSTDIR\${FILE_NAME_EXECUTABLE}" "" "$INSTDIR\images\bf_icon.ico" "0" "" "" ""
+    CreateShortCut "$SMPROGRAMS\${GROUP_NAME}\${FOLDER_NAME}\${APP_NAME}.lnk" "$INSTDIR\${FILE_NAME_EXECUTABLE}" "" "$INSTDIR\images\hf_icon.ico" "0" "" "" ""
     CreateShortCut "$SMPROGRAMS\${GROUP_NAME}\${FOLDER_NAME}\Uninstall ${APP_NAME}.lnk" "$INSTDIR\${FILE_NAME_UNINSTALLER}"
-    CreateShortCut "$DESKTOP\${APP_NAME}.lnk" "$INSTDIR\${FILE_NAME_EXECUTABLE}" "" "$INSTDIR\images\bf_icon.ico" "0" "" "" ""
+    CreateShortCut "$DESKTOP\${APP_NAME}.lnk" "$INSTDIR\${FILE_NAME_EXECUTABLE}" "" "$INSTDIR\images\hf_icon.ico" "0" "" "" ""
 
     # include in add/remove programs
     WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}" \

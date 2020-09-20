@@ -49,8 +49,8 @@ var nwBuilderOptions = {
     version: '0.44.2',
     files: './dist/**/*',
     macIcns: './src/images/bf_icon.icns',
-    macPlist: { 'CFBundleDisplayName': 'Heliflight Configurator'},
-    winIco: './src/images/bf_icon.ico',
+    macPlist: { 'CFBundleDisplayName': 'HeliFlight Configurator'},
+    winIco: './src/images/hf_icon.ico',
     zip: false
 };
 
