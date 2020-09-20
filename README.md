@@ -2,21 +2,8 @@
 
 HeliFlight Configurator is a crossplatform configuration tool for the HeliFlight flight control system.
 
-It runs as an app within Google Chrome and allows you to configure the HeliFlight firmware.
-
-There is also now a standalone version available, since Google Chrome Apps are getting deprecated on platforms that aren't Chrome OS.
-
 HeliFlight Configurator is forked from Betaflight Configurator.
 
-
-## Betaflight README below
-
-## Authors
-
-Betaflight Configurator is a [fork](#credits) of the Cleanflight Configurator with support for Betaflight instead of Cleanflight.
-
-This configurator is the only configurator with support for Betaflight specific features. It will likely require that you run the latest firmware on the flight controller.
-If you are experiencing any problems please make sure you are running the [latest firmware version](https://github.com/betaflight/betaflight/releases/).
 
 ## Installation
 
@@ -24,28 +11,12 @@ If you are experiencing any problems please make sure you are running the [lates
 
 **This is the default installation method, and at some point in the future this will become the only way available for most platforms. Please use this method whenever possible.**
 
-Download the installer from [Releases.](https://github.com/betaflight/betaflight-configurator/releases)
+Download the installer from [Releases.](https://github.com/heliflight3d/heliflight-configurator/releases)
 
 #### Note for MacOS X users
 
-Changes to the security model used in the latest versions of MacOS X 10.14 (Mojave) and 10.15 (Catalina) mean that the operating system will show an error message ('"Betaflight Configurator.app" is damaged and can’t be opened. You should move it to the Trash.') when trying to install the application. To work around this, run the following command in a terminal after installing: `sudo xattr -rd com.apple.quarantine /Applications/Betaflight\ Configurator.app`.
+Changes to the security model used in the latest versions of MacOS X 10.14 (Mojave) and 10.15 (Catalina) mean that the operating system will show an error message ('"Heliflight Configurator.app" is damaged and can’t be opened. You should move it to the Trash.') when trying to install the application. To work around this, run the following command in a terminal after installing: `sudo xattr -rd com.apple.quarantine /Applications/Betaflight\ Configurator.app`.
 
-
-### Via Chrome Web Store (for ChromeOS)
-
-[![available in the Chrome web store for Chromeos](https://developer.chrome.com/webstore/images/ChromeWebStore_Badge_v2_206x58.png)](https://chrome.google.com/webstore/detail/dlgclabibdhkfnbkajgkplmkpndajfom)
-
-1. Visit the [Betaflight Configurator product page in the Chrome web store](https://chrome.google.com/webstore/detail/dlgclabibdhkfnbkajgkplmkpndajfom)
-2. Click **+ Add to Chrome**
-
-Please note - the application will automatically update itself when new versions are released.  Please ensure you maintain configuration backups as described in the Betaflight documentation.
-
-
-### Unstable Testing Versions
-
-Unstable testing versions of the lates builds of the configurator for most platforms can be downloaded from [here](https://github.com/betaflight/betaflight-configurator-nightlies/releases/).
-
-**Be aware that these versions are intended for testing / feedback only, and may be buggy or broken, and can cause flight controller settings to be corrupted. Caution is advised when using these versions.**
 
 ## Native app build via NW.js (windows/linux/macos) or Cordova (android)
 
@@ -92,7 +63,7 @@ You can also use multiple platforms e.g. `yarn gulp <taskname> --osx64 --linux64
 
 ## Languages
 
-Betaflight Configurator has been translated into several languages. The application will try to detect and use your system language if a translation into this language is available. You can help [translating the application into your language](https://github.com/betaflight/betaflight/tree/master/README.md#Translators);
+HeliFlight Configurator has been translated into several languages. The application will try to detect and use your system language if a translation into this language is available. You can help [translating the application into your language](https://github.com/heliflight3d/heliflght/tree/master/README.md#Translators);
 
 If you prefer to have the application in English or any other language, you can select your desired language in the first screen of the application.
 
@@ -116,17 +87,17 @@ If you have 3D model animation problems, enable "Override software rendering lis
 
 ## Support
 
-If you need help please reach out on the [betaflightgroup](https://betaflightgroup.slack.com) slack channel before raising issues on github. Register and [request slack access here](https://slack.betaflight.com).
+If you need help please reach out on the [HeliFlight Discord channel](https://discord.com/channels/704441708661964940) before raising issues on github. 
 
 ### Issue trackers
 
 For Betaflight configurator issues raise them here
 
-https://github.com/betaflight/betaflight-configurator/issues
+https://github.com/heliflight3d/heliflight-configurator/issues
 
 For Betaflight firmware issues raise them here
 
-https://github.com/betaflight/betaflight/issues
+https://github.com/heliflight3d/heliflight/issues
 
 ## Technical details
 
@@ -140,5 +111,6 @@ We accept clean and reasonable patches, submit them!
 
 ctn - primary author and maintainer of Baseflight Configurator from which Cleanflight Configurator project was forked.
 
-Hydra -  author and maintainer of Cleanflight Configurator from which this project was forked.
+Hydra -  author and maintainer of Cleanflight Configurator from which the Betaflight project was forked.
 
+Betaflight devs - From which this project was forked.

@@ -2,10 +2,10 @@
     "manifest_version": 2,
     "minimum_chrome_version": "49",
     "version": "10.7.1",
-    "author": "Heliflight Squad",
-    "name": "Heliflight - Configurator",
-    "short_name": "Heliflight",
-    "description": "Crossplatform configuration tool for Heliflight flight control system",
+    "author": "HeliFlight Squad",
+    "name": "HeliFlight - Configurator",
+    "short_name": "HeliFlight",
+    "description": "Crossplatform configuration tool for HeliFlight flight control system",
 
     "offline_enabled": true,
 
@@ -21,9 +21,7 @@
         "https://api.openstreetmap.org/",
         "https://*.github.com/",
         "https://*.githubusercontent.com/",
-        "http://*.baseflight.net/",
         "https://*.amazonaws.com/",
-        "https://*.betaflight.tech/",
         "https://www.google-analytics.com/",
         "serial",
         "usb",
@@ -60,6 +58,6 @@
         ]
     },
     "icons": {
-        "128": "images/bf_icon_128.png"
+        "128": "images/hf_icon_128.png"
     }
 }
