@@ -59,7 +59,8 @@
         "object-hash": "^2.0.3",
         "semver-min": "^0.6.5",
         "short-unique-id": "^1.1.1",
-        "universal-ga": "^1.2.0"
+        "universal-ga": "^1.2.0",
+        "three": "^0.120.1"
     },
     "devDependencies": {
         "@quanle94/innosetup": "^6.0.2",
