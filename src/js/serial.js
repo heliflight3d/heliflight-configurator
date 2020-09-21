@@ -1,20 +1,20 @@
 'use strict';
 
 var serial = {
-    connected:       false,
-    connectionId:    false,
-    openRequested:   false,
-    openCanceled:    false,
-    bitrate:         0,
-    bytesReceived:   0,
-    bytesSent:       0,
-    failed:          0,
-    connectionType:  'serial', // 'serial' or 'tcp'
-    connectionIP:    '127.0.0.1',
-    connectionPort:  2323,
+    connected: false,
+    connectionId: false,
+    openRequested: false,
+    openCanceled: false,
+    bitrate: 0,
+    bytesReceived: 0,
+    bytesSent: 0,
+    failed: 0,
+    connectionType: 'serial', // 'serial' or 'tcp'
+    connectionIP: '127.0.0.1',
+    connectionPort: 2323,
 
-    transmitting:   false,
-    outputBuffer:  [],
+    transmitting: false,
+    outputBuffer: [],
 
     logHead: 'SERIAL: ',
 
@@ -85,15 +85,15 @@ var serial = {
                         case 'overrun':
                             // wait 50 ms and attempt recovery
                             self.error = info.error;
-                            setTimeout(function() {
-                                chrome.serial.setPaused(info.connectionId, false, function() {
+                            setTimeout(function () {
+                                chrome.serial.setPaused(info.connectionId, false, function () {
                                     self.getInfo(function (info) {
                                         if (info) {
                                             if (info.paused) {
                                                 // assume unrecoverable, disconnect
                                                 console.log('SERIAL: Connection did not recover from ' + self.error + ' condition, disconnecting');
                                                 GUI.log(i18n.getMessage('serialUnrecoverable'));
-    
+
                                                 if (GUI.connected_to || GUI.connecting_to) {
                                                     $('a.connect').click();
                                                 } else {
@@ -174,7 +174,7 @@ var serial = {
         self.logHead = 'SERIAL-TCP: ';
 
         console.log('connect to raw tcp:', ip + ':' + port)
-        chrome.sockets.tcp.create({}, function(createInfo) {
+        chrome.sockets.tcp.create({}, function (createInfo) {
             console.log('chrome.sockets.tcp.create', createInfo)
             if (createInfo && !self.openCanceled) {
                 self.connectionId = createInfo.socketId;
@@ -185,21 +185,21 @@ var serial = {
                 self.openRequested = false;
             }
 
-            chrome.sockets.tcp.connect(createInfo.socketId, self.connectionIP, self.connectionPort, function (result){
+            chrome.sockets.tcp.connect(createInfo.socketId, self.connectionIP, self.connectionPort, function (result) {
                 if (chrome.runtime.lastError) {
                     console.error('onConnectedCallback', chrome.runtime.lastError.message);
                 }
 
                 console.log('onConnectedCallback', result)
-                if(result == 0) {
+                if (result == 0) {
                     self.connected = true;
-                    chrome.sockets.tcp.setNoDelay(createInfo.socketId, true, function (noDelayResult){
+                    chrome.sockets.tcp.setNoDelay(createInfo.socketId, true, function (noDelayResult) {
                         if (chrome.runtime.lastError) {
                             console.error('setNoDelay', chrome.runtime.lastError.message);
                         }
 
                         console.log('setNoDelay', noDelayResult)
-                        if(noDelayResult != 0) {
+                        if (noDelayResult != 0) {
                             self.openRequested = false;
                             console.log(self.logHead + 'Failed to setNoDelay');
                         }
@@ -280,9 +280,12 @@ var serial = {
     },
     getDevices: function (callback) {
         chrome.serial.getDevices(function (devices_array) {
-            var devices = [];
+            const devices = [];
             devices_array.forEach(function (device) {
-                devices.push(device.path);
+                devices.push({
+                    path: device.path,
+                    displayName: device.displayName,
+                });
             });
 
             callback(devices);
@@ -300,7 +303,7 @@ var serial = {
     },
     send: function (data, callback) {
         var self = this;
-        this.outputBuffer.push({'data': data, 'callback': callback});
+        this.outputBuffer.push({ 'data': data, 'callback': callback });
 
         function send() {
             // store inside separate variables in case array gets destroyed
@@ -312,8 +315,8 @@ var serial = {
                 if (callback) callback({
                     bytesSent: 0,
                     error: 'undefined'
-               });
-               return;
+                });
+                return;
             }
 
             var sendFn = (self.connectionType == 'serial') ? chrome.serial.send : chrome.sockets.tcp.send;
@@ -323,8 +326,8 @@ var serial = {
                     if (callback) callback({
                         bytesSent: 0,
                         error: 'undefined'
-                   });
-                   return;
+                    });
+                    return;
                 }
 
                 // tcp send error
@@ -341,8 +344,8 @@ var serial = {
 
                     }
                     if (callback) callback({
-                         bytesSent: 0,
-                         error: error
+                        bytesSent: 0,
+                        error: error
                     });
                     return;
                 }

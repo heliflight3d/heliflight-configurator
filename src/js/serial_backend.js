@@ -7,7 +7,7 @@ function initializeSerialBackend() {
     mspHelper = new MspHelper();
     mspHelper.process_data.bind(mspHelper);
 
-    GUI.updateManualPortVisibility = function(){
+    GUI.updateManualPortVisibility = function () {
         var selected_port = $('div#port-picker #port option:selected');
         if (selected_port.data().isManual) {
             $('#port-override-option').show();
@@ -26,7 +26,7 @@ function initializeSerialBackend() {
     GUI.updateManualPortVisibility();
 
     $('#port-override').change(function () {
-        ConfigStorage.set({'portOverride': $('#port-override').val()});
+        ConfigStorage.set({ 'portOverride': $('#port-override').val() });
     });
 
     ConfigStorage.get('portOverride', function (data) {
@@ -43,7 +43,7 @@ function initializeSerialBackend() {
             var thisElement = $(this);
             var clicks = thisElement.data('clicks');
 
-            var toggleStatus = function() {
+            var toggleStatus = function () {
                 thisElement.data("clicks", !clicks);
             };
 
@@ -70,7 +70,7 @@ function initializeSerialBackend() {
                     $('div#port-picker #port, div#port-picker #baud, div#port-picker #delay').prop('disabled', true);
                     $('div.connect_controls div.connect_state').text(i18n.getMessage('connecting'));
 
-                    serial.connect(portName, {bitrate: selected_baud}, onOpen);
+                    serial.connect(portName, { bitrate: selected_baud }, onOpen);
 
                     toggleStatus();
                 } else {
@@ -90,7 +90,7 @@ function initializeSerialBackend() {
                     mspHelper.setArmingEnabled(true, false, onFinishCallback);
                 }
             }
-       }
+        }
     });
 
     $('div.open_firmware_flasher a.flash').click(function () {
@@ -138,7 +138,7 @@ function initializeSerialBackend() {
                 if (!GUI.connected_to && !GUI.connecting_to) $('select#baud').prop('disabled', false);
             }
 
-            ConfigStorage.set({'auto_connect': GUI.auto_connect});
+            ConfigStorage.set({ 'auto_connect': GUI.auto_connect });
         });
     });
 
@@ -223,19 +223,6 @@ function onOpen(openInfo) {
 
         GUI.log(i18n.getMessage('serialPortOpened', [openInfo.connectionId]));
 
-        // save selected port with chrome.storage if the port differs
-        ConfigStorage.get('last_used_port', function (result) {
-            if (result.last_used_port) {
-                if (result.last_used_port != GUI.connected_to) {
-                    // last used port doesn't match the one found in local db, we will store the new one
-                    ConfigStorage.set({'last_used_port': GUI.connected_to});
-                }
-            } else {
-                // variable isn't stored yet, saving
-                ConfigStorage.set({'last_used_port': GUI.connected_to});
-            }
-        });
-
         serial.onReceive.addListener(read_serial);
 
         setConnectionTimeout();
@@ -277,7 +264,7 @@ function onOpen(openInfo) {
 
                         $('.dialogConnectWarning-content').html(i18n.getMessage('firmwareTypeNotSupported'));
 
-                        $('.dialogConnectWarning-closebtn').click(function() {
+                        $('.dialogConnectWarning-closebtn').click(function () {
                             dialog.close();
                         });
 
@@ -293,7 +280,7 @@ function onOpen(openInfo) {
 
                 $('.dialogConnectWarning-content').html(i18n.getMessage('firmwareVersionNotSupported', [CONFIGURATOR.API_VERSION_ACCEPTED]));
 
-                $('.dialogConnectWarning-closebtn').click(function() {
+                $('.dialogConnectWarning-closebtn').click(function () {
                     dialog.close();
                 });
 
@@ -337,7 +324,7 @@ function processBoardInfo() {
     if (bit_check(CONFIG.targetCapabilities, FC.TARGET_CAPABILITIES_FLAGS.SUPPORTS_CUSTOM_DEFAULTS) && bit_check(CONFIG.targetCapabilities, FC.TARGET_CAPABILITIES_FLAGS.HAS_CUSTOM_DEFAULTS) && CONFIG.configurationState === FC.CONFIGURATION_STATES.DEFAULTS_BARE) {
         var dialog = $('#dialogResetToCustomDefaults')[0];
 
-        $('#dialogResetToCustomDefaults-acceptbtn').click(function() {
+        $('#dialogResetToCustomDefaults-acceptbtn').click(function () {
             analytics.sendEvent(analytics.EVENT_CATEGORIES.FLIGHT_CONTROLLER, 'AcceptResetToCustomDefaults');
 
             var buffer = [];
@@ -351,7 +338,7 @@ function processBoardInfo() {
             }, 0);
         });
 
-        $('#dialogResetToCustomDefaults-cancelbtn').click(function() {
+        $('#dialogResetToCustomDefaults-cancelbtn').click(function () {
             analytics.sendEvent(analytics.EVENT_CATEGORIES.FLIGHT_CONTROLLER, 'CancelResetToCustomDefaults');
 
             dialog.close();
@@ -408,7 +395,7 @@ function checkReportProblems() {
 
         if (needsProblemReportingDialog) {
             const problemDialog = $('#dialogReportProblems')[0];
-            $('#dialogReportProblems-closebtn').click(function() {
+            $('#dialogReportProblems-closebtn').click(function () {
                 problemDialog.close();
             });
 
@@ -514,7 +501,7 @@ function onConnect() {
     if (CONFIG.flightControllerVersion !== '') {
         FEATURE_CONFIG.features = new Features(CONFIG);
         BEEPER_CONFIG.beepers = new Beepers(CONFIG);
-        BEEPER_CONFIG.dshotBeaconConditions = new Beepers(CONFIG, [ "RX_LOST", "RX_SET" ]);
+        BEEPER_CONFIG.dshotBeaconConditions = new Beepers(CONFIG, ["RX_LOST", "RX_SET"]);
 
         $('#tabs ul.mode-connected').show();
 
@@ -632,7 +619,7 @@ function sensor_status(sensors_detected) {
 
     if (have_sensor(sensors_detected, 'gps')) {
         $('.gps', e_sensor_status).addClass('on');
-    $('.gpsicon', e_sensor_status).addClass('active');
+        $('.gpsicon', e_sensor_status).addClass('active');
     } else {
         $('.gps', e_sensor_status).removeClass('on');
         $('.gpsicon', e_sensor_status).removeClass('active');
@@ -648,7 +635,7 @@ function sensor_status(sensors_detected) {
 }
 
 function have_sensor(sensors_detected, sensor_code) {
-    switch(sensor_code) {
+    switch (sensor_code) {
         case 'acc':
             return bit_check(sensors_detected, 0);
         case 'baro':
@@ -679,7 +666,7 @@ function update_live_status() {
     var statuswrapper = $('#quad-status_wrapper');
 
     $(".quad-status-contents").css({
-       display: 'inline-block'
+        display: 'inline-block'
     });
 
     if (GUI.active_tab != 'cli') {
@@ -695,52 +682,52 @@ function update_live_status() {
     var active = ((Date.now() - ANALOG.last_received_timestamp) < 300);
 
     for (var i = 0; i < AUX_CONFIG.length; i++) {
-       if (AUX_CONFIG[i] == 'ARM') {
-               if (bit_check(CONFIG.mode, i))
-                       $(".armedicon").addClass('active');
-               else
-                       $(".armedicon").removeClass('active');
-       }
-       if (AUX_CONFIG[i] == 'FAILSAFE') {
-               if (bit_check(CONFIG.mode, i))
-                       $(".failsafeicon").addClass('active');
-               else
-                       $(".failsafeicon").removeClass('active');
-       }
+        if (AUX_CONFIG[i] == 'ARM') {
+            if (bit_check(CONFIG.mode, i))
+                $(".armedicon").addClass('active');
+            else
+                $(".armedicon").removeClass('active');
+        }
+        if (AUX_CONFIG[i] == 'FAILSAFE') {
+            if (bit_check(CONFIG.mode, i))
+                $(".failsafeicon").addClass('active');
+            else
+                $(".failsafeicon").removeClass('active');
+        }
     }
 
     if (ANALOG != undefined) {
         var nbCells = Math.floor(ANALOG.voltage / BATTERY_CONFIG.vbatmaxcellvoltage) + 1;
 
         if (ANALOG.voltage == 0) {
-               nbCells = 1;
+            nbCells = 1;
         }
 
-       var min = BATTERY_CONFIG.vbatmincellvoltage * nbCells;
-       var max = BATTERY_CONFIG.vbatmaxcellvoltage * nbCells;
-       var warn = BATTERY_CONFIG.vbatwarningcellvoltage * nbCells;
+        var min = BATTERY_CONFIG.vbatmincellvoltage * nbCells;
+        var max = BATTERY_CONFIG.vbatmaxcellvoltage * nbCells;
+        var warn = BATTERY_CONFIG.vbatwarningcellvoltage * nbCells;
 
-       const NO_BATTERY_VOLTAGE_MAXIMUM = 1.8; // Maybe is better to add a call to MSP_BATTERY_STATE but is not available for all versions  
+        const NO_BATTERY_VOLTAGE_MAXIMUM = 1.8; // Maybe is better to add a call to MSP_BATTERY_STATE but is not available for all versions  
 
-       if (ANALOG.voltage < min && ANALOG.voltage > NO_BATTERY_VOLTAGE_MAXIMUM) {
-           $(".battery-status").addClass('state-empty').removeClass('state-ok').removeClass('state-warning');
-           $(".battery-status").css({
-               width: "100%",
-           });
-       } else {
-           $(".battery-status").css({
-               width: ((ANALOG.voltage - min) / (max - min) * 100) + "%",
-           });
+        if (ANALOG.voltage < min && ANALOG.voltage > NO_BATTERY_VOLTAGE_MAXIMUM) {
+            $(".battery-status").addClass('state-empty').removeClass('state-ok').removeClass('state-warning');
+            $(".battery-status").css({
+                width: "100%",
+            });
+        } else {
+            $(".battery-status").css({
+                width: ((ANALOG.voltage - min) / (max - min) * 100) + "%",
+            });
 
-           if (ANALOG.voltage < warn) {
-               $(".battery-status").addClass('state-warning').removeClass('state-empty').removeClass('state-ok');
-           } else  {
-               $(".battery-status").addClass('state-ok').removeClass('state-warning').removeClass('state-empty');
-           }
-       }
-       
-       let cellsText = (ANALOG.voltage > NO_BATTERY_VOLTAGE_MAXIMUM)? nbCells + 'S' : 'USB';
-       $(".battery-legend").text(ANALOG.voltage.toFixed(2) + "V (" + cellsText + ")");
+            if (ANALOG.voltage < warn) {
+                $(".battery-status").addClass('state-warning').removeClass('state-empty').removeClass('state-ok');
+            } else {
+                $(".battery-status").addClass('state-ok').removeClass('state-warning').removeClass('state-empty');
+            }
+        }
+
+        let cellsText = (ANALOG.voltage > NO_BATTERY_VOLTAGE_MAXIMUM) ? nbCells + 'S' : 'USB';
+        $(".battery-legend").text(ANALOG.voltage.toFixed(2) + "V (" + cellsText + ")");
 
     }
 
@@ -789,29 +776,29 @@ function update_dataflash_global() {
 
     var supportsDataflash = DATAFLASH.totalSize > 0;
 
-    if (supportsDataflash){
+    if (supportsDataflash) {
         $(".noflash_global").css({
-           display: 'none'
+            display: 'none'
         });
 
         $(".dataflash-contents_global").css({
-           display: 'block'
+            display: 'block'
         });
 
         $(".dataflash-free_global").css({
-           width: (100-(DATAFLASH.totalSize - DATAFLASH.usedSize) / DATAFLASH.totalSize * 100) + "%",
-           display: 'block'
+            width: (100 - (DATAFLASH.totalSize - DATAFLASH.usedSize) / DATAFLASH.totalSize * 100) + "%",
+            display: 'block'
         });
         $(".dataflash-free_global div").text('Dataflash: free ' + formatFilesize(DATAFLASH.totalSize - DATAFLASH.usedSize));
-     } else {
+    } else {
         $(".noflash_global").css({
-           display: 'block'
+            display: 'block'
         });
 
         $(".dataflash-contents_global").css({
-           display: 'none'
+            display: 'none'
         });
-     }
+    }
 }
 
 function reinitialiseConnection(originatorTab, callback) {
@@ -831,7 +818,7 @@ function reinitialiseConnection(originatorTab, callback) {
                 callback();
             }
 
-            MSP.send_message(MSPCodes.MSP_STATUS, false, false, function() {
+            MSP.send_message(MSPCodes.MSP_STATUS, false, false, function () {
                 GUI.log(i18n.getMessage('deviceReady'));
                 originatorTab.initialize(false, $('#content').scrollTop());
             });
