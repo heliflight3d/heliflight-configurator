@@ -63,7 +63,7 @@ TABS.setup.initialize = function (callback) {
 
         if (semver.gte(CONFIG.apiVersion, "1.40.0")) {
             $('.initialSetupRebootBootloader').show();
-    
+
             $('a.rebootBootloader').click(function () {
                 var buffer = [];
                 buffer.push(mspHelper.REBOOT_TYPES.BOOTLOADER);
@@ -127,11 +127,11 @@ TABS.setup.initialize = function (callback) {
             dialogConfirmReset.showModal();
         });
 
-        $('.dialogConfirmReset-cancelbtn').click(function() {
+        $('.dialogConfirmReset-cancelbtn').click(function () {
             dialogConfirmReset.close();
         });
 
-        $('.dialogConfirmReset-confirmbtn').click(function() {
+        $('.dialogConfirmReset-confirmbtn').click(function () {
             dialogConfirmReset.close();
             MSP.send_message(MSPCodes.MSP_RESET_CONF, false, false, function () {
                 GUI.log(i18n.getMessage('initialSetupSettingsRestored'));
@@ -196,25 +196,25 @@ TABS.setup.initialize = function (callback) {
 
         // DISARM FLAGS
         // We add all the arming/disarming flags available, and show/hide them if needed.
-        var prepareDisarmFlags = function() {
+        var prepareDisarmFlags = function () {
 
             var disarmFlagElements = ['NO_GYRO',
-                                      'FAILSAFE',
-                                      'RX_FAILSAFE',
-                                      'BAD_RX_RECOVERY',
-                                      'BOXFAILSAFE',
-                                      'THROTTLE',
-                                      'ANGLE',
-                                      'BOOT_GRACE_TIME',
-                                      'NOPREARM',
-                                      'LOAD',
-                                      'CALIBRATING',
-                                      'CLI',
-                                      'CMS_MENU',
-                                      'OSD_MENU',
-                                      'BST',
-                                      'MSP',
-                                     ];
+                'FAILSAFE',
+                'RX_FAILSAFE',
+                'BAD_RX_RECOVERY',
+                'BOXFAILSAFE',
+                'THROTTLE',
+                'ANGLE',
+                'BOOT_GRACE_TIME',
+                'NOPREARM',
+                'LOAD',
+                'CALIBRATING',
+                'CLI',
+                'CMS_MENU',
+                'OSD_MENU',
+                'BST',
+                'MSP',
+            ];
 
             if (semver.gte(CONFIG.apiVersion, "1.38.0")) {
                 disarmFlagElements.splice(disarmFlagElements.indexOf('THROTTLE'), 0, 'RUNAWAY_TAKEOFF');
@@ -222,7 +222,7 @@ TABS.setup.initialize = function (callback) {
 
             if (semver.gte(CONFIG.apiVersion, "1.39.0")) {
                 disarmFlagElements = disarmFlagElements.concat(['PARALYZE',
-                                                                'GPS']);
+                    'GPS']);
             }
 
             if (semver.gte(CONFIG.apiVersion, "1.41.0")) {
@@ -233,7 +233,7 @@ TABS.setup.initialize = function (callback) {
             if (semver.gte(CONFIG.apiVersion, "1.42.0")) {
                 disarmFlagElements.splice(disarmFlagElements.indexOf('THROTTLE'), 0, 'CRASH');
                 disarmFlagElements = disarmFlagElements.concat(['REBOOT_REQD',
-                                                                'DSHOT_BBANG']);
+                    'DSHOT_BBANG']);
             }
             if (semver.gte(CONFIG.apiVersion, API_VERSION_1_43)) {
                 disarmFlagElements = disarmFlagElements.concat(['NO_ACC_CAL', 'MOTOR_PROTO']);
@@ -243,7 +243,7 @@ TABS.setup.initialize = function (callback) {
             disarmFlagElements = disarmFlagElements.concat(['ARM_SWITCH']);
 
             // Arming allowed flag
-            arming_disable_flags_e.append('<span id="initialSetupArmingAllowed" i18n="initialSetupArmingAllowed" style="display: none;"/>');
+            arming_disable_flags_e.append('<span id="initialSetupArmingAllowed" i18n="initialSetupArmingAllowed" style="display: none;"></span>');
 
             // Arming disabled flags
             for (var i = 0; i < CONFIG.armingDisableCount; i++) {
@@ -252,11 +252,11 @@ TABS.setup.initialize = function (callback) {
                 if (i < disarmFlagElements.length - 1) {
                     arming_disable_flags_e.append('<span id="initialSetupArmingDisableFlags' + i + '" class="cf_tip disarm-flag" title="' + i18n.getMessage('initialSetupArmingDisableFlagsTooltip' + disarmFlagElements[i]) + '" style="display: none;">' + disarmFlagElements[i] + '</span>');
 
-                // The ARM_SWITCH, always the last element
+                    // The ARM_SWITCH, always the last element
                 } else if (i == CONFIG.armingDisableCount - 1) {
                     arming_disable_flags_e.append('<span id="initialSetupArmingDisableFlags' + i + '" class="cf_tip disarm-flag" title="' + i18n.getMessage('initialSetupArmingDisableFlagsTooltipARM_SWITCH') + '" style="display: none;">ARM_SWITCH</span>');
 
-                // Unknown disarm flags
+                    // Unknown disarm flags
                 } else {
                     arming_disable_flags_e.append('<span id="initialSetupArmingDisableFlags' + i + '" class="disarm-flag" style="display: none;">' + (i + 1) + '</span>');
                 }
@@ -267,12 +267,12 @@ TABS.setup.initialize = function (callback) {
 
         function get_slow_data() {
 
-            MSP.send_message(MSPCodes.MSP_STATUS, false, false, function() {
+            MSP.send_message(MSPCodes.MSP_STATUS, false, false, function () {
 
                 $('#initialSetupArmingAllowed').toggle(CONFIG.armingDisableFlags == 0);
 
                 for (var i = 0; i < CONFIG.armingDisableCount; i++) {
-                    $('#initialSetupArmingDisableFlags'+i).css('display',(CONFIG.armingDisableFlags & (1 << i)) == 0 ? 'none':'inline-block');
+                    $('#initialSetupArmingDisableFlags' + i).css('display', (CONFIG.armingDisableFlags & (1 << i)) == 0 ? 'none' : 'inline-block');
                 }
 
             });
@@ -312,12 +312,12 @@ TABS.setup.initialize = function (callback) {
     }
 };
 
-TABS.setup.initializeInstruments = function() {
-    var options = {size:90, showBox : false, img_directory: 'images/flightindicators/'};
+TABS.setup.initializeInstruments = function () {
+    var options = { size: 90, showBox: false, img_directory: 'images/flightindicators/' };
     var attitude = $.flightIndicator('#attitude', 'attitude', options);
     var heading = $.flightIndicator('#heading', 'heading', options);
 
-    this.updateInstruments = function() {
+    this.updateInstruments = function () {
         attitude.setRoll(SENSOR_DATA.kinematics[0]);
         attitude.setPitch(SENSOR_DATA.kinematics[1]);
         heading.setHeading(SENSOR_DATA.kinematics[2]);
