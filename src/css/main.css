@@ -1,5 +1,5 @@
 :root {
-    --accent: #ffbb00;
+    --accent: #3d7fb2;
     --error: red;
     --subtleAccent: silver;
     --quietText: #ffffff;
@@ -33,7 +33,7 @@ html, body {
 body {
     font-family: 'Open Sans', 'Segoe UI', Tahoma, sans-serif;
     font-size: 12px;
-    color: #303030;
+    color: #000000;
     background-color: #3d3f3e;
     margin: 0;
     padding: 0;
@@ -88,8 +88,8 @@ a.disabled {
     margin-top: -45px;
     background-color: var(--accent);
     border-radius: 3px;
-    border: 1px solid #e8b423;
-    color: #000;
+    border: 1px solid #f9f9f9;
+    color: #ffffff;
     float: right;
     font-weight: bold;
     font-size: 10px;
@@ -101,7 +101,7 @@ a.disabled {
 }
 
 .cf_doc_version_bt a:hover {
-    background-color: #fecb3f;
+    background-color: darkorange;
     transition: all ease 0.2s;
 }
 
@@ -310,7 +310,7 @@ input[type="number"]::-webkit-inner-spin-button {
 
 .firmware_b a.flash, .connect_b a.connect {
     background-color: var(--accent);
-    border: 1px solid #dba718;
+    border: 1px solid #f9f9f9;
     background-repeat: no-repeat;
     height: 50px;
     width: 50px;
@@ -339,7 +339,7 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 .firmware_b a.flash:hover, .connect_b a.connect:hover {
-    background-color: #ffcc3f;
+    background-color: darkorange;
 }
 
 .firmware_b a.flash.active, .connect_b a.connect.active {
@@ -1027,7 +1027,7 @@ input[type="number"]::-webkit-inner-spin-button {
 
 #tabs li.active a {
     background-color: var(--accent);
-    color: #000;
+    color: #fff;
     transition: none;
     text-shadow: 0 1px rgba(255, 255, 255, 0.45);
 
@@ -1503,7 +1503,7 @@ dialog .dialog_toolbar .btn a {
     margin-right: 20px;
     background-color: var(--accent);
     border-radius: 3px;
-    border: 1px solid #dba718;
+    border: 1px solid #f9f9f9;
     color: #000;
     float: left;
     font-weight: bold;
@@ -1599,8 +1599,8 @@ dialog .dialog_toolbar .btn a.disabled {
     margin-right: 20px;
     background-color: var(--accent);
     border-radius: 3px;
-    border: 1px solid #dba718;
-    color: #000;
+    border: 1px solid #f9f9f9;
+    color: #fff;
     float: right;
     font-weight: bold;
     font-size: 12px;
@@ -1613,7 +1613,7 @@ dialog .dialog_toolbar .btn a.disabled {
 }
 
 .content_toolbar .btn a:hover {
-    background-color: #ffcc3e;
+    background-color: darkorange;
     transition: all ease 0.2s;
 }
 
@@ -1919,8 +1919,8 @@ dialog .dialog_toolbar .btn a.disabled {
     text-align: center;
     background-color: var(--accent);
     border-radius: 4px;
-    border: 1px solid #dba718;
-    color: #000;
+    border: 1px solid #f9f9f9;
+    color: #ffffff;
     font-weight: 600;
     font-size: 12px;
     line-height: 13px;
@@ -1962,7 +1962,7 @@ dialog .dialog_toolbar .btn a.disabled {
     background-color: var(--accent);
     border-radius: 3px;
     border: 1px solid #dba718;
-    color: #000;
+    color: #ffffff;
     font-weight: bold;
     font-size: 12px;
     text-shadow: 0 1px rgba(255, 255, 255, 0.25);

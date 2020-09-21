@@ -297,7 +297,7 @@
 .tab-pid_tuning .tab-container > div.active,
 .tab-pid_tuning .tab-container > div.active a {
     background-color: var(--accent);
-    color: #000;
+    color: #ffffff;
     transition: none;
 }
 
