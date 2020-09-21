@@ -1,60 +1,60 @@
-'use strict';
+"use strict";
 
-var pkg = require('./package.json');
+var pkg = require("./package.json");
 // remove gulp-appdmg from the package.json we're going to write
-delete pkg.optionalDependencies['gulp-appdmg'];
+delete pkg.optionalDependencies["gulp-appdmg"];
 
-const child_process = require('child_process');
-const fs = require('fs');
-const fse = require('fs-extra');
-const https = require('follow-redirects').https;
-const path = require('path');
+const child_process = require("child_process");
+const fs = require("fs");
+const fse = require("fs-extra");
+const https = require("follow-redirects").https;
+const path = require("path");
 
-const zip = require('gulp-zip');
-const del = require('del');
-const NwBuilder = require('nw-builder');
-const makensis = require('makensis');
-const deb = require('gulp-debian');
-const buildRpm = require('rpm-builder');
-const commandExistsSync = require('command-exists').sync;
-const targz = require('targz');
+const zip = require("gulp-zip");
+const del = require("del");
+const NwBuilder = require("nw-builder");
+const innoSetup = require("@quanle94/innosetup");
+const deb = require("gulp-debian");
+const buildRpm = require("rpm-builder");
+const commandExistsSync = require("command-exists").sync;
+const targz = require("targz");
 
-const gulp = require('gulp');
-const concat = require('gulp-concat');
+const gulp = require("gulp");
+const concat = require("gulp-concat");
 const yarn = require("gulp-yarn");
-const rename = require('gulp-rename');
-const replace = require('gulp-replace');
+const rename = require("gulp-rename");
+const replace = require("gulp-replace");
 const jeditor = require("gulp-json-editor");
 const xmlTransformer = require("gulp-xml-transformer");
-const os = require('os');
-const git = require('gulp-git');
-const source = require('vinyl-source-stream');
-const stream = require('stream');
+const os = require("os");
+const git = require("gulp-git");
+const source = require("vinyl-source-stream");
+const stream = require("stream");
 
 const cordova = require("cordova-lib").cordova;
 
-const DIST_DIR = './dist/';
-const APPS_DIR = './apps/';
-const DEBUG_DIR = './debug/';
-const RELEASE_DIR = './release/';
-const CORDOVA_DIR = './cordova/';
-const CORDOVA_DIST_DIR = './dist_cordova/';
+const DIST_DIR = "./dist/";
+const APPS_DIR = "./apps/";
+const DEBUG_DIR = "./debug/";
+const RELEASE_DIR = "./release/";
+const CORDOVA_DIR = "./cordova/";
+const CORDOVA_DIST_DIR = "./dist_cordova/";
 
-const LINUX_INSTALL_DIR = '/opt/heliflight';
+const LINUX_INSTALL_DIR = "/opt/heliflight";
 
 // Global variable to hold the change hash from when we get it, to when we use it.
 var gitChangeSetId;
 
 var nwBuilderOptions = {
-    version: '0.44.2',
-    files: './dist/**/*',
-    macIcns: './src/images/bf_icon.icns',
-    macPlist: { 'CFBundleDisplayName': 'HeliFlight Configurator'},
-    winIco: './src/images/hf_icon.ico',
-    zip: false
+    version: "0.44.2",
+    files: "./dist/**/*",
+    macIcns: "./src/images/bf_icon.icns",
+    macPlist: { CFBundleDisplayName: "HeliFlight Configurator" },
+    winIco: "./src/images/hf_icon.ico",
+    zip: false,
 };
 
-var nwArmVersion = '0.27.6';
+var nwArmVersion = "0.27.6";
 
 let cordovaDependencies = true;
 
@@ -67,44 +67,82 @@ const SELECTED_PLATFORMS = getInputPlatforms();
 //Tasks
 //-----------------
 
-gulp.task('clean', gulp.parallel(clean_dist, clean_apps, clean_debug, clean_release, clean_cordova));
+gulp.task(
+    "clean",
+    gulp.parallel(
+        clean_dist,
+        clean_apps,
+        clean_debug,
+        clean_release,
+        clean_cordova
+    )
+);
 
-gulp.task('clean-dist', clean_dist);
+gulp.task("clean-dist", clean_dist);
 
-gulp.task('clean-apps', clean_apps);
+gulp.task("clean-apps", clean_apps);
 
-gulp.task('clean-debug', clean_debug);
+gulp.task("clean-debug", clean_debug);
 
-gulp.task('clean-release', clean_release);
+gulp.task("clean-release", clean_release);
 
-gulp.task('clean-cache', clean_cache);
+gulp.task("clean-cache", clean_cache);
 
-gulp.task('clean-cordova', clean_cordova);
+gulp.task("clean-cordova", clean_cordova);
 
 // Function definitions are processed before function calls.
 const getChangesetId = gulp.series(getHash, writeChangesetId);
-gulp.task('get-changeset-id', getChangesetId);
+gulp.task("get-changeset-id", getChangesetId);
 
 // dist_yarn MUST be done after dist_src
-const distBuild = gulp.series(dist_src, dist_changelog, dist_yarn, dist_locale, dist_libraries, dist_resources, getChangesetId, gulp.series(cordova_dist()));
+const distBuild = gulp.series(
+    dist_src,
+    dist_changelog,
+    dist_yarn,
+    dist_locale,
+    dist_libraries,
+    dist_resources,
+    getChangesetId,
+    gulp.series(cordova_dist())
+);
 const distRebuild = gulp.series(clean_dist, distBuild);
-gulp.task('dist', distRebuild);
+gulp.task("dist", distRebuild);
 
-const appsBuild = gulp.series(gulp.parallel(clean_apps, distRebuild), apps, gulp.series(cordova_apps()), gulp.parallel(listPostBuildTasks(APPS_DIR)));
-gulp.task('apps', appsBuild);
+const appsBuild = gulp.series(
+    gulp.parallel(clean_apps, distRebuild),
+    apps,
+    gulp.series(cordova_apps()),
+    gulp.parallel(listPostBuildTasks(APPS_DIR))
+);
+gulp.task("apps", appsBuild);
 
-const debugAppsBuild = gulp.series(gulp.parallel(clean_debug, distRebuild), debug, gulp.parallel(listPostBuildTasks(DEBUG_DIR)));
+const debugAppsBuild = gulp.series(
+    gulp.parallel(clean_debug, distRebuild),
+    debug,
+    gulp.parallel(listPostBuildTasks(DEBUG_DIR))
+);
 
-const debugBuild = gulp.series(distBuild, debug, gulp.parallel(listPostBuildTasks(DEBUG_DIR)), start_debug);
-gulp.task('debug', debugBuild);
+const debugBuild = gulp.series(
+    distBuild,
+    debug,
+    gulp.parallel(listPostBuildTasks(DEBUG_DIR)),
+    start_debug
+);
+gulp.task("debug", debugBuild);
 
-const releaseBuild = gulp.series(gulp.parallel(clean_release, appsBuild), gulp.parallel(listReleaseTasks(APPS_DIR)));
-gulp.task('release', releaseBuild);
+const releaseBuild = gulp.series(
+    gulp.parallel(clean_release, appsBuild),
+    gulp.parallel(listReleaseTasks(APPS_DIR))
+);
+gulp.task("release", releaseBuild);
 
-const debugReleaseBuild = gulp.series(gulp.parallel(clean_release, debugAppsBuild), gulp.parallel(listReleaseTasks(DEBUG_DIR)));
-gulp.task('debug-release', debugReleaseBuild);
+const debugReleaseBuild = gulp.series(
+    gulp.parallel(clean_release, debugAppsBuild),
+    gulp.parallel(listReleaseTasks(DEBUG_DIR))
+);
+gulp.task("debug-release", debugReleaseBuild);
 
-gulp.task('default', debugBuild);
+gulp.task("default", debugBuild);
 
 // -----------------
 // Helper functions
@@ -115,7 +153,16 @@ gulp.task('default', debugBuild);
 // # gulp <task> [<platform>]+        Run only for platform(s) (with <platform> one of --linux64, --linux32, --armv7, --osx64, --win32, --win64, --chromeos or --android)
 // #
 function getInputPlatforms() {
-    const supportedPlatforms = ['linux64', 'linux32', 'armv7', 'osx64', 'win32','win64', 'chromeos', 'android'];
+    const supportedPlatforms = [
+        "linux64",
+        "linux32",
+        "armv7",
+        "osx64",
+        "win32",
+        "win64",
+        "chromeos",
+        "android",
+    ];
     var platforms = [];
     var regEx = /--(\w+)/;
     console.log(process.argv);
@@ -123,14 +170,14 @@ function getInputPlatforms() {
         var arg = process.argv[i].match(regEx)[1];
         if (supportedPlatforms.indexOf(arg) > -1) {
             platforms.push(arg);
-        } else if (arg === 'nowinicon') {
-            console.log('ignoring winIco');
-            delete nwBuilderOptions['winIco'];
-        } else if (arg === 'skipdep') {
-            console.log('ignoring cordova dependencies');
+        } else if (arg === "nowinicon") {
+            console.log("ignoring winIco");
+            delete nwBuilderOptions["winIco"];
+        } else if (arg === "skipdep") {
+            console.log("ignoring cordova dependencies");
             cordovaDependencies = false;
         } else {
-            console.log('Unknown platform: ' + arg);
+            console.log("Unknown platform: " + arg);
             process.exit();
         }
     }
@@ -140,15 +187,17 @@ function getInputPlatforms() {
         if (supportedPlatforms.indexOf(defaultPlatform) > -1) {
             platforms.push(defaultPlatform);
         } else {
-            console.error(`Your current platform (${os.platform()}) is not a supported build platform. Please specify platform to build for on the command line.`);
+            console.error(
+                `Your current platform (${os.platform()}) is not a supported build platform. Please specify platform to build for on the command line.`
+            );
             process.exit();
         }
     }
 
     if (platforms.length > 0) {
-        console.log('Building for platform(s): ' + platforms + '.');
+        console.log("Building for platform(s): " + platforms + ".");
     } else {
-        console.error('No suitables platforms found.');
+        console.error("No suitables platforms found.");
         process.exit();
     }
 
@@ -159,27 +208,26 @@ function getInputPlatforms() {
 function getDefaultPlatform() {
     var defaultPlatform;
     switch (os.platform()) {
-    case 'darwin':
-        defaultPlatform = 'osx64';
+        case "darwin":
+            defaultPlatform = "osx64";
 
-        break;
-    case 'linux':
-        defaultPlatform = 'linux64';
+            break;
+        case "linux":
+            defaultPlatform = "linux64";
 
-        break;
-    case 'win32':
-        defaultPlatform = 'win32';
+            break;
+        case "win32":
+            defaultPlatform = "win32";
 
-        break;
+            break;
 
-    default:
-        defaultPlatform = '';
+        default:
+            defaultPlatform = "";
 
-        break;
+            break;
     }
     return defaultPlatform;
 }
-
 
 function getPlatforms() {
     return SELECTED_PLATFORMS.slice();
@@ -194,28 +242,31 @@ function removeItem(platforms, item) {
 
 function getRunDebugAppCommand(arch) {
     switch (arch) {
-    case 'osx64':
-        return 'open ' + path.join(DEBUG_DIR, pkg.name, arch, pkg.name + '.app');
+        case "osx64":
+            return (
+                "open " +
+                path.join(DEBUG_DIR, pkg.name, arch, pkg.name + ".app")
+            );
 
-        break;
+            break;
 
-    case 'linux64':
-    case 'linux32':
-    case 'armv7':
-        return path.join(DEBUG_DIR, pkg.name, arch, pkg.name);
+        case "linux64":
+        case "linux32":
+        case "armv7":
+            return path.join(DEBUG_DIR, pkg.name, arch, pkg.name);
 
-        break;
+            break;
 
-    case 'win32':
-    case 'win64':
-        return path.join(DEBUG_DIR, pkg.name, arch, pkg.name + '.exe');
+        case "win32":
+        case "win64":
+            return path.join(DEBUG_DIR, pkg.name, arch, pkg.name + ".exe");
 
-        break;
+            break;
 
-    default:
-        return '';
+        default:
+            return "";
 
-        break;
+            break;
     }
 }
 
@@ -224,104 +275,108 @@ function getReleaseFilename(platform, ext) {
 }
 
 function clean_dist() {
-    return del([DIST_DIR + '**'], { force: true });
+    return del([DIST_DIR + "**"], { force: true });
 }
 
 function clean_apps() {
-    return del([APPS_DIR + '**'], { force: true });
+    return del([APPS_DIR + "**"], { force: true });
 }
 
 function clean_debug() {
-    return del([DEBUG_DIR + '**'], { force: true });
+    return del([DEBUG_DIR + "**"], { force: true });
 }
 
 function clean_release() {
-    return del([RELEASE_DIR + '**'], { force: true });
+    return del([RELEASE_DIR + "**"], { force: true });
 }
 
 function clean_cache() {
-    return del(['./cache/**'], { force: true });
+    return del(["./cache/**"], { force: true });
 }
 
 // Real work for dist task. Done in another task to call it via
 // run-sequence.
 function dist_src() {
     var distSources = [
-        './src/**/*',
-        '!./src/css/dropdown-lists/LICENSE',
-        '!./src/support/**'
+        "./src/**/*",
+        "!./src/css/dropdown-lists/LICENSE",
+        "!./src/support/**",
     ];
-    var packageJson = new stream.Readable;
-    packageJson.push(JSON.stringify(pkg,undefined,2));
+    var packageJson = new stream.Readable();
+    packageJson.push(JSON.stringify(pkg, undefined, 2));
     packageJson.push(null);
 
     return packageJson
-        .pipe(source('package.json'))
-        .pipe(gulp.src(distSources, { base: 'src' }))
-        .pipe(gulp.src('manifest.json', { passthrougth: true }))
-        .pipe(gulp.src('yarn.lock', { passthrougth: true }))
+        .pipe(source("package.json"))
+        .pipe(gulp.src(distSources, { base: "src" }))
+        .pipe(gulp.src("manifest.json", { passthrougth: true }))
+        .pipe(gulp.src("yarn.lock", { passthrougth: true }))
         .pipe(gulp.dest(DIST_DIR));
 }
 
 function dist_changelog() {
-    return gulp.src('changelog.html')
-        .pipe(gulp.dest(DIST_DIR+"tabs/"));
+    return gulp.src("changelog.html").pipe(gulp.dest(DIST_DIR + "tabs/"));
 }
 
 // This function relies on files from the dist_src function
 function dist_yarn() {
-    return gulp.src(['./dist/package.json', './dist/yarn.lock'])
-        .pipe(gulp.dest('./dist'))
-        .pipe(yarn({
-            production: true
-        }));
+    return gulp
+        .src(["./dist/package.json", "./dist/yarn.lock"])
+        .pipe(gulp.dest("./dist"))
+        .pipe(
+            yarn({
+                production: true,
+            })
+        );
 }
 
 function dist_locale() {
-    return gulp.src('./locales/**/*', { base: 'locales'})
-        .pipe(gulp.dest(DIST_DIR + '_locales'));
+    return gulp
+        .src("./locales/**/*", { base: "locales" })
+        .pipe(gulp.dest(DIST_DIR + "_locales"));
 }
 
 function dist_libraries() {
-    return gulp.src('./libraries/**/*', { base: '.'})
-        .pipe(gulp.dest(DIST_DIR + 'js'));
+    return gulp
+        .src("./libraries/**/*", { base: "." })
+        .pipe(gulp.dest(DIST_DIR + "js"));
 }
 
 function dist_resources() {
-    return gulp.src(['./resources/**/*', '!./resources/osd/**/*.png'], { base: '.'})
+    return gulp
+        .src(["./resources/**/*", "!./resources/osd/**/*.png"], { base: "." })
         .pipe(gulp.dest(DIST_DIR));
 }
 
 // Create runable app directories in ./apps
 function apps(done) {
     var platforms = getPlatforms();
-    removeItem(platforms, 'chromeos');
-    removeItem(platforms, 'android');
+    removeItem(platforms, "chromeos");
+    removeItem(platforms, "android");
 
-    buildNWAppsWrapper(platforms, 'normal', APPS_DIR, done);
+    buildNWAppsWrapper(platforms, "normal", APPS_DIR, done);
 }
 
 function listPostBuildTasks(folder, done) {
-
     var platforms = getPlatforms();
 
     var postBuildTasks = [];
 
-    if (platforms.indexOf('linux32') != -1) {
+    if (platforms.indexOf("linux32") != -1) {
         postBuildTasks.push(function post_build_linux32(done) {
-            return post_build('linux32', folder, done);
+            return post_build("linux32", folder, done);
         });
     }
 
-    if (platforms.indexOf('linux64') != -1) {
+    if (platforms.indexOf("linux64") != -1) {
         postBuildTasks.push(function post_build_linux64(done) {
-            return post_build('linux64', folder, done);
+            return post_build("linux64", folder, done);
         });
     }
 
-    if (platforms.indexOf('armv7') != -1) {
+    if (platforms.indexOf("armv7") != -1) {
         postBuildTasks.push(function post_build_armv7(done) {
-            return post_build('armv7', folder, done);
+            return post_build("armv7", folder, done);
         });
     }
 
@@ -335,18 +390,21 @@ function listPostBuildTasks(folder, done) {
 }
 
 function post_build(arch, folder, done) {
-
-    if ((arch === 'linux32') || (arch === 'linux64')) {
+    if (arch === "linux32" || arch === "linux64") {
         // Copy Ubuntu launcher scripts to destination dir
         var launcherDir = path.join(folder, pkg.name, arch);
-        console.log('Copy Ubuntu launcher scripts to ' + launcherDir);
-        return gulp.src('assets/linux/**')
-                   .pipe(gulp.dest(launcherDir));
+        console.log("Copy Ubuntu launcher scripts to " + launcherDir);
+        return gulp.src("assets/linux/**").pipe(gulp.dest(launcherDir));
     }
 
-    if (arch === 'armv7') {
-        console.log('Moving ARMv7 build from "linux32" to "armv7" directory...');
-        fse.moveSync(path.join(folder, pkg.name, 'linux32'), path.join(folder, pkg.name, 'armv7'));
+    if (arch === "armv7") {
+        console.log(
+            'Moving ARMv7 build from "linux32" to "armv7" directory...'
+        );
+        fse.moveSync(
+            path.join(folder, pkg.name, "linux32"),
+            path.join(folder, pkg.name, "armv7")
+        );
     }
 
     return done();
@@ -355,79 +413,100 @@ function post_build(arch, folder, done) {
 // Create debug app directories in ./debug
 function debug(done) {
     var platforms = getPlatforms();
-    removeItem(platforms, 'chromeos');
-    removeItem(platforms, 'android');
+    removeItem(platforms, "chromeos");
+    removeItem(platforms, "android");
 
-    buildNWAppsWrapper(platforms, 'sdk', DEBUG_DIR, done);
+    buildNWAppsWrapper(platforms, "sdk", DEBUG_DIR, done);
 }
 
 function injectARMCache(flavor, callback) {
     var flavorPostfix = `-${flavor}`;
-    var flavorDownloadPostfix = flavor !== 'normal' ? `-${flavor}` : '';
-    clean_cache().then(function() {
-        if (!fs.existsSync('./cache')) {
-            fs.mkdirSync('./cache');
+    var flavorDownloadPostfix = flavor !== "normal" ? `-${flavor}` : "";
+    clean_cache().then(function () {
+        if (!fs.existsSync("./cache")) {
+            fs.mkdirSync("./cache");
         }
-        fs.closeSync(fs.openSync('./cache/_ARMv7_IS_CACHED', 'w'));
+        fs.closeSync(fs.openSync("./cache/_ARMv7_IS_CACHED", "w"));
         var versionFolder = `./cache/${nwBuilderOptions.version}${flavorPostfix}`;
         if (!fs.existsSync(versionFolder)) {
             fs.mkdirSync(versionFolder);
         }
-        if (!fs.existsSync(versionFolder + '/linux32')) {
+        if (!fs.existsSync(versionFolder + "/linux32")) {
             fs.mkdirSync(`${versionFolder}/linux32`);
         }
         var downloadedArchivePath = `${versionFolder}/nwjs${flavorPostfix}-v${nwArmVersion}-linux-arm.tar.gz`;
         var downloadUrl = `https://github.com/LeonardLaszlo/nw.js-armv7-binaries/releases/download/v${nwArmVersion}/nwjs${flavorDownloadPostfix}-v${nwArmVersion}-linux-arm.tar.gz`;
         if (fs.existsSync(downloadedArchivePath)) {
-            console.log('Prebuilt ARMv7 binaries found in /tmp');
-            downloadDone(flavorDownloadPostfix, downloadedArchivePath, versionFolder);
+            console.log("Prebuilt ARMv7 binaries found in /tmp");
+            downloadDone(
+                flavorDownloadPostfix,
+                downloadedArchivePath,
+                versionFolder
+            );
         } else {
-            console.log(`Downloading prebuilt ARMv7 binaries from "${downloadUrl}"...`);
-            process.stdout.write('> Starting download...\r');
+            console.log(
+                `Downloading prebuilt ARMv7 binaries from "${downloadUrl}"...`
+            );
+            process.stdout.write("> Starting download...\r");
             var armBuildBinary = fs.createWriteStream(downloadedArchivePath);
-            var request = https.get(downloadUrl, function(res) {
-                var totalBytes = res.headers['content-length'];
+            var request = https.get(downloadUrl, function (res) {
+                var totalBytes = res.headers["content-length"];
                 var downloadedBytes = 0;
                 res.pipe(armBuildBinary);
-                res.on('data', function (chunk) {
+                res.on("data", function (chunk) {
                     downloadedBytes += chunk.length;
-                    process.stdout.write(`> ${parseInt((downloadedBytes * 100) / totalBytes)}% done             \r`);
+                    process.stdout.write(
+                        `> ${parseInt(
+                            (downloadedBytes * 100) / totalBytes
+                        )}% done             \r`
+                    );
                 });
-                armBuildBinary.on('finish', function() {
-                    process.stdout.write('> 100% done             \n');
-                    armBuildBinary.close(function() {
-                        downloadDone(flavorDownloadPostfix, downloadedArchivePath, versionFolder);
+                armBuildBinary.on("finish", function () {
+                    process.stdout.write("> 100% done             \n");
+                    armBuildBinary.close(function () {
+                        downloadDone(
+                            flavorDownloadPostfix,
+                            downloadedArchivePath,
+                            versionFolder
+                        );
                     });
                 });
             });
         }
     });
 
-    function downloadDone(flavorDownloadPostfix, downloadedArchivePath, versionFolder) {
-        console.log('Injecting prebuilt ARMv7 binaries into Linux32 cache...');
-        targz.decompress({
-            src: downloadedArchivePath,
-            dest: versionFolder,
-        }, function(err) {
-            if (err) {
-                console.log(err);
-                clean_debug();
-                process.exit(1);
-            } else {
-                fs.rename(
-                    `${versionFolder}/nwjs${flavorDownloadPostfix}-v${nwArmVersion}-linux-arm`,
-                    `${versionFolder}/linux32`,
-                    (err) => {
-                        if (err) {
-                            console.log(err);
-                            clean_debug();
-                            process.exit(1);
+    function downloadDone(
+        flavorDownloadPostfix,
+        downloadedArchivePath,
+        versionFolder
+    ) {
+        console.log("Injecting prebuilt ARMv7 binaries into Linux32 cache...");
+        targz.decompress(
+            {
+                src: downloadedArchivePath,
+                dest: versionFolder,
+            },
+            function (err) {
+                if (err) {
+                    console.log(err);
+                    clean_debug();
+                    process.exit(1);
+                } else {
+                    fs.rename(
+                        `${versionFolder}/nwjs${flavorDownloadPostfix}-v${nwArmVersion}-linux-arm`,
+                        `${versionFolder}/linux32`,
+                        (err) => {
+                            if (err) {
+                                console.log(err);
+                                clean_debug();
+                                process.exit(1);
+                            }
+                            callback();
                         }
-                        callback();
-                    }
-                );
+                    );
+                }
             }
-        });
+        );
     }
 }
 
@@ -436,26 +515,33 @@ function buildNWAppsWrapper(platforms, flavor, dir, done) {
         buildNWApps(platforms, flavor, dir, done);
     }
 
-    if (platforms.indexOf('armv7') !== -1) {
-        if (platforms.indexOf('linux32') !== -1) {
-            console.log('Cannot build ARMv7 and Linux32 versions at the same time!');
+    if (platforms.indexOf("armv7") !== -1) {
+        if (platforms.indexOf("linux32") !== -1) {
+            console.log(
+                "Cannot build ARMv7 and Linux32 versions at the same time!"
+            );
             clean_debug();
             process.exit(1);
         }
-        removeItem(platforms, 'armv7');
-        platforms.push('linux32');
+        removeItem(platforms, "armv7");
+        platforms.push("linux32");
 
-        if (!fs.existsSync('./cache/_ARMv7_IS_CACHED', 'w')) {
-            console.log('Purging cache because it needs to be overwritten...');
+        if (!fs.existsSync("./cache/_ARMv7_IS_CACHED", "w")) {
+            console.log("Purging cache because it needs to be overwritten...");
             clean_cache().then(() => {
                 injectARMCache(flavor, buildNWAppsCallback);
-            })
+            });
         } else {
             buildNWAppsCallback();
         }
     } else {
-        if (platforms.indexOf('linux32') !== -1 && fs.existsSync('./cache/_ARMv7_IS_CACHED')) {
-            console.log('Purging cache because it was previously overwritten...');
+        if (
+            platforms.indexOf("linux32") !== -1 &&
+            fs.existsSync("./cache/_ARMv7_IS_CACHED")
+        ) {
+            console.log(
+                "Purging cache because it was previously overwritten..."
+            );
             clean_cache().then(buildNWAppsCallback);
         } else {
             buildNWAppsCallback();
@@ -465,30 +551,35 @@ function buildNWAppsWrapper(platforms, flavor, dir, done) {
 
 function buildNWApps(platforms, flavor, dir, done) {
     if (platforms.length > 0) {
-        var builder = new NwBuilder(Object.assign({
-            buildDir: dir,
-            platforms: platforms,
-            flavor: flavor
-        }, nwBuilderOptions));
-        builder.on('log', console.log);
+        var builder = new NwBuilder(
+            Object.assign(
+                {
+                    buildDir: dir,
+                    platforms: platforms,
+                    flavor: flavor,
+                },
+                nwBuilderOptions
+            )
+        );
+        builder.on("log", console.log);
         builder.build(function (err) {
             if (err) {
-                console.log('Error building NW apps: ' + err);
+                console.log("Error building NW apps: " + err);
                 clean_debug();
                 process.exit(1);
             }
             done();
         });
     } else {
-        console.log('No platform suitable for NW Build')
+        console.log("No platform suitable for NW Build");
         done();
     }
 }
 
 function getHash(cb) {
-    git.revParse({args: '--short HEAD'}, function (err, hash) {
+    git.revParse({ args: "--short HEAD" }, function (err, hash) {
         if (err) {
-            gitChangeSetId = 'unsupported';
+            gitChangeSetId = "unsupported";
         } else {
             gitChangeSetId = hash;
         }
@@ -497,130 +588,142 @@ function getHash(cb) {
 }
 
 function writeChangesetId() {
-    var versionJson = new stream.Readable;
-    versionJson.push(JSON.stringify({
-        gitChangesetId: gitChangeSetId,
-        version: pkg.version
-        }, undefined, 2));
+    var versionJson = new stream.Readable();
+    versionJson.push(
+        JSON.stringify(
+            {
+                gitChangesetId: gitChangeSetId,
+                version: pkg.version,
+            },
+            undefined,
+            2
+        )
+    );
     versionJson.push(null);
-    return versionJson
-        .pipe(source('version.json'))
-        .pipe(gulp.dest(DIST_DIR))
+    return versionJson.pipe(source("version.json")).pipe(gulp.dest(DIST_DIR));
 }
 
 function start_debug(done) {
-
     var platforms = getPlatforms();
 
-    var exec = require('child_process').exec;
+    var exec = require("child_process").exec;
     if (platforms.length === 1) {
-        if (platforms[0] === 'android') {
+        if (platforms[0] === "android") {
             cordova_debug();
         } else {
             var run = getRunDebugAppCommand(platforms[0]);
-            console.log('Starting debug app (' + run + ')...');
+            console.log("Starting debug app (" + run + ")...");
             exec(run);
         }
     } else {
-        console.log('More than one platform specified, not starting debug app');
+        console.log("More than one platform specified, not starting debug app");
     }
     done();
 }
 
 // Create installer package for windows platforms
 function release_win(arch, appDirectory, done) {
-
-    // Check if makensis exists
-    if (!commandExistsSync('makensis')) {
-        console.warn('makensis command not found, not generating win package for ' + arch);
-        done();
-    }
-
-    // The makensis does not generate the folder correctly, manually
-    createDirIfNotExists(RELEASE_DIR);
-
     // Parameters passed to the installer script
-    const options = {
-            verbose: 2,
-            define: {
-                'VERSION': pkg.version,
-                'PLATFORM': arch,
-                'DEST_FOLDER': RELEASE_DIR,
-                'SOURCE_FOLDER': appDirectory,
-            }
+    const parameters = [];
+
+    // Extra parameters to replace inside the iss file
+    parameters.push(`/Dversion=${pkg.version}`);
+    parameters.push(`/DarchName=${arch}`);
+    parameters.push(`/DarchAllowed=${arch === "win32" ? "x86 x64" : "x64"}`);
+    parameters.push(`/DarchInstallIn64bit=${arch === "win32" ? "" : "x64"}`);
+    parameters.push(`/DsourceFolder=${appDirectory}`);
+    parameters.push(`/DtargetFolder=${RELEASE_DIR}`);
+
+    // Show only errors in console
+    parameters.push(`/Q`);
+
+    // Script file to execute
+    parameters.push("assets/windows/installer.iss");
+
+    innoSetup(parameters, {}, function (error) {
+        if (error != null) {
+            console.error(
+                `Installer for platform ${arch} finished with error ${error}`
+            );
+        } else {
+            console.log(`Installer for platform ${arch} finished`);
         }
-
-    var output = makensis.compileSync('./assets/windows/installer.nsi', options);
-
-    if (output.status !== 0) {
-        console.error('Installer for platform ' + arch + ' finished with error ' + output.status + ': ' + output.stderr);
-    }
-
-    done();
+        done();
+    });
 }
 
 // Create distribution package (zip) for windows and linux platforms
 function release_zip(arch, appDirectory) {
-    const src = path.join(appDirectory, pkg.name, arch, '**');
-    const output = getReleaseFilename(arch, 'zip');
+    const src = path.join(appDirectory, pkg.name, arch, "**");
+    const output = getReleaseFilename(arch, "zip");
     const base = path.join(appDirectory, pkg.name, arch);
 
-    return compressFiles(src, base, output, 'Heliflight Configurator');
+    return compressFiles(src, base, output, "Heliflight Configurator");
 }
 
 // Create distribution package for chromeos platform
 function release_chromeos() {
-    var src = path.join(DIST_DIR, '**');
-    var output = getReleaseFilename('chromeos', 'zip');
+    var src = path.join(DIST_DIR, "**");
+    var output = getReleaseFilename("chromeos", "zip");
     var base = DIST_DIR;
 
-    return compressFiles(src, base, output, '.');
+    return compressFiles(src, base, output, ".");
 }
 
 // Compress files from srcPath, using basePath, to outputFile in the RELEASE_DIR
 function compressFiles(srcPath, basePath, outputFile, zipFolder) {
-    return gulp.src(srcPath, { base: basePath })
-               .pipe(rename(function(actualPath) {
-                   actualPath.dirname = path.join(zipFolder, actualPath.dirname);
-               }))
-               .pipe(zip(outputFile))
-               .pipe(gulp.dest(RELEASE_DIR));
+    return gulp
+        .src(srcPath, { base: basePath })
+        .pipe(
+            rename(function (actualPath) {
+                actualPath.dirname = path.join(zipFolder, actualPath.dirname);
+            })
+        )
+        .pipe(zip(outputFile))
+        .pipe(gulp.dest(RELEASE_DIR));
 }
 
 function release_deb(arch, appDirectory, done) {
-
     // Check if dpkg-deb exists
-    if (!commandExistsSync('dpkg-deb')) {
-        console.warn('dpkg-deb command not found, not generating deb package for ' + arch);
+    if (!commandExistsSync("dpkg-deb")) {
+        console.warn(
+            "dpkg-deb command not found, not generating deb package for " + arch
+        );
         done();
     }
 
-    return gulp.src([path.join(appDirectory, pkg.name, arch, '*')])
-        .pipe(deb({
-             package: pkg.name,
-             version: pkg.version,
-             section: 'base',
-             priority: 'optional',
-             architecture: getLinuxPackageArch('deb', arch),
-             maintainer: pkg.author,
-             description: pkg.description,
-             preinst: [`rm -rf ${LINUX_INSTALL_DIR}/${pkg.name}`],
-             postinst: [`chown root:root ${LINUX_INSTALL_DIR}`, `chown -R root:root ${LINUX_INSTALL_DIR}/${pkg.name}`, `xdg-desktop-menu install ${LINUX_INSTALL_DIR}/${pkg.name}/${pkg.name}.desktop`],
-             prerm: [`xdg-desktop-menu uninstall ${pkg.name}.desktop`],
-             depends: 'libgconf-2-4',
-             changelog: [],
-             _target: `${LINUX_INSTALL_DIR}/${pkg.name}`,
-             _out: RELEASE_DIR,
-             _copyright: 'assets/linux/copyright',
-             _clean: true
-    }));
+    return gulp.src([path.join(appDirectory, pkg.name, arch, "*")]).pipe(
+        deb({
+            package: pkg.name,
+            version: pkg.version,
+            section: "base",
+            priority: "optional",
+            architecture: getLinuxPackageArch("deb", arch),
+            maintainer: pkg.author,
+            description: pkg.description,
+            preinst: [`rm -rf ${LINUX_INSTALL_DIR}/${pkg.name}`],
+            postinst: [
+                `chown root:root ${LINUX_INSTALL_DIR}`,
+                `chown -R root:root ${LINUX_INSTALL_DIR}/${pkg.name}`,
+                `xdg-desktop-menu install ${LINUX_INSTALL_DIR}/${pkg.name}/${pkg.name}.desktop`,
+            ],
+            prerm: [`xdg-desktop-menu uninstall ${pkg.name}.desktop`],
+            depends: "libgconf-2-4",
+            changelog: [],
+            _target: `${LINUX_INSTALL_DIR}/${pkg.name}`,
+            _out: RELEASE_DIR,
+            _copyright: "assets/linux/copyright",
+            _clean: true,
+        })
+    );
 }
 
 function release_rpm(arch, appDirectory, done) {
-
     // Check if dpkg-deb exists
-    if (!commandExistsSync('rpmbuild')) {
-        console.warn('rpmbuild command not found, not generating rpm package for ' + arch);
+    if (!commandExistsSync("rpmbuild")) {
+        console.warn(
+            "rpmbuild command not found, not generating rpm package for " + arch
+        );
         done();
     }
 
@@ -630,30 +733,35 @@ function release_rpm(arch, appDirectory, done) {
     var regex = /-/g;
 
     var options = {
-             name: pkg.name,
-             version: pkg.version.replace(regex, '_'), // RPM does not like release candidate versions
-             buildArch: getLinuxPackageArch('rpm', arch),
-             vendor: pkg.author,
-             summary: pkg.description,
-             license: 'GNU General Public License v3.0',
-             requires: 'libgconf-2-4',
-             prefix: '/opt',
-             files:
-                 [ { cwd: path.join(appDirectory, pkg.name, arch),
-                     src: '*',
-                     dest: `${LINUX_INSTALL_DIR}/${pkg.name}` } ],
-             postInstallScript: [`xdg-desktop-menu install ${LINUX_INSTALL_DIR}/${pkg.name}/${pkg.name}.desktop`],
-             preUninstallScript: [`xdg-desktop-menu uninstall ${pkg.name}.desktop`],
-             tempDir: path.join(RELEASE_DIR,'tmp-rpm-build-' + arch),
-             keepTemp: false,
-             verbose: false,
-             rpmDest: RELEASE_DIR,
-             execOpts: { maxBuffer: 1024 * 1024 * 16 },
+        name: pkg.name,
+        version: pkg.version.replace(regex, "_"), // RPM does not like release candidate versions
+        buildArch: getLinuxPackageArch("rpm", arch),
+        vendor: pkg.author,
+        summary: pkg.description,
+        license: "GNU General Public License v3.0",
+        requires: "libgconf-2-4",
+        prefix: "/opt",
+        files: [
+            {
+                cwd: path.join(appDirectory, pkg.name, arch),
+                src: "*",
+                dest: `${LINUX_INSTALL_DIR}/${pkg.name}`,
+            },
+        ],
+        postInstallScript: [
+            `xdg-desktop-menu install ${LINUX_INSTALL_DIR}/${pkg.name}/${pkg.name}.desktop`,
+        ],
+        preUninstallScript: [`xdg-desktop-menu uninstall ${pkg.name}.desktop`],
+        tempDir: path.join(RELEASE_DIR, "tmp-rpm-build-" + arch),
+        keepTemp: false,
+        verbose: false,
+        rpmDest: RELEASE_DIR,
+        execOpts: { maxBuffer: 1024 * 1024 * 16 },
     };
 
-    buildRpm(options, function(err, rpm) {
+    buildRpm(options, function (err, rpm) {
         if (err) {
-          console.error("Error generating rpm package: " + err);
+            console.error("Error generating rpm package: " + err);
         }
         done();
     });
@@ -663,50 +771,59 @@ function getLinuxPackageArch(type, arch) {
     var packArch;
 
     switch (arch) {
-    case 'linux32':
-        packArch = 'i386';
-        break;
-    case 'linux64':
-        if (type == 'rpm') {
-            packArch = 'x86_64';
-        } else {
-            packArch = 'amd64';
-        }
-        break;
-    default:
-        console.error("Package error, arch: " + arch);
-        process.exit(1);
-        break;
+        case "linux32":
+            packArch = "i386";
+            break;
+        case "linux64":
+            if (type == "rpm") {
+                packArch = "x86_64";
+            } else {
+                packArch = "amd64";
+            }
+            break;
+        default:
+            console.error("Package error, arch: " + arch);
+            process.exit(1);
+            break;
     }
 
     return packArch;
 }
 // Create distribution package for macOS platform
 function release_osx64(appDirectory) {
-    var appdmg = require('gulp-appdmg');
+    var appdmg = require("gulp-appdmg");
 
     // The appdmg does not generate the folder correctly, manually
     createDirIfNotExists(RELEASE_DIR);
 
     // The src pipe is not used
-    return gulp.src(['.'])
-        .pipe(appdmg({
-            target: path.join(RELEASE_DIR, getReleaseFilename('macOS', 'dmg')),
-            basepath: path.join(appDirectory, pkg.name, 'osx64'),
+    return gulp.src(["."]).pipe(
+        appdmg({
+            target: path.join(RELEASE_DIR, getReleaseFilename("macOS", "dmg")),
+            basepath: path.join(appDirectory, pkg.name, "osx64"),
             specification: {
-                title: 'Heliflight Configurator',
+                title: "Heliflight Configurator",
                 contents: [
-                    { 'x': 448, 'y': 342, 'type': 'link', 'path': '/Applications' },
-                    { 'x': 192, 'y': 344, 'type': 'file', 'path': pkg.name + '.app', 'name': 'Heliflight Configurator.app' }
+                    { x: 448, y: 342, type: "link", path: "/Applications" },
+                    {
+                        x: 192,
+                        y: 344,
+                        type: "file",
+                        path: pkg.name + ".app",
+                        name: "Heliflight Configurator.app",
+                    },
                 ],
-                background: path.join(__dirname, 'assets/osx/dmg-background.png'),
-                format: 'UDZO',
+                background: path.join(
+                    __dirname,
+                    "assets/osx/dmg-background.png"
+                ),
+                format: "UDZO",
                 window: {
                     size: {
                         width: 638,
-                        height: 479
-                    }
-                }
+                        height: 479,
+                    },
+                },
             },
         })
     );
@@ -714,9 +831,9 @@ function release_osx64(appDirectory) {
 
 // Create the dir directory, with write permissions
 function createDirIfNotExists(dir) {
-    fs.mkdir(dir, '0775', function(err) {
+    fs.mkdir(dir, "0775", function (err) {
         if (err) {
-            if (err.code !== 'EEXIST') {
+            if (err.code !== "EEXIST") {
                 throw err;
             }
         }
@@ -725,64 +842,63 @@ function createDirIfNotExists(dir) {
 
 // Create a list of the gulp tasks to execute for release
 function listReleaseTasks(appDirectory) {
-
     var platforms = getPlatforms();
 
     var releaseTasks = [];
 
-    if (platforms.indexOf('chromeos') !== -1) {
+    if (platforms.indexOf("chromeos") !== -1) {
         releaseTasks.push(release_chromeos);
     }
 
-    if (platforms.indexOf('linux64') !== -1) {
+    if (platforms.indexOf("linux64") !== -1) {
         releaseTasks.push(function release_linux64_zip() {
-            return release_zip('linux64', appDirectory);
+            return release_zip("linux64", appDirectory);
         });
         releaseTasks.push(function release_linux64_deb(done) {
-            return release_deb('linux64', appDirectory, done);
+            return release_deb("linux64", appDirectory, done);
         });
         releaseTasks.push(function release_linux64_rpm(done) {
-            return release_rpm('linux64', appDirectory, done);
+            return release_rpm("linux64", appDirectory, done);
         });
     }
 
-    if (platforms.indexOf('linux32') !== -1) {
+    if (platforms.indexOf("linux32") !== -1) {
         releaseTasks.push(function release_linux32_zip() {
-            return release_zip('linux32', appDirectory);
+            return release_zip("linux32", appDirectory);
         });
         releaseTasks.push(function release_linux32_deb(done) {
-            return release_deb('linux32', appDirectory, done);
+            return release_deb("linux32", appDirectory, done);
         });
         releaseTasks.push(function release_linux32_rpm(done) {
-            return release_rpm('linux32', appDirectory, done);
+            return release_rpm("linux32", appDirectory, done);
         });
     }
 
-    if (platforms.indexOf('armv7') !== -1) {
+    if (platforms.indexOf("armv7") !== -1) {
         releaseTasks.push(function release_armv7_zip() {
-            return release_zip('armv7', appDirectory);
+            return release_zip("armv7", appDirectory);
         });
     }
 
-    if (platforms.indexOf('osx64') !== -1) {
+    if (platforms.indexOf("osx64") !== -1) {
         releaseTasks.push(function () {
             return release_osx64(appDirectory);
         });
     }
 
-    if (platforms.indexOf('win32') !== -1) {
+    if (platforms.indexOf("win32") !== -1) {
         releaseTasks.push(function release_win32(done) {
-            return release_win('win32', appDirectory, done);
+            return release_win("win32", appDirectory, done);
         });
     }
 
-    if (platforms.indexOf('win64') !== -1) {
+    if (platforms.indexOf("win64") !== -1) {
         releaseTasks.push(function release_win64(done) {
-            return release_win('win64', appDirectory, done);
+            return release_win("win64", appDirectory, done);
         });
     }
 
-    if (platforms.indexOf('android') !== -1) {
+    if (platforms.indexOf("android") !== -1) {
         releaseTasks.push(function release_android() {
             return cordova_release();
         });
@@ -795,7 +911,7 @@ function listReleaseTasks(appDirectory) {
 function cordova_dist() {
     const distTasks = [];
     const platforms = getPlatforms();
-    if (platforms.indexOf('android') !== -1) {
+    if (platforms.indexOf("android") !== -1) {
         distTasks.push(clean_cordova);
         distTasks.push(cordova_copy_www);
         distTasks.push(cordova_locales_www);
@@ -820,7 +936,7 @@ function cordova_dist() {
 function cordova_apps() {
     const appsTasks = [];
     const platforms = getPlatforms();
-    if (platforms.indexOf('android') !== -1) {
+    if (platforms.indexOf("android") !== -1) {
         appsTasks.push(cordova_build);
     } else {
         appsTasks.push(function cordova_dist_none(done) {
@@ -829,7 +945,6 @@ function cordova_apps() {
     }
     return appsTasks;
 }
-
 
 function clean_cordova() {
     const patterns = [];
@@ -842,95 +957,140 @@ function clean_cordova() {
     return del(patterns, { force: true });
 }
 function cordova_copy_www() {
-    return gulp.src(`${DIST_DIR}**`, { base: DIST_DIR })
+    return gulp
+        .src(`${DIST_DIR}**`, { base: DIST_DIR })
         .pipe(gulp.dest(`${CORDOVA_DIST_DIR}www/`));
 }
 function cordova_locales_www(cb) {
-    fs.renameSync(`${CORDOVA_DIST_DIR}www/_locales`, `${CORDOVA_DIST_DIR}www/i18n`);
+    fs.renameSync(
+        `${CORDOVA_DIST_DIR}www/_locales`,
+        `${CORDOVA_DIST_DIR}www/i18n`
+    );
     gulp.src(`${CORDOVA_DIST_DIR}www/js/localization.js`)
-        .pipe(replace('/_locales', './i18n'))
+        .pipe(replace("/_locales", "./i18n"))
         .pipe(gulp.dest(`${CORDOVA_DIST_DIR}www/js`));
     cb();
 }
 function cordova_resources() {
-    return gulp.src('assets/android/**')
+    return gulp
+        .src("assets/android/**")
         .pipe(gulp.dest(`${CORDOVA_DIST_DIR}resources/android/`));
 }
 function cordova_include_www() {
-    return gulp.src(`${CORDOVA_DIST_DIR}www/main.html`)
-        .pipe(replace('<!-- CORDOVA_INCLUDE js/cordova_chromeapi.js -->', '<script type="text/javascript" src="./js/cordova_chromeapi.js"></script>'))
-        .pipe(replace('<!-- CORDOVA_INCLUDE js/cordova_startup.js -->', '<script type="text/javascript" src="./js/cordova_startup.js"></script>'))
-        .pipe(replace('<!-- CORDOVA_INCLUDE cordova.js -->', '<script type="text/javascript" src="cordova.js"></script>'))
+    return gulp
+        .src(`${CORDOVA_DIST_DIR}www/main.html`)
+        .pipe(
+            replace(
+                "<!-- CORDOVA_INCLUDE js/cordova_chromeapi.js -->",
+                '<script type="text/javascript" src="./js/cordova_chromeapi.js"></script>'
+            )
+        )
+        .pipe(
+            replace(
+                "<!-- CORDOVA_INCLUDE js/cordova_startup.js -->",
+                '<script type="text/javascript" src="./js/cordova_startup.js"></script>'
+            )
+        )
+        .pipe(
+            replace(
+                "<!-- CORDOVA_INCLUDE cordova.js -->",
+                '<script type="text/javascript" src="cordova.js"></script>'
+            )
+        )
         .pipe(gulp.dest(`${CORDOVA_DIST_DIR}www`));
 }
 function cordova_copy_src() {
-    return gulp.src([`${CORDOVA_DIR}**`, `!${CORDOVA_DIR}config_template.xml`, `!${CORDOVA_DIR}package_template.json`])
+    return gulp
+        .src([
+            `${CORDOVA_DIR}**`,
+            `!${CORDOVA_DIR}config_template.xml`,
+            `!${CORDOVA_DIR}package_template.json`,
+        ])
         .pipe(gulp.dest(`${CORDOVA_DIST_DIR}`));
 }
 function cordova_rename_src_config() {
-    return gulp.src(`${CORDOVA_DIR}config_template.xml`)
-        .pipe(rename('config.xml'))
+    return gulp
+        .src(`${CORDOVA_DIR}config_template.xml`)
+        .pipe(rename("config.xml"))
         .pipe(gulp.dest(`${CORDOVA_DIST_DIR}`));
 }
 function cordova_rename_src_package() {
-    return gulp.src(`${CORDOVA_DIR}package_template.json`)
-        .pipe(rename('package.json'))
+    return gulp
+        .src(`${CORDOVA_DIR}package_template.json`)
+        .pipe(rename("package.json"))
         .pipe(gulp.dest(`${CORDOVA_DIST_DIR}`));
 }
 function cordova_packagejson() {
-    return gulp.src(`${CORDOVA_DIST_DIR}package.json`)
-        .pipe(jeditor({
-            'name': pkg.name,
-            'description': pkg.description,
-            'version': pkg.version,
-            'author': pkg.author,
-            'license': pkg.license,
-        }))
+    return gulp
+        .src(`${CORDOVA_DIST_DIR}package.json`)
+        .pipe(
+            jeditor({
+                name: pkg.name,
+                description: pkg.description,
+                version: pkg.version,
+                author: pkg.author,
+                license: pkg.license,
+            })
+        )
         .pipe(gulp.dest(CORDOVA_DIST_DIR));
 }
 function cordova_configxml() {
-    return gulp.src([`${CORDOVA_DIST_DIR}config.xml`])
-        .pipe(xmlTransformer([
-            { path: '//xmlns:name', text: pkg.productName },
-            { path: '//xmlns:description', text: pkg.description },
-            { path: '//xmlns:author', text: pkg.author },
-        ], 'http://www.w3.org/ns/widgets'))
-        .pipe(xmlTransformer([
-            { path: '.', attr: { 'version': pkg.version } },
-        ]))
+    return gulp
+        .src([`${CORDOVA_DIST_DIR}config.xml`])
+        .pipe(
+            xmlTransformer(
+                [
+                    { path: "//xmlns:name", text: pkg.productName },
+                    { path: "//xmlns:description", text: pkg.description },
+                    { path: "//xmlns:author", text: pkg.author },
+                ],
+                "http://www.w3.org/ns/widgets"
+            )
+        )
+        .pipe(xmlTransformer([{ path: ".", attr: { version: pkg.version } }]))
         .pipe(gulp.dest(CORDOVA_DIST_DIR));
 }
 function cordova_depedencies() {
-    process.chdir('dist_cordova');
-    return gulp.src(['./package.json', './yarn.lock'])
-        .pipe(gulp.dest('./'))
-        .pipe(yarn({
-            production: true,
-        }));
+    process.chdir("dist_cordova");
+    return gulp
+        .src(["./package.json", "./yarn.lock"])
+        .pipe(gulp.dest("./"))
+        .pipe(
+            yarn({
+                production: true,
+            })
+        );
 }
 function cordova_platforms() {
-    return cordova.platform('add', ['android']);
+    return cordova.platform("add", ["android"]);
 }
 function cordova_debug() {
     cordova.run();
 }
 function cordova_build(cb) {
-    cordova.build({
-        'platforms': ['android'],
-        'options': {
-            release: true,
-            buildConfig: 'build.json',
-        },
-    }).then(function() {
-        process.chdir('../');
-        cb();
-    });
-    console.log('APK will be generated at dist_cordova/platforms/android/app/build/outputs/apk/release/app-release.apk');
+    cordova
+        .build({
+            platforms: ["android"],
+            options: {
+                release: true,
+                buildConfig: "build.json",
+            },
+        })
+        .then(function () {
+            process.chdir("../");
+            cb();
+        });
+    console.log(
+        "APK will be generated at dist_cordova/platforms/android/app/build/outputs/apk/release/app-release.apk"
+    );
 }
 async function cordova_release() {
-    const filename = await getReleaseFilename('android', 'apk');
+    const filename = await getReleaseFilename("android", "apk");
     console.log(`Release APK : release/${filename}`);
-    return gulp.src(`${CORDOVA_DIST_DIR}platforms/android/app/build/outputs/apk/release/app-release.apk`)
+    return gulp
+        .src(
+            `${CORDOVA_DIST_DIR}platforms/android/app/build/outputs/apk/release/app-release.apk`
+        )
         .pipe(rename(filename))
         .pipe(gulp.dest(RELEASE_DIR));
 }
