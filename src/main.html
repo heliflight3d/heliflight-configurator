@@ -1,42 +1,44 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta name="author" content="cTn"/>
-    <link type="text/css" rel="stylesheet" href="./node_modules/jbox/dist/jBox.min.css"/>
-    <link type="text/css" rel="stylesheet" href="./js/libraries/jquery.nouislider.min.css"/>
-    <link type="text/css" rel="stylesheet" href="./js/libraries/jquery.nouislider.pips.min.css"/>
-    <link type="text/css" rel="stylesheet" href="./js/libraries/flightindicators.css"/>
-    <link type="text/css" rel="stylesheet" href="./css/main.css" media="all"/>
-    <link type="text/css" rel="stylesheet" href="./css/tabs/static_tab.css" media="all"/>
-    <link type="text/css" rel="stylesheet" href="./css/tabs/landing.css" media="all"/>
-    <link type="text/css" rel="stylesheet" href="./css/tabs/setup.css" media="all"/>
-    <link type="text/css" rel="stylesheet" href="./css/tabs/help.css" media="all"/>
-    <link type="text/css" rel="stylesheet" href="./css/tabs/ports.css" media="all"/>
-    <link type="text/css" rel="stylesheet" href="./css/tabs/configuration.css" media="all"/>
-    <link type="text/css" rel="stylesheet" href="./css/tabs/pid_tuning.css" media="all"/>
-    <link type="text/css" rel="stylesheet" href="./css/tabs/receiver.css" media="all"/>
-    <link type="text/css" rel="stylesheet" href="./css/tabs/servos.css" media="all"/>
-    <link type="text/css" rel="stylesheet" href="./css/tabs/gps.css" media="all"/>
-    <link type="text/css" rel="stylesheet" href="./css/tabs/motors.css" media="all"/>
-    <link type="text/css" rel="stylesheet" href="./css/tabs/led_strip.css" media="all"/>
-    <link type="text/css" rel="stylesheet" href="./css/tabs/sensors.css" media="all"/>
-    <link type="text/css" rel="stylesheet" href="./css/tabs/cli.css" media="all"/>
-    <link type="text/css" rel="stylesheet" href="./css/tabs/logging.css" media="all"/>
-    <link type="text/css" rel="stylesheet" href="./css/tabs/onboard_logging.css" media="all"/>
-    <link type="text/css" rel="stylesheet" href="./css/tabs/firmware_flasher.css" media="all"/>
-    <link type="text/css" rel="stylesheet" href="./css/tabs/adjustments.css" media="all"/>
-    <link type="text/css" rel="stylesheet" href="./css/tabs/auxiliary.css" media="all"/>
-    <link type="text/css" rel="stylesheet" href="./css/tabs/failsafe.css" media="all"/>
-    <link type="text/css" rel="stylesheet" href="./css/tabs/power.css" media="all"/>
-    <link type="text/css" rel="stylesheet" href="./css/tabs/privacy_policy.css" media="all"/>
-    <link type="text/css" rel="stylesheet" href="./css/tabs/options.css" media="all"/>
-    <link type="text/css" rel="stylesheet" href="./css/opensans_webfontkit/fonts.css" media="all"/>
-    <link type="text/css" rel="stylesheet" href="./css/dropdown-lists/css/style_lists.css" media="all"/>
-    <link type="text/css" rel="stylesheet" href="./js/libraries/switchery/switchery.css" media="all"/>
-    <link type="text/css" rel="stylesheet" href="./node_modules/@fortawesome/fontawesome-free/css/all.css" media="all"/>
 
-    <link type="text/css" rel="stylesheet" href="./css/dark-theme.css" media="all" disabled/>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="author" content="cTn" />
+    <link type="text/css" rel="stylesheet" href="./node_modules/jbox/dist/jBox.min.css" />
+    <link type="text/css" rel="stylesheet" href="./js/libraries/jquery.nouislider.min.css" />
+    <link type="text/css" rel="stylesheet" href="./js/libraries/jquery.nouislider.pips.min.css" />
+    <link type="text/css" rel="stylesheet" href="./js/libraries/flightindicators.css" />
+    <link type="text/css" rel="stylesheet" href="./css/main.css" media="all" />
+    <link type="text/css" rel="stylesheet" href="./css/tabs/static_tab.css" media="all" />
+    <link type="text/css" rel="stylesheet" href="./css/tabs/landing.css" media="all" />
+    <link type="text/css" rel="stylesheet" href="./css/tabs/setup.css" media="all" />
+    <link type="text/css" rel="stylesheet" href="./css/tabs/help.css" media="all" />
+    <link type="text/css" rel="stylesheet" href="./css/tabs/ports.css" media="all" />
+    <link type="text/css" rel="stylesheet" href="./css/tabs/configuration.css" media="all" />
+    <link type="text/css" rel="stylesheet" href="./css/tabs/pid_tuning.css" media="all" />
+    <link type="text/css" rel="stylesheet" href="./css/tabs/receiver.css" media="all" />
+    <link type="text/css" rel="stylesheet" href="./css/tabs/servos.css" media="all" />
+    <link type="text/css" rel="stylesheet" href="./css/tabs/gps.css" media="all" />
+    <link type="text/css" rel="stylesheet" href="./css/tabs/motors.css" media="all" />
+    <link type="text/css" rel="stylesheet" href="./css/tabs/led_strip.css" media="all" />
+    <link type="text/css" rel="stylesheet" href="./css/tabs/sensors.css" media="all" />
+    <link type="text/css" rel="stylesheet" href="./css/tabs/cli.css" media="all" />
+    <link type="text/css" rel="stylesheet" href="./css/tabs/logging.css" media="all" />
+    <link type="text/css" rel="stylesheet" href="./css/tabs/onboard_logging.css" media="all" />
+    <link type="text/css" rel="stylesheet" href="./css/tabs/firmware_flasher.css" media="all" />
+    <link type="text/css" rel="stylesheet" href="./css/tabs/adjustments.css" media="all" />
+    <link type="text/css" rel="stylesheet" href="./css/tabs/auxiliary.css" media="all" />
+    <link type="text/css" rel="stylesheet" href="./css/tabs/failsafe.css" media="all" />
+    <link type="text/css" rel="stylesheet" href="./css/tabs/power.css" media="all" />
+    <link type="text/css" rel="stylesheet" href="./css/tabs/privacy_policy.css" media="all" />
+    <link type="text/css" rel="stylesheet" href="./css/tabs/options.css" media="all" />
+    <link type="text/css" rel="stylesheet" href="./css/opensans_webfontkit/fonts.css" media="all" />
+    <link type="text/css" rel="stylesheet" href="./css/dropdown-lists/css/style_lists.css" media="all" />
+    <link type="text/css" rel="stylesheet" href="./js/libraries/switchery/switchery.css" media="all" />
+    <link type="text/css" rel="stylesheet" href="./node_modules/@fortawesome/fontawesome-free/css/all.css"
+        media="all" />
+
+    <link type="text/css" rel="stylesheet" href="./css/dark-theme.css" media="all" disabled />
 
     <!-- CORDOVA_INCLUDE js/cordova_chromeapi.js -->
     <!-- CORDOVA_INCLUDE js/cordova_startup.js -->
@@ -54,9 +56,9 @@
     <script type="text/javascript" src="./node_modules/djv/djv.js"></script>
     <script type="text/javascript" src="./js/libraries/d3.min.js"></script>
     <script type="text/javascript" src="./js/libraries/jquery.nouislider.all.min.js"></script>
-    <script type="text/javascript" src="./js/libraries/three/three.min.js"></script>
-    <script type="text/javascript" src="./js/libraries/three/three.module.js"></script>
-    <script type="text/javascript" src="./js/libraries/three/GLTFLoader.js"></script>
+    <script type="text/javascript" src="./node_modules/three/build/three.min.js"></script>
+    <script type="text/javascript" src="./node_modules/three/build/three.module.js"></script>
+    <script type="text/javascript" src="./node_modules/three/examples/js/loaders/GLTFLoader.js"></script>
     <script type="text/javascript" src="./js/libraries/jquery.flightindicators.js"></script>
     <script type="text/javascript" src="./node_modules/semver-min/umd/index.js"></script>
     <script type="text/javascript" src="./js/libraries/switchery/switchery.js"></script>
@@ -130,219 +132,231 @@
     <script type="text/javascript" src="./node_modules/jquery-touchswipe/jquery.touchSwipe.min.js"></script>
     <title i18n="windowTitle"></title>
 </head>
+
 <body>
-<div id="main-wrapper">
-    <div id="background"></div>
-    <div id="side_menu_swipe"></div>
-    <div class="headerbar">
-        <div id="menu_btn">
-            <em class="fas fa-bars"></em>
-        </div>
-        <div id="logo">
-            <div class="logo_text">
-                CONFIGURATOR
-                <div class="version"></div>
+    <div id="main-wrapper">
+        <div id="background"></div>
+        <div id="side_menu_swipe"></div>
+        <div class="headerbar">
+            <div id="menu_btn">
+                <em class="fas fa-bars"></em>
             </div>
-        </div>
-        <div id="port-picker">
-            <div id="port-override-option">
-                <label for="port-override">
-                    <span i18n="portOverrideText">Port:</span>
-                    <input id="port-override" type="text" value="/dev/rfcomm0"/>
-                </label>
-            </div>
-            <div id="portsinput">
-                <div class="dropdown dropdown-dark">
-                    <select class="dropdown-select" id="port" i18n_title="firmwareFlasherManualPort">
-                        <option value="manual">Manual</option>
-                        <!-- port list gets generated here -->
-                    </select>
-                </div>
-                <div class="dropdown dropdown-dark">
-                    <select class="dropdown-select" id="baud" i18n_title="firmwareFlasherBaudRate">
-                        <option value="1000000">1000000</option>
-                        <option value="500000">500000</option>
-                        <option value="250000">250000</option>
-                        <option value="115200" selected="selected">115200</option>
-                        <option value="57600">57600</option>
-                        <option value="38400">38400</option>
-                        <option value="28800">28800</option>
-                        <option value="19200">19200</option>
-                        <option value="14400">14400</option>
-                        <option value="9600">9600</option>
-                        <option value="4800">4800</option>
-                        <option value="2400">2400</option>
-                        <option value="1200">1200</option>
-                    </select>
-                </div>
-                <div id="autoConnectSwitch">
-                    <label><input class="auto_connect togglesmall" type="checkbox"/><span
-                        class="auto_connect" i18n="autoConnect"></span></label>
-                </div>
-            </div>
-        </div>
-        <div class="header-wrapper">
-            <div id="quad-status_wrapper">
-                <div class="battery-icon">
-                    <div class="quad-status-contents">
-                        <div class="battery-status"></div>
-                    </div>
-                </div>
-                <div class="battery-legend">Battery voltage</div>
-                <div class="bottomStatusIcons">
-                    <div class="armedicon cf_tip" i18n_title="mainHelpArmed"></div>
-                    <div class="failsafeicon cf_tip" i18n_title="mainHelpFailsafe"></div>
-                    <div class="linkicon cf_tip" i18n_title="mainHelpLink"></div>
-                </div>
-            </div>
-            <div id="sensor-status" class="sensor_state mode-connected">
-                <ul>
-                    <li class="gyro" i18n_title="sensorStatusGyro">
-                        <div class="gyroicon" i18n="sensorStatusGyroShort"></div>
-                    </li>
-                    <li class="accel" i18n_title="sensorStatusAccel">
-                        <div class="accicon" i18n="sensorStatusAccelShort"></div>
-                    </li>
-                    <li class="mag" i18n_title="sensorStatusMag">
-                        <div class="magicon" i18n="sensorStatusMagShort"></div>
-                    </li>
-                    <li class="baro" i18n_title="sensorStatusBaro">
-                        <div class="baroicon" i18n="sensorStatusBaroShort"></div>
-                    </li>
-                    <li class="gps" i18n_title="sensorStatusGPS">
-                        <div class="gpsicon" i18n="sensorStatusGPSShort"></div>
-                    </li>
-                    <li class="sonar" i18n_title="sensorStatusSonar">
-                        <div class="sonaricon" i18n="sensorStatusSonarShort"></div>
-                    </li>
-                </ul>
-            </div>
-            <div id="dataflash_wrapper_global">
-                <div class="noflash_global" align="center" i18n="sensorDataFlashNotFound"></div>
-                <ul class="dataflash-contents_global">
-                    <li class="dataflash-free_global">
-                        <div class="legend" i18n="sensorDataFlashFreeSpace"></div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div id="header_btns">
-            <div class="open_firmware_flasher" id="flashbutton">
-                <div class="firmware_b">
-                    <a class="flash disabled" href="#"></a>
-                </div>
-                <div class="flash_state" i18n="flashTab"></div>
-            </div>
-            <div class="connect_controls" id="connectbutton">
-                <div class="connect_b">
-                    <a class="connect disabled" href="#"></a>
-                </div>
-                <div class="connect_state" i18n="connect"></div>
-            </div>
-        </div>
-        <div id="reveal_btn">
-            <em class="fas fa-ellipsis-v"></em>
-        </div>
-    </div>
-    <div id="log">
-        <div class="logswitch">
-            <a href="#" id="showlog" i18n="logActionShow"></a>
-        </div>
-        <div id="scrollicon"></div>
-        <div class="wrapper"></div>
-    </div>
-    <div id="tab-content-container">
-        <div class="tab_container">
-            <div id="tab_logoversion">
+            <div id="logo">
                 <div class="logo_text">
+                    CONFIGURATOR
                     <div class="version"></div>
                 </div>
             </div>
-            <div id="tabs">
-                <ul class="mode-disconnected">
-                    <li class="tab_landing" id="tab_landing"><a href="#" i18n="tabLanding" class="tabicon ic_welcome" i18n_title="tabLanding"></a>
-                    </li>
-                    <li class="tab_changelog"><a href="#" class="tabicon ic_help" i18n="tabChangelog"></a></li>
-                    <li class="tab_privacy_policy"><a href="#" class="tabicon ic_help" i18n="tabPrivacyPolicy"></a></li>
-                    <li class="tab_help" id="tab_help"><a href="#" i18n="tabHelp" class="tabicon ic_help"
-                                                          i18n_title="tabHelp"></a></li>
-                    <li class="tab_options" id="tab_options"><a href="#" i18n="tabOptions" class="tabicon ic_config" i18n_title="tabOptions"></a>
-                    </li>
-                    <li class="tab_firmware_flasher" id="tabFirmware"><a href="#" i18n="tabFirmwareFlasher" class="tabicon ic_flasher"
-                                                                         i18n_title="tabFirmwareFlasher"></a></li>
-                </ul>
-                <ul class="mode-connected">
-                    <li class="tab_setup"><a href="#" i18n="tabSetup" class="tabicon ic_setup" i18n_title="tabSetup"></a></li>
+            <div id="port-picker">
+                <div id="port-override-option">
+                    <label for="port-override">
+                        <span i18n="portOverrideText">Port:</span>
+                        <input id="port-override" type="text" value="/dev/rfcomm0" />
+                    </label>
+                </div>
+                <div id="portsinput">
+                    <div class="dropdown dropdown-dark">
+                        <select class="dropdown-select" id="port" i18n_title="firmwareFlasherManualPort">
+                            <option value="manual">Manual</option>
+                            <!-- port list gets generated here -->
+                        </select>
+                    </div>
+                    <div class="dropdown dropdown-dark">
+                        <select class="dropdown-select" id="baud" i18n_title="firmwareFlasherBaudRate">
+                            <option value="1000000">1000000</option>
+                            <option value="500000">500000</option>
+                            <option value="250000">250000</option>
+                            <option value="115200" selected="selected">115200</option>
+                            <option value="57600">57600</option>
+                            <option value="38400">38400</option>
+                            <option value="28800">28800</option>
+                            <option value="19200">19200</option>
+                            <option value="14400">14400</option>
+                            <option value="9600">9600</option>
+                            <option value="4800">4800</option>
+                            <option value="2400">2400</option>
+                            <option value="1200">1200</option>
+                        </select>
+                    </div>
+                    <div id="autoConnectSwitch">
+                        <label><input class="auto_connect togglesmall" type="checkbox" /><span class="auto_connect"
+                                i18n="autoConnect"></span></label>
+                    </div>
+                </div>
+            </div>
+            <div class="header-wrapper">
+                <div id="quad-status_wrapper">
+                    <div class="battery-icon">
+                        <div class="quad-status-contents">
+                            <div class="battery-status"></div>
+                        </div>
+                    </div>
+                    <div class="battery-legend">Battery voltage</div>
+                    <div class="bottomStatusIcons">
+                        <div class="armedicon cf_tip" i18n_title="mainHelpArmed"></div>
+                        <div class="failsafeicon cf_tip" i18n_title="mainHelpFailsafe"></div>
+                        <div class="linkicon cf_tip" i18n_title="mainHelpLink"></div>
+                    </div>
+                </div>
+                <div id="sensor-status" class="sensor_state mode-connected">
+                    <ul>
+                        <li class="gyro" i18n_title="sensorStatusGyro">
+                            <div class="gyroicon" i18n="sensorStatusGyroShort"></div>
+                        </li>
+                        <li class="accel" i18n_title="sensorStatusAccel">
+                            <div class="accicon" i18n="sensorStatusAccelShort"></div>
+                        </li>
+                        <li class="mag" i18n_title="sensorStatusMag">
+                            <div class="magicon" i18n="sensorStatusMagShort"></div>
+                        </li>
+                        <li class="baro" i18n_title="sensorStatusBaro">
+                            <div class="baroicon" i18n="sensorStatusBaroShort"></div>
+                        </li>
+                        <li class="gps" i18n_title="sensorStatusGPS">
+                            <div class="gpsicon" i18n="sensorStatusGPSShort"></div>
+                        </li>
+                        <li class="sonar" i18n_title="sensorStatusSonar">
+                            <div class="sonaricon" i18n="sensorStatusSonarShort"></div>
+                        </li>
+                    </ul>
+                </div>
+                <div id="dataflash_wrapper_global">
+                    <div class="noflash_global" align="center" i18n="sensorDataFlashNotFound"></div>
+                    <ul class="dataflash-contents_global">
+                        <li class="dataflash-free_global">
+                            <div class="legend" i18n="sensorDataFlashFreeSpace"></div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div id="header_btns">
+                <div class="open_firmware_flasher" id="flashbutton">
+                    <div class="firmware_b">
+                        <a class="flash disabled" href="#"></a>
+                    </div>
+                    <div class="flash_state" i18n="flashTab"></div>
+                </div>
+                <div class="connect_controls" id="connectbutton">
+                    <div class="connect_b">
+                        <a class="connect disabled" href="#"></a>
+                    </div>
+                    <div class="connect_state" i18n="connect"></div>
+                </div>
+            </div>
+            <div id="reveal_btn">
+                <em class="fas fa-ellipsis-v"></em>
+            </div>
+        </div>
+        <div id="log">
+            <div class="logswitch">
+                <a href="#" id="showlog" i18n="logActionShow"></a>
+            </div>
+            <div id="scrollicon"></div>
+            <div class="wrapper"></div>
+        </div>
+        <div id="tab-content-container">
+            <div class="tab_container">
+                <div id="tab_logoversion">
+                    <div class="logo_text">
+                        <div class="version"></div>
+                    </div>
+                </div>
+                <div id="tabs">
+                    <ul class="mode-disconnected">
+                        <li class="tab_landing" id="tab_landing"><a href="#" i18n="tabLanding"
+                                class="tabicon ic_welcome" i18n_title="tabLanding"></a>
+                        </li>
+                        <li class="tab_changelog"><a href="#" class="tabicon ic_help" i18n="tabChangelog"></a></li>
+                        <li class="tab_privacy_policy"><a href="#" class="tabicon ic_help" i18n="tabPrivacyPolicy"></a>
+                        </li>
+                        <li class="tab_help" id="tab_help"><a href="#" i18n="tabHelp" class="tabicon ic_help"
+                                i18n_title="tabHelp"></a></li>
+                        <li class="tab_options" id="tab_options"><a href="#" i18n="tabOptions" class="tabicon ic_config"
+                                i18n_title="tabOptions"></a>
+                        </li>
+                        <li class="tab_firmware_flasher" id="tabFirmware"><a href="#" i18n="tabFirmwareFlasher"
+                                class="tabicon ic_flasher" i18n_title="tabFirmwareFlasher"></a></li>
+                    </ul>
+                    <ul class="mode-connected">
+                        <li class="tab_setup"><a href="#" i18n="tabSetup" class="tabicon ic_setup"
+                                i18n_title="tabSetup"></a></li>
 
-                    <li class="tab_ports"><a href="#" i18n="tabPorts" class="tabicon ic_ports" i18n_title="tabPorts"></a></li>
-                    <li class="tab_configuration"><a href="#" i18n="tabConfiguration" class="tabicon ic_config"
-                                                     i18n_title="tabConfiguration"></a></li>
-                    <li class="tab_power"><a href="#" i18n="tabPower" class="tabicon ic_power"
-                                             i18n_title="tabPower"></a></li>
-                    <li class="tab_failsafe"><a href="#" i18n="tabFailsafe" class="tabicon ic_failsafe"
-                                                i18n_title="tabFailsafe"></a></li>
-                    <li class="tab_pid_tuning"><a href="#" i18n="tabPidTuning" class="tabicon ic_pid"
-                                                  i18n_title="tabPidTuning"></a></li>
-                    <li class="tab_receiver"><a href="#" i18n="tabReceiver" class="tabicon ic_rx" i18n_title="tabReceiver"></a></li>
-                    <li class="tab_auxiliary"><a href="#" i18n="tabAuxiliary" class="tabicon ic_modes" i18n_title="tabAuxiliary"></a>
-                    </li>
-                    <li class="tab_adjustments"><a href="#" i18n="tabAdjustments" class="tabicon ic_adjust"
-                                                   i18n_title="tabAdjustments"></a></li>
-                    <li class="tab_servos"><a href="#" i18n="tabServos" class="tabicon ic_servo" i18n_title="tabServos"></a></li>
-                    <li class="tab_gps"><a href="#" i18n="tabGPS" class="tabicon ic_gps" i18n_title="tabGPS"></a></li>
-                    <li class="tab_motors"><a href="#" i18n="tabMotorTesting" class="tabicon ic_motor" i18n_title="tabMotorTesting"></a>
-                    </li>
-                    <li class="tab_led_strip"><a href="#" i18n="tabLedStrip" class="tabicon ic_led" i18n_title="tabLedStrip"></a>
-                    </li>
-                    <li class="tab_sensors"><a href="#" i18n="tabRawSensorData" class="tabicon ic_sensors"
-                                               i18n_title="tabRawSensorData"></a></li>
-                    <li class="tab_logging"><a href="#" i18n="tabLogging" class="tabicon ic_log"
-                                               i18n_title="tabLogging"></a></li>
-                    <li class="tab_onboard_logging"><a href="#" i18n="tabOnboardLogging" class="tabicon ic_data"
-                                                       i18n_title="tabOnboardLogging"></a></li>
-                    <!-- spare icons
+                        <li class="tab_ports"><a href="#" i18n="tabPorts" class="tabicon ic_ports"
+                                i18n_title="tabPorts"></a></li>
+                        <li class="tab_configuration"><a href="#" i18n="tabConfiguration" class="tabicon ic_config"
+                                i18n_title="tabConfiguration"></a></li>
+                        <li class="tab_power"><a href="#" i18n="tabPower" class="tabicon ic_power"
+                                i18n_title="tabPower"></a></li>
+                        <li class="tab_failsafe"><a href="#" i18n="tabFailsafe" class="tabicon ic_failsafe"
+                                i18n_title="tabFailsafe"></a></li>
+                        <li class="tab_pid_tuning"><a href="#" i18n="tabPidTuning" class="tabicon ic_pid"
+                                i18n_title="tabPidTuning"></a></li>
+                        <li class="tab_receiver"><a href="#" i18n="tabReceiver" class="tabicon ic_rx"
+                                i18n_title="tabReceiver"></a></li>
+                        <li class="tab_auxiliary"><a href="#" i18n="tabAuxiliary" class="tabicon ic_modes"
+                                i18n_title="tabAuxiliary"></a>
+                        </li>
+                        <li class="tab_adjustments"><a href="#" i18n="tabAdjustments" class="tabicon ic_adjust"
+                                i18n_title="tabAdjustments"></a></li>
+                        <li class="tab_servos"><a href="#" i18n="tabServos" class="tabicon ic_servo"
+                                i18n_title="tabServos"></a></li>
+                        <li class="tab_gps"><a href="#" i18n="tabGPS" class="tabicon ic_gps" i18n_title="tabGPS"></a>
+                        </li>
+                        <li class="tab_motors"><a href="#" i18n="tabMotorTesting" class="tabicon ic_motor"
+                                i18n_title="tabMotorTesting"></a>
+                        </li>
+                        <li class="tab_led_strip"><a href="#" i18n="tabLedStrip" class="tabicon ic_led"
+                                i18n_title="tabLedStrip"></a>
+                        </li>
+                        <li class="tab_sensors"><a href="#" i18n="tabRawSensorData" class="tabicon ic_sensors"
+                                i18n_title="tabRawSensorData"></a></li>
+                        <li class="tab_logging"><a href="#" i18n="tabLogging" class="tabicon ic_log"
+                                i18n_title="tabLogging"></a></li>
+                        <li class="tab_onboard_logging"><a href="#" i18n="tabOnboardLogging" class="tabicon ic_data"
+                                i18n_title="tabOnboardLogging"></a></li>
+                        <!-- spare icons
                     <li class=""><a href="#"class="tabicon ic_mission">Mission (spare icon)</a></li>
                     <li class=""><a href="#"class="tabicon ic_advanced">Advanced (spare icon)</a></li>
                     <li class=""><a href="#"class="tabicon ic_wizzard">Wizzard (spare icon)</a></li>
                     -->
-                </ul>
-                <ul class="mode-connected mode-connected-cli">
-                    <li class="tab_cli">
-                        <a href="#" i18n="tabCLI" class="tabicon ic_cli" i18n_title="tabCLI"></a>
-                    </li>
-                </ul>
+                    </ul>
+                    <ul class="mode-connected mode-connected-cli">
+                        <li class="tab_cli">
+                            <a href="#" i18n="tabCLI" class="tabicon ic_cli" i18n_title="tabCLI"></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="clear-both"></div>
             </div>
-            <div class="clear-both"></div>
+            <div id="content"></div>
         </div>
-        <div id="content"></div>
+        <div id="status-bar">
+            <div>
+                <span i18n="statusbar_port_utilization"></span> <span class="port_usage_down">D: 0%</span> <span
+                    class="port_usage_up">U: 0%</span>
+            </div>
+            <div>
+                <span i18n="statusbar_packet_error"></span> <span class="packet-error">0</span>
+            </div>
+            <div>
+                <span i18n="statusbar_i2c_error"></span> <span class="i2c-error">0</span>
+            </div>
+            <div>
+                <span i18n="statusbar_cycle_time"></span> <span class="cycle-time">0</span>
+            </div>
+            <div>
+                <span class="cpu-load"> </span>
+            </div>
+            <div class="version">
+                <!-- configuration version generated here -->
+            </div>
+        </div>
+        <div id="cache">
+            <div class="data-loading">
+                <p>Waiting for data ...</p>
+            </div>
+        </div>
     </div>
-    <div id="status-bar">
-        <div>
-            <span i18n="statusbar_port_utilization"></span> <span class="port_usage_down">D: 0%</span> <span
-                class="port_usage_up">U: 0%</span>
-        </div>
-        <div>
-            <span i18n="statusbar_packet_error"></span> <span class="packet-error">0</span>
-        </div>
-        <div>
-            <span i18n="statusbar_i2c_error"></span> <span class="i2c-error">0</span>
-        </div>
-        <div>
-            <span i18n="statusbar_cycle_time"></span> <span class="cycle-time">0</span>
-        </div>
-        <div>
-            <span class="cpu-load"> </span>
-        </div>
-        <div class="version">
-            <!-- configuration version generated here -->
-        </div>
-    </div>
-    <div id="cache">
-        <div class="data-loading">
-            <p>Waiting for data ...</p>
-        </div>
-    </div>
-</div>
 
     <dialog class="dialogConfiguratorUpdate">
         <h3 i18n="noticeTitle"></h3>
@@ -372,7 +386,8 @@
         </div>
         <div>
             <span class="buttons">
-                <a href="#" id="dialogResetToCustomDefaults-acceptbtn" class="regular-button" i18n="resetToCustomDefaultsAccept"></a>
+                <a href="#" id="dialogResetToCustomDefaults-acceptbtn" class="regular-button"
+                    i18n="resetToCustomDefaultsAccept"></a>
             </span>
             <span class="buttons">
                 <a href="#" id="dialogResetToCustomDefaults-cancelbtn" class="regular-button" i18n="cancel"></a>
@@ -396,7 +411,8 @@
         </div>
     </dialog>
 
-    <ul class="hidden"> <!-- Sonar says so -->
+    <ul class="hidden">
+        <!-- Sonar says so -->
         <li id="dialogReportProblems-listItemTemplate" class="dialogReportProblems-listItem"></li>
     </ul>
 
@@ -412,4 +428,5 @@
 
     <!-- CORDOVA_INCLUDE cordova.js -->
 </body>
+
 </html>

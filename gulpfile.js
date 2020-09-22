@@ -46,7 +46,7 @@ const LINUX_INSTALL_DIR = "/opt/heliflight";
 var gitChangeSetId;
 
 var nwBuilderOptions = {
-    version: "0.44.2",
+    version: "0.48.2",
     files: "./dist/**/*",
     macIcns: "./src/images/bf_icon.icns",
     macPlist: { CFBundleDisplayName: "HeliFlight Configurator" },
