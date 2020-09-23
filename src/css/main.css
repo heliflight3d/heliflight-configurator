@@ -876,12 +876,12 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 .logswitch a {
-    color: #656565 !important;
+    color: #959595 !important;
     transition: all 0.2s;
 }
 
 .logswitch a:hover {
-    color: #959595 !important;
+    color: #f9f9f9 !important;
     text-decoration: none !important;
 }
 
@@ -1887,7 +1887,7 @@ dialog .dialog_toolbar .btn a.disabled {
     margin-right: 20px;
     background-color: var(--accent);
     border-radius: 3px;
-    border: 1px solid #dba718;
+    border: 1px solid #f9f9f9;
     color: #000;
     float: right;
     font-weight: bold;
@@ -1961,7 +1961,7 @@ dialog .dialog_toolbar .btn a.disabled {
     margin-right: 10px;
     background-color: var(--accent);
     border-radius: 3px;
-    border: 1px solid #dba718;
+    border: 1px solid #f9f9f9;
     color: #ffffff;
     font-weight: bold;
     font-size: 12px;
@@ -2015,13 +2015,13 @@ dialog .dialog_toolbar .btn a.disabled {
     background-color: var(--accent);
     text-shadow: 0 1px rgba(255, 255, 255, 0.25);
     color: #000;
-    border: 1px solid #dba718;
+    border: 1px solid #f9f9f9;
     transition: all ease 0.2s;
 }
 
 .green a:hover {
     background-color: #ffcc3f;
-    border: 1px solid #dba718;
+    border: 1px solid #f9f9f9;
     text-shadow: 0 1px rgba(255, 255, 255, 0.25);
     color: #000;
     transition: all ease 0.2s;
@@ -2142,7 +2142,7 @@ button {
 
 button.active {
     background-color: var(--accent);
-    border: 1px solid #dba718;
+    border: 1px solid #f9f9f9;
     color: #000;
 }
 
