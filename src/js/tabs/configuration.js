@@ -85,7 +85,7 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
     }
 
     function load_arming_config() {
-        var next_callback = load_3d;
+        var next_callback = load_rc_deadband;
         if (semver.gte(CONFIG.apiVersion, "1.8.0")) {
             MSP.send_message(MSPCodes.MSP_ARMING_CONFIG, false, false, next_callback);
         } else {
