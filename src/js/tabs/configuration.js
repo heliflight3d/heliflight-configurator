@@ -121,23 +121,9 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
     }
 
     function load_sensor_alignment() {
-        var next_callback = load_name;
+        var next_callback = load_rx_config;
         if (semver.gte(CONFIG.apiVersion, "1.15.0")) {
             MSP.send_message(MSPCodes.MSP_SENSOR_ALIGNMENT, false, false, next_callback);
-        } else {
-            next_callback();
-        }
-    }
-
-    function load_name() {
-        var next_callback = load_rx_config;
-
-        if (self.SHOW_OLD_BATTERY_CONFIG) {
-            next_callback = load_battery;
-        }
-
-        if (semver.gte(CONFIG.apiVersion, "1.20.0")) {
-            MSP.send_message(MSPCodes.MSP_NAME, false, false, next_callback);
         } else {
             next_callback();
         }
@@ -674,8 +660,6 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
             $('.hardwareSelection').hide();
         }
 
-        $('input[name="craftName"]').val(CONFIG.name);
-
         if (semver.gte(CONFIG.apiVersion, "1.31.0")) {
             $('input[name="fpvCamAngleDegrees"]').val(RX_CONFIG.fpvCamAngleDegrees);
             if (semver.gte(CONFIG.apiVersion, "1.41.0")) {
@@ -1037,15 +1021,6 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
             }
         }
 
-        //fill 3D
-        if (semver.lt(CONFIG.apiVersion, "1.14.0")) {
-            $('.tab-configuration ._3d').hide();
-        } else {
-            $('input[name="3ddeadbandlow"]').val(MOTOR_3D_CONFIG.deadband3d_low);
-            $('input[name="3ddeadbandhigh"]').val(MOTOR_3D_CONFIG.deadband3d_high);
-            $('input[name="3dneutral"]').val(MOTOR_3D_CONFIG.neutral);
-        }
-
         // UI hooks
         function checkShowDisarmDelay() {
             if (FEATURE_CONFIG.features.isEnabled('MOTOR_STOP')) {
@@ -1079,13 +1054,6 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
             }
         }
 
-        function checkUpdate3dControls() {
-            if (FEATURE_CONFIG.features.isEnabled('3D')) {
-                $('._3dSettings').show();
-            } else {
-                $('._3dSettings').hide();
-            }
-        }
 
         $('input.feature', features_e).change(function () {
             var element = $(this);
@@ -1111,10 +1079,6 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
 
                 case 'GPS':
                     checkUpdateGpsControls();
-                    break;
-
-                case '3D':
-                    checkUpdate3dControls();
                     break;
 
                 default:
@@ -1155,7 +1119,6 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
         checkShowSerialRxBox();
         checkShowSpiRxBox();
         checkUpdateGpsControls();
-        checkUpdate3dControls();
 
         if (self.SHOW_OLD_BATTERY_CONFIG) {
             checkUpdateVbatControls();
@@ -1196,12 +1159,6 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
                 BF_CONFIG.currentscale = parseInt($('input[name="currentscale"]').val());
                 BF_CONFIG.currentoffset = parseInt($('input[name="currentoffset"]').val());
                 MISC.multiwiicurrentoutput = $('input[name="multiwiicurrentoutput"]').is(':checked') ? 1 : 0;
-            }
-
-            if (semver.gte(CONFIG.apiVersion, "1.14.0")) {
-                MOTOR_3D_CONFIG.deadband3d_low = parseInt($('input[name="3ddeadbandlow"]').val());
-                MOTOR_3D_CONFIG.deadband3d_high = parseInt($('input[name="3ddeadbandhigh"]').val());
-                MOTOR_3D_CONFIG.neutral = parseInt($('input[name="3dneutral"]').val());
             }
 
             if (semver.gte(CONFIG.apiVersion, "1.41.0")) {
@@ -1289,17 +1246,12 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
                     GPS_CONFIG.auto_config = $('input[name="gps_auto_config"]').is(':checked') ? 1 : 0;
                 }
 
-                var next_callback = save_motor_3d_config;
+                var next_callback = save_rc_deadband;
                 if (semver.gte(CONFIG.apiVersion, "1.33.0")) {
                     MSP.send_message(MSPCodes.MSP_SET_GPS_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_GPS_CONFIG), false, next_callback);
                 } else {
                     next_callback();
                 }
-            }
-
-            function save_motor_3d_config() {
-                var next_callback = save_rc_deadband;
-                MSP.send_message(MSPCodes.MSP_SET_MOTOR_3D_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_MOTOR_3D_CONFIG), false, next_callback);
             }
 
             function save_rc_deadband() {
@@ -1330,19 +1282,8 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
                 SENSOR_CONFIG.baro_hardware = $('input[id="baroHardwareSwitch"]').is(':checked') ? 0 : 1;
                 SENSOR_CONFIG.mag_hardware = $('input[id="magHardwareSwitch"]').is(':checked') ? 0 : 1;
 
-                var next_callback = save_name;
+                var next_callback = save_rx_config;;
                 MSP.send_message(MSPCodes.MSP_SET_SENSOR_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_SENSOR_CONFIG), false, next_callback);
-            }
-
-            function save_name() {
-                var next_callback = save_rx_config;
-
-                if (self.SHOW_OLD_BATTERY_CONFIG) {
-                    next_callback = save_battery;
-                }
-
-                CONFIG.name = $.trim($('input[name="craftName"]').val());
-                MSP.send_message(MSPCodes.MSP_SET_NAME, mspHelper.crunch(MSPCodes.MSP_SET_NAME), false, next_callback);
             }
 
             function save_battery() {
