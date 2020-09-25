@@ -546,31 +546,6 @@
                                     </td>
                                 </tr>
 
-                                <tr class="throttleBoost">
-                                    <td><input type="number" name="throttleBoost-number" step="1" min="0" max="100" />
-                                    </td>
-                                    <td colspan="1">
-                                        <div>
-                                            <label>
-                                                <span i18n="pidTuningThrottleBoost"></span>
-                                            </label>
-                                            <div class="helpicon cf_tip" i18n_title="pidTuningThrottleBoostHelp"></div>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr class="idleMinRpm">
-                                    <td><input type="number" name="idleMinRpm-number" step="1" min="0" max="100" /></td>
-                                    <td colspan="1">
-                                        <div>
-                                            <label>
-                                                <span i18n="pidTuningIdleMinRpm"></span>
-                                            </label>
-                                            <div class="helpicon cf_tip" i18n_title="pidTuningIdleMinRpmHelp"></div>
-                                        </div>
-                                    </td>
-                                </tr>
-
                                 <tr class="absoluteControlGain">
                                     <td><input type="number" name="absoluteControlGain-number" step="1" min="0"
                                             max="20" /></td>
@@ -593,30 +568,11 @@
                                     </td>
                                 </tr>
 
-                                <tr>
-                                    <td><input type="checkbox" id="vbatpidcompensation" class="toggle" /></td>
-                                    <td colspan="2">
-                                        <span i18n="pidTuningVbatPidCompensation"></span>
-                                        <div class="helpicon cf_tip" i18n_title="pidTuningVbatPidCompensationHelp">
-                                        </div>
-                                    </td>
-                                </tr>
-
                                 <tr class="smartfeedforward">
                                     <td><input type="checkbox" id="smartfeedforward" class="toggle" /></td>
                                     <td colspan="2">
                                         <span i18n="pidTuningSmartFeedforward"></span>
                                         <div class="helpicon cf_tip" i18n_title="pidTuningSmartFeedforwardHelp"></div>
-                                    </td>
-                                </tr>
-
-                                <tr class="integratedYaw">
-                                    <td><input type="checkbox" id="useIntegratedYaw" class="toggle" /></td>
-                                    <td colspan="2">
-                                        <div class="helpicon cf_tip" i18n_title="pidTuningIntegratedYawHelp"></div>
-                                        <span i18n="pidTuningIntegratedYaw" />
-                                        <span class="spacer_left" id="pidTuningIntegratedYawCaution"
-                                            i18n="pidTuningIntegratedYawCaution" />
                                     </td>
                                 </tr>
 
@@ -653,69 +609,6 @@
                                             <input type="number" name="itermRelaxCutoff" step="1" min="1" max="100" />
                                             <label for="itermRelaxCutoff">
                                                 <span i18n="pidTuningItermRelaxCutoff" />
-                                            </label>
-                                        </span>
-                                    </td>
-                                </tr>
-
-                                <tr class="dminGroup">
-                                    <td><input type="checkbox" id="dMinSwitch" class="toggle" /></td>
-                                    <td colspan="3">
-                                        <div class="helpicon cf_tip" i18n_title="pidTuningDMinFeatureHelp"></div>
-                                        <span i18n="pidTuningDMin" />
-
-                                        <span class="suboption">
-                                            <input type="number" name="dMinGain" step="1" min="0" max="100" />
-                                            <label for="dMinGain">
-                                                <span i18n="pidTuningDMinGain" />
-                                            </label>
-                                        </span>
-
-                                        <span class="suboption">
-                                            <input type="number" name="dMinAdvance" step="1" min="0" max="200" />
-                                            <label for="dMinAdvance">
-                                                <span i18n="pidTuningDMinAdvance" />
-                                            </label>
-                                        </span>
-                                    </td>
-                                </tr>
-
-                                <tr class="antigravity">
-                                    <td><input type="checkbox" id="antiGravitySwitch" class="toggle" /></td>
-                                    <td colspan="3">
-                                        <div class="helpicon cf_tip" i18n_title="pidTuningAntiGravityHelp"></div>
-                                        <span i18n="pidTuningAntiGravity" />
-                                        <span class="suboption">
-                                            <table>
-                                                <tbody class="features antiGravity">
-                                                    <!-- table generated here -->
-                                                </tbody>
-                                            </table>
-                                        </span>
-
-                                        <span class="suboption antiGravityMode">
-                                            <select id="antiGravityMode">
-                                                <option i18n="pidTuningAntiGravityModeOptionSmooth" value="0" />
-                                                <option i18n="pidTuningAntiGravityModeOptionStep" value="1" />
-                                            </select>
-                                            <label for="antiGravityMode">
-                                                <span i18n="pidTuningAntiGravityMode" />
-                                            </label>
-                                        </span>
-
-                                        <span class="suboption">
-                                            <input type="number" name="itermAcceleratorGain" step="0.1" min="1.1"
-                                                max="30" />
-                                            <label for="antiGravityGain">
-                                                <span i18n="pidTuningAntiGravityGain" />
-                                            </label>
-                                        </span>
-
-                                        <span class="suboption antiGravityThres">
-                                            <input type="number" name="itermThrottleThreshold" step="10" min="20"
-                                                max="1000" />
-                                            <label for="antiGravityThres">
-                                                <span i18n="pidTuningAntiGravityThres" />
                                             </label>
                                         </span>
                                     </td>

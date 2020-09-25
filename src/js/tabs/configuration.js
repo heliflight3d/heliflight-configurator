@@ -55,7 +55,7 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
 
     function load_motor_config() {
         var next_callback = load_gps_config;
-        if(semver.gte(CONFIG.apiVersion, "1.33.0")) {
+        if (semver.gte(CONFIG.apiVersion, "1.33.0")) {
             MSP.send_message(MSPCodes.MSP_MOTOR_CONFIG, false, false, next_callback);
         } else {
             next_callback();
@@ -64,7 +64,7 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
 
     function load_gps_config() {
         var next_callback = load_acc_trim;
-        if(semver.gte(CONFIG.apiVersion, "1.33.0")) {
+        if (semver.gte(CONFIG.apiVersion, "1.33.0")) {
             MSP.send_message(MSPCodes.MSP_GPS_CONFIG, false, false, load_acc_trim);
         } else {
             next_callback();
@@ -85,18 +85,9 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
     }
 
     function load_arming_config() {
-        var next_callback = load_3d;
+        var next_callback = load_rc_deadband;
         if (semver.gte(CONFIG.apiVersion, "1.8.0")) {
             MSP.send_message(MSPCodes.MSP_ARMING_CONFIG, false, false, next_callback);
-        } else {
-            next_callback();
-        }
-    }
-
-    function load_3d() {
-        var next_callback = load_rc_deadband;
-        if (semver.gte(CONFIG.apiVersion, "1.14.0")) {
-            MSP.send_message(MSPCodes.MSP_MOTOR_3D_CONFIG, false, false, next_callback);
         } else {
             next_callback();
         }
@@ -130,23 +121,9 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
     }
 
     function load_sensor_alignment() {
-        var next_callback = load_name;
+        var next_callback = load_rx_config;
         if (semver.gte(CONFIG.apiVersion, "1.15.0")) {
             MSP.send_message(MSPCodes.MSP_SENSOR_ALIGNMENT, false, false, next_callback);
-        } else {
-            next_callback();
-        }
-    }
-
-    function load_name() {
-        var next_callback = load_rx_config;
-
-        if (self.SHOW_OLD_BATTERY_CONFIG) {
-            next_callback = load_battery;
-        }
-
-        if (semver.gte(CONFIG.apiVersion, "1.20.0")) {
-            MSP.send_message(MSPCodes.MSP_NAME, false, false, next_callback);
         } else {
             next_callback();
         }
@@ -211,7 +188,7 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
         var reverseMotorSwitch_e = $('#reverseMotorSwitch');
         var reverseMotor_e = $('.reverseMotor');
 
-        reverseMotorSwitch_e.change(function() {
+        reverseMotorSwitch_e.change(function () {
             MIXER_CONFIG.reverseMotorDir = $(this).prop('checked') ? 1 : 0;
             refreshMixerPreview();
         });
@@ -247,14 +224,14 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
 
         if (semver.gte(CONFIG.apiVersion, "1.37.0")) {
             for (var i = 1; i <= 5; i++) {
-                dshotBeeperBeaconTone.append('<option value="' + (i) + '">'+ (i) + '</option>');
+                dshotBeeperBeaconTone.append('<option value="' + (i) + '">' + (i) + '</option>');
             }
             dshotBeeper_e.show();
         } else {
             dshotBeeper_e.hide();
         }
 
-        dshotBeeperBeaconTone.change(function() {
+        dshotBeeperBeaconTone.change(function () {
             BEEPER_CONFIG.dshotBeaconTone = dshotBeeperBeaconTone.val();
         });
 
@@ -272,7 +249,7 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
         } else {
             dshotBeaconCondition_e.hide();
 
-            dshotBeeperSwitch.change(function() {
+            dshotBeeperSwitch.change(function () {
                 if ($(this).is(':checked')) {
                     dshotBeacon_e.show();
                     if (dshotBeeperBeaconTone.val() == 0) {
@@ -334,9 +311,9 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
         } else {
 
             for (var i = 0; i < alignments.length; i++) {
-                orientation_gyro_e.append('<option value="' + (i+1) + '">'+ alignments[i] + '</option>');
-                orientation_acc_e.append('<option value="' + (i+1) + '">'+ alignments[i] + '</option>');
-                orientation_mag_e.append('<option value="' + (i+1) + '">'+ alignments[i] + '</option>');
+                orientation_gyro_e.append('<option value="' + (i + 1) + '">' + alignments[i] + '</option>');
+                orientation_acc_e.append('<option value="' + (i + 1) + '">' + alignments[i] + '</option>');
+                orientation_mag_e.append('<option value="' + (i + 1) + '">' + alignments[i] + '</option>');
             }
 
             orientation_gyro_e.val(SENSOR_ALIGNMENT.align_gyro);
@@ -387,9 +364,9 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
                 legacy_accel_alignment_e.hide();
 
                 const GYRO_DETECTION_FLAGS = {
-                        DETECTED_GYRO_1:      (1 << 0), 
-                        DETECTED_GYRO_2:      (1 << 1),
-                        DETECTED_DUAL_GYROS:  (1 << 7)
+                    DETECTED_GYRO_1: (1 << 0),
+                    DETECTED_GYRO_2: (1 << 1),
+                    DETECTED_DUAL_GYROS: (1 << 7)
                 };
 
                 var detected_gyro_1 = (SENSOR_ALIGNMENT.gyro_detection_flags & GYRO_DETECTION_FLAGS.DETECTED_GYRO_1) != 0;
@@ -397,18 +374,18 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
                 var detected_dual_gyros = (SENSOR_ALIGNMENT.gyro_detection_flags & GYRO_DETECTION_FLAGS.DETECTED_DUAL_GYROS) != 0;
 
                 if (detected_gyro_1) {
-                    orientation_gyro_to_use_e.append('<option value="0">'+ i18n.getMessage('configurationSensorGyroToUseFirst') + '</option>');
+                    orientation_gyro_to_use_e.append('<option value="0">' + i18n.getMessage('configurationSensorGyroToUseFirst') + '</option>');
                 }
                 if (detected_gyro_2) {
-                    orientation_gyro_to_use_e.append('<option value="1">'+ i18n.getMessage('configurationSensorGyroToUseSecond') + '</option>');
+                    orientation_gyro_to_use_e.append('<option value="1">' + i18n.getMessage('configurationSensorGyroToUseSecond') + '</option>');
                 }
                 if (detected_dual_gyros) {
-                    orientation_gyro_to_use_e.append('<option value="2">'+ i18n.getMessage('configurationSensorGyroToUseBoth') + '</option>');
+                    orientation_gyro_to_use_e.append('<option value="2">' + i18n.getMessage('configurationSensorGyroToUseBoth') + '</option>');
                 }
 
                 for (var i = 0; i < alignments.length; i++) {
-                    orientation_gyro_1_align_e.append('<option value="' + (i+1) + '">'+ alignments[i] + '</option>');
-                    orientation_gyro_2_align_e.append('<option value="' + (i+1) + '">'+ alignments[i] + '</option>');
+                    orientation_gyro_1_align_e.append('<option value="' + (i + 1) + '">' + alignments[i] + '</option>');
+                    orientation_gyro_2_align_e.append('<option value="' + (i + 1) + '">' + alignments[i] + '</option>');
                 }
 
                 orientation_gyro_to_use_e.val(SENSOR_ALIGNMENT.gyro_to_use);
@@ -482,7 +459,7 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
             esc_protocol_e.append(`<option value="${j + 1}">${escProtocols[j]}</option>`);
         }
 
-        $("input[id='unsyncedPWMSwitch']").change(function() {
+        $("input[id='unsyncedPWMSwitch']").change(function () {
             if ($(this).is(':checked')) {
                 $('div.unsyncedpwmfreq').show();
             } else {
@@ -521,17 +498,17 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
             const protocolConfigured = protocolName !== 'DISABLED';
             let digitalProtocol = false;
             switch (protocolName) {
-            case 'DSHOT150':
-            case 'DSHOT300':
-            case 'DSHOT600':
-            case 'DSHOT1200':
-            case 'PROSHOT1000':
-                digitalProtocol = true;
+                case 'DSHOT150':
+                case 'DSHOT300':
+                case 'DSHOT600':
+                case 'DSHOT1200':
+                case 'PROSHOT1000':
+                    digitalProtocol = true;
 
-                break;
-            default:
+                    break;
+                default:
 
-                break;
+                    break;
             }
 
             const rpmFeaturesVisible = digitalProtocol && ($("input[id='dshotBidir']").is(':checked') || $("input[name='ESC_SENSOR']").is(':checked'));
@@ -580,9 +557,9 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
         function addDenomOption(element, denom, baseFreq) {
             let denomDescription;
             if (baseFreq === 0) {
-                denomDescription = i18n.getMessage('configurationSpeedPidNoGyro', {'value' : denom});
+                denomDescription = i18n.getMessage('configurationSpeedPidNoGyro', { 'value': denom });
             } else {
-                denomDescription = i18n.getMessage('configurationKHzUnitLabel', { 'value' : (baseFreq / denom).toFixed(2)});
+                denomDescription = i18n.getMessage('configurationKHzUnitLabel', { 'value': (baseFreq / denom).toFixed(2) });
             }
             element.append(`<option value="${denom}">${denomDescription}</option>`);
         }
@@ -603,38 +580,38 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
             gyroSelectElement.val(originalGyroDenom);
 
             gyroSelectElement.change();
-         };
+        };
 
-         const updateGyroDenomReadOnly = function (gyroFrequency) {
-             gyroSelectElement.hide();
+        const updateGyroDenomReadOnly = function (gyroFrequency) {
+            gyroSelectElement.hide();
 
-             let gyroContent;
-             if (gyroFrequency === 0) {
+            let gyroContent;
+            if (gyroFrequency === 0) {
                 gyroContent = i18n.getMessage('configurationSpeedGyroNoGyro');
-             } else {
-                gyroContent = i18n.getMessage('configurationKHzUnitLabel', { 'value' : (gyroFrequency / 1000).toFixed(2)});
-             }
-             gyroTextElement.val(gyroContent);
-         };
+            } else {
+                gyroContent = i18n.getMessage('configurationKHzUnitLabel', { 'value': (gyroFrequency / 1000).toFixed(2) });
+            }
+            gyroTextElement.val(gyroContent);
+        };
 
-         if (semver.gte(CONFIG.apiVersion, "1.25.0") && semver.lt(CONFIG.apiVersion, "1.41.0")) {
-             gyroUse32kHzElement.prop('checked', PID_ADVANCED_CONFIG.gyroUse32kHz !== 0);
+        if (semver.gte(CONFIG.apiVersion, "1.25.0") && semver.lt(CONFIG.apiVersion, "1.41.0")) {
+            gyroUse32kHzElement.prop('checked', PID_ADVANCED_CONFIG.gyroUse32kHz !== 0);
 
-             gyroUse32kHzElement.change(function () {
-                 const gyroBaseFreq = ($(this).is(':checked'))? 32 : 8;
+            gyroUse32kHzElement.change(function () {
+                const gyroBaseFreq = ($(this).is(':checked')) ? 32 : 8;
 
-                 updateGyroDenom(gyroBaseFreq);
-             }).change();
+                updateGyroDenom(gyroBaseFreq);
+            }).change();
 
-         } else {
+        } else {
 
-             $('div.gyroUse32kHz').hide();
+            $('div.gyroUse32kHz').hide();
 
-             if (semver.gte(CONFIG.apiVersion, API_VERSION_1_43)) {
-                 updateGyroDenomReadOnly(CONFIG.sampleRateHz);
-             } else {
-                 updateGyroDenom(8);
-             }
+            if (semver.gte(CONFIG.apiVersion, API_VERSION_1_43)) {
+                updateGyroDenomReadOnly(CONFIG.sampleRateHz);
+            } else {
+                updateGyroDenom(8);
+            }
         }
 
         gyroSelectElement.val(PID_ADVANCED_CONFIG.gyro_sync_denom);
@@ -682,8 +659,6 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
         if (semver.lt(CONFIG.apiVersion, "1.16.0")) {
             $('.hardwareSelection').hide();
         }
-
-        $('input[name="craftName"]').val(CONFIG.name);
 
         if (semver.gte(CONFIG.apiVersion, "1.31.0")) {
             $('input[name="fpvCamAngleDegrees"]').val(RX_CONFIG.fpvCamAngleDegrees);
@@ -741,12 +716,12 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
         });
         gps_protocol_e.val(GPS_CONFIG.provider).change();
 
-        $('input[name="gps_ublox_galileo"]').change(function() {
+        $('input[name="gps_ublox_galileo"]').change(function () {
             GPS_CONFIG.ublox_use_galileo = $(this).is(':checked') ? 1 : 0;
         }).prop('checked', GPS_CONFIG.ublox_use_galileo > 0).change();
 
         $('.gps_home_once').toggle(semver.gte(CONFIG.apiVersion, API_VERSION_1_43));
-        $('input[name="gps_home_once"]').change(function() {
+        $('input[name="gps_home_once"]').change(function () {
             GPS_CONFIG.home_point_once = $(this).is(':checked') ? 1 : 0;
         }).prop('checked', GPS_CONFIG.home_point_once > 0).change();
 
@@ -809,23 +784,23 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
             serialRXtypes.push('JETIEXBUS');
         }
 
-        if (semver.gte(CONFIG.apiVersion, "1.31.0"))  {
+        if (semver.gte(CONFIG.apiVersion, "1.31.0")) {
             serialRXtypes.push('CRSF');
         }
 
-        if (semver.gte(CONFIG.apiVersion, "1.24.0"))  {
+        if (semver.gte(CONFIG.apiVersion, "1.24.0")) {
             serialRXtypes.push('SPEKTRUM2048/SRXL');
         }
 
-        if (semver.gte(CONFIG.apiVersion, "1.35.0"))  {
+        if (semver.gte(CONFIG.apiVersion, "1.35.0")) {
             serialRXtypes.push('TARGET_CUSTOM');
         }
 
-        if (semver.gte(CONFIG.apiVersion, "1.37.0"))  {
+        if (semver.gte(CONFIG.apiVersion, "1.37.0")) {
             serialRXtypes.push('FrSky FPort');
         }
 
-        if (semver.gte(CONFIG.apiVersion, "1.42.0"))  {
+        if (semver.gte(CONFIG.apiVersion, "1.42.0")) {
             serialRXtypes.push('SPEKTRUM SRXL2');
         }
 
@@ -904,7 +879,7 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
 
             // select current serial RX type
             spiRx_e.val(RX_CONFIG.rxSpiProtocol);
-            }
+        }
 
         // for some odd reason chrome 38+ changes scroll according to the touched select element
         // i am guessing this is a bug, since this wasn't happening on 37
@@ -921,7 +896,7 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
         $('input[name="pitch"]').val(CONFIG.accelerometerTrims[0]);
 
         //fill motor disarm params and FC loop time
-        if(semver.gte(CONFIG.apiVersion, "1.8.0")) {
+        if (semver.gte(CONFIG.apiVersion, "1.8.0")) {
             $('input[name="autodisarmdelay"]').val(ARMING_CONFIG.auto_disarm_delay);
             $('input[id="disarmkillswitch"]').prop('checked', ARMING_CONFIG.disarm_kill_switch !== 0);
             $('div.disarm').show();
@@ -929,13 +904,13 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
             $('div.cycles').show();
         }
 
-        if(semver.gte(CONFIG.apiVersion, "1.37.0")) {
+        if (semver.gte(CONFIG.apiVersion, "1.37.0")) {
             $('input[id="disarmkillswitch"]').prop('checked', true);
             $('div.disarm').hide();
         }
 
         $('._smallAngle').toggle(semver.gte(CONFIG.apiVersion, "1.37.0"));
-        if(semver.gte(CONFIG.apiVersion, "1.37.0")) {
+        if (semver.gte(CONFIG.apiVersion, "1.37.0")) {
             $('input[id="configurationSmallAngle"]').val(ARMING_CONFIG.small_angle);
         }
 
@@ -967,9 +942,9 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
             }
 
             if (semver.gte(CONFIG.apiVersion, "1.41.0")) {
-                $('input[name="mincellvoltage"]').prop('step','0.01');
-                $('input[name="maxcellvoltage"]').prop('step','0.01');
-                $('input[name="warningcellvoltage"]').prop('step','0.01');
+                $('input[name="mincellvoltage"]').prop('step', '0.01');
+                $('input[name="maxcellvoltage"]').prop('step', '0.01');
+                $('input[name="warningcellvoltage"]').prop('step', '0.01');
             }
 
             $('input[name="mincellvoltage"]').val(MISC.vbatmincellvoltage);
@@ -1011,11 +986,11 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
                 $('.vbatmonitoring').show();
 
                 if (semver.gte(CONFIG.flightControllerVersion, "3.1.0")) {
-                     $('select.batterymetertype').show();
+                    $('select.batterymetertype').show();
 
                     if (MISC.batterymetertype !== 0) {
                         $('.vbatCalibration').hide();
-                     }
+                    }
                 } else {
                     $('select.batterymetertype').hide();
                 }
@@ -1028,7 +1003,7 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
             if (FEATURE_CONFIG.features.isEnabled('CURRENT_METER')) {
                 $('.currentMonitoring').show();
 
-                switch(BF_CONFIG.currentmetertype) {
+                switch (BF_CONFIG.currentmetertype) {
                     case 0:
                         $('.currentCalibration').hide();
                         $('.currentOutput').hide();
@@ -1044,15 +1019,6 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
             } else {
                 $('.currentMonitoring').hide();
             }
-        }
-
-        //fill 3D
-        if (semver.lt(CONFIG.apiVersion, "1.14.0")) {
-            $('.tab-configuration ._3d').hide();
-        } else {
-            $('input[name="3ddeadbandlow"]').val(MOTOR_3D_CONFIG.deadband3d_low);
-            $('input[name="3ddeadbandhigh"]').val(MOTOR_3D_CONFIG.deadband3d_high);
-            $('input[name="3dneutral"]').val(MOTOR_3D_CONFIG.neutral);
         }
 
         // UI hooks
@@ -1088,13 +1054,6 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
             }
         }
 
-        function checkUpdate3dControls() {
-            if (FEATURE_CONFIG.features.isEnabled('3D')) {
-                $('._3dSettings').show();
-            } else {
-                $('._3dSettings').hide();
-            }
-        }
 
         $('input.feature', features_e).change(function () {
             var element = $(this);
@@ -1122,19 +1081,15 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
                     checkUpdateGpsControls();
                     break;
 
-                case '3D':
-                    checkUpdate3dControls();
-                    break;
-
                 default:
                     break;
             }
         });
 
-        $('input[id="accHardwareSwitch"]').change(function() {
-            if(semver.gte(CONFIG.apiVersion, "1.37.0")) {
-              var checked = $(this).is(':checked');
-              $('.accelNeeded').toggle(checked);
+        $('input[id="accHardwareSwitch"]').change(function () {
+            if (semver.gte(CONFIG.apiVersion, "1.37.0")) {
+                var checked = $(this).is(':checked');
+                $('.accelNeeded').toggle(checked);
             }
         }).change();
 
@@ -1164,7 +1119,6 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
         checkShowSerialRxBox();
         checkShowSpiRxBox();
         checkUpdateGpsControls();
-        checkUpdate3dControls();
 
         if (self.SHOW_OLD_BATTERY_CONFIG) {
             checkUpdateVbatControls();
@@ -1181,22 +1135,22 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
             CONFIG.accelerometerTrims[0] = parseInt($('input[name="pitch"]').val());
 
             // motor disarm
-            if(semver.gte(CONFIG.apiVersion, "1.8.0")) {
+            if (semver.gte(CONFIG.apiVersion, "1.8.0")) {
                 ARMING_CONFIG.auto_disarm_delay = parseInt($('input[name="autodisarmdelay"]').val());
                 ARMING_CONFIG.disarm_kill_switch = $('input[id="disarmkillswitch"]').is(':checked') ? 1 : 0;
             }
-            if(semver.gte(CONFIG.apiVersion, "1.37.0")) {
+            if (semver.gte(CONFIG.apiVersion, "1.37.0")) {
                 ARMING_CONFIG.small_angle = parseInt($('input[id="configurationSmallAngle"]').val());
             }
 
             MOTOR_CONFIG.minthrottle = parseInt($('input[name="minthrottle"]').val());
             MOTOR_CONFIG.maxthrottle = parseInt($('input[name="maxthrottle"]').val());
             MOTOR_CONFIG.mincommand = parseInt($('input[name="mincommand"]').val());
-            if(semver.gte(CONFIG.apiVersion, "1.42.0")) {
+            if (semver.gte(CONFIG.apiVersion, "1.42.0")) {
                 MOTOR_CONFIG.motor_poles = parseInt($('input[name="motorPoles"]').val());
             }
 
-            if(self.SHOW_OLD_BATTERY_CONFIG) {
+            if (self.SHOW_OLD_BATTERY_CONFIG) {
                 MISC.vbatmincellvoltage = parseFloat($('input[name="mincellvoltage"]').val());
                 MISC.vbatmaxcellvoltage = parseFloat($('input[name="maxcellvoltage"]').val());
                 MISC.vbatwarningcellvoltage = parseFloat($('input[name="warningcellvoltage"]').val());
@@ -1207,17 +1161,11 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
                 MISC.multiwiicurrentoutput = $('input[name="multiwiicurrentoutput"]').is(':checked') ? 1 : 0;
             }
 
-            if(semver.gte(CONFIG.apiVersion, "1.14.0")) {
-                MOTOR_3D_CONFIG.deadband3d_low = parseInt($('input[name="3ddeadbandlow"]').val());
-                MOTOR_3D_CONFIG.deadband3d_high = parseInt($('input[name="3ddeadbandhigh"]').val());
-                MOTOR_3D_CONFIG.neutral = parseInt($('input[name="3dneutral"]').val());
-            }
-
             if (semver.gte(CONFIG.apiVersion, "1.41.0")) {
                 SENSOR_ALIGNMENT.gyro_to_use = parseInt(orientation_gyro_to_use_e.val());
             }
 
-            PID_ADVANCED_CONFIG.fast_pwm_protocol = parseInt(esc_protocol_e.val()-1);
+            PID_ADVANCED_CONFIG.fast_pwm_protocol = parseInt(esc_protocol_e.val() - 1);
             PID_ADVANCED_CONFIG.use_unsyncedPwm = $('input[id="unsyncedPWMSwitch"]').is(':checked') ? 1 : 0;
             PID_ADVANCED_CONFIG.motor_pwm_rate = parseInt($('input[name="unsyncedpwmfreq"]').val());
             PID_ADVANCED_CONFIG.gyro_sync_denom = parseInt(gyroSelectElement.val());
@@ -1266,7 +1214,7 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
 
             function save_misc() {
                 var next_callback = save_mixer_config;
-                if(semver.lt(CONFIG.apiVersion, "1.33.0")) {
+                if (semver.lt(CONFIG.apiVersion, "1.33.0")) {
                     MSP.send_message(MSPCodes.MSP_SET_MISC, mspHelper.crunch(MSPCodes.MSP_SET_MISC), false, next_callback);
                 } else {
                     next_callback();
@@ -1285,7 +1233,7 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
 
             function save_motor_config() {
                 var next_callback = save_gps_config;
-                if(semver.gte(CONFIG.apiVersion, "1.33.0")) {
+                if (semver.gte(CONFIG.apiVersion, "1.33.0")) {
                     MSP.send_message(MSPCodes.MSP_SET_MOTOR_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_MOTOR_CONFIG), false, next_callback);
                 } else {
                     next_callback();
@@ -1298,17 +1246,12 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
                     GPS_CONFIG.auto_config = $('input[name="gps_auto_config"]').is(':checked') ? 1 : 0;
                 }
 
-                var next_callback = save_motor_3d_config;
-                if(semver.gte(CONFIG.apiVersion, "1.33.0")) {
+                var next_callback = save_rc_deadband;
+                if (semver.gte(CONFIG.apiVersion, "1.33.0")) {
                     MSP.send_message(MSPCodes.MSP_SET_GPS_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_GPS_CONFIG), false, next_callback);
                 } else {
                     next_callback();
                 }
-            }
-
-            function save_motor_3d_config() {
-                var next_callback = save_rc_deadband;
-                MSP.send_message(MSPCodes.MSP_SET_MOTOR_3D_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_MOTOR_3D_CONFIG), false, next_callback);
             }
 
             function save_rc_deadband() {
@@ -1339,19 +1282,8 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
                 SENSOR_CONFIG.baro_hardware = $('input[id="baroHardwareSwitch"]').is(':checked') ? 0 : 1;
                 SENSOR_CONFIG.mag_hardware = $('input[id="magHardwareSwitch"]').is(':checked') ? 0 : 1;
 
-                var next_callback = save_name;
+                var next_callback = save_rx_config;;
                 MSP.send_message(MSPCodes.MSP_SET_SENSOR_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_SENSOR_CONFIG), false, next_callback);
-            }
-
-            function save_name() {
-                var next_callback = save_rx_config;
-
-                if(self.SHOW_OLD_BATTERY_CONFIG) {
-                    next_callback = save_battery;
-                }
-
-                CONFIG.name = $.trim($('input[name="craftName"]').val());
-                MSP.send_message(MSPCodes.MSP_SET_NAME, mspHelper.crunch(MSPCodes.MSP_SET_NAME), false, next_callback);
             }
 
             function save_battery() {
@@ -1388,7 +1320,7 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
             function reboot() {
                 GUI.log(i18n.getMessage('configurationEepromSaved'));
 
-                GUI.tab_switch_cleanup(function() {
+                GUI.tab_switch_cleanup(function () {
                     MSP.send_message(MSPCodes.MSP_SET_REBOOT, false, false);
                     reinitialiseConnection(self);
                 });

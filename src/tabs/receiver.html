@@ -2,7 +2,8 @@
     <div class="content_wrapper">
         <div class="tab_title" i18n="tabReceiver"></div>
         <div class="cf_doc_version_bt">
-            <a id="button-documentation" href="https://github.com/betaflight/betaflight/releases" target="_blank" rel="noopener noreferrer"></a>
+            <a id="button-documentation" href="https://github.com/betaflight/betaflight/releases" target="_blank"
+                rel="noopener noreferrer"></a>
         </div>
         <div class="note">
             <p i18n="receiverHelp"></p>
@@ -22,8 +23,7 @@
                     </div>
                     <div class="hybrid_element">
                         <input type="text" name="rcmap" spellcheck="false" />
-                        <select class="hybrid_helper"
-                                name="rcmap_helper">
+                        <select class="hybrid_helper" name="rcmap_helper">
                             <option i18n="receiverChannelDefaultOption" value="AETRC123"></option>
                             <option value="AETRC123">FrSky</option>
                             <option value="AETR1C23">Futaba / Hitec</option>
@@ -41,19 +41,19 @@
                         <tr>
                             <td>
                                 <div class="input-helpicon-flex">
-                                    <input type="number" name="stick_min" min="1000" max="1200"/>
+                                    <input type="number" name="stick_min" min="1000" max="1200" />
                                     <div class="helpicon cf_tip" i18n_title="receiverHelpStickMin"></div>
                                 </div>
                             </td>
                             <td>
                                 <div class="input-helpicon-flex">
-                                    <input type="number" name="stick_center" min="1401" max="1599"/>
+                                    <input type="number" name="stick_center" min="1401" max="1599" />
                                     <div class="helpicon cf_tip" i18n_title="receiverHelpStickCenter"></div>
                                 </div>
                             </td>
                             <td>
                                 <div class="input-helpicon-flex">
-                                    <input type="number" name="stick_max" min="1800" max="2000"/>
+                                    <input type="number" name="stick_max" min="1800" max="2000" />
                                     <div class="helpicon cf_tip" i18n_title="receiverHelpStickMax"></div>
                                 </div>
                             </td>
@@ -65,25 +65,18 @@
                         <tr>
                             <th i18n="receiverDeadband"></th>
                             <th i18n="receiverYawDeadband"></th>
-                            <th i18n="recevier3dDeadbandThrottle"></th>
                         </tr>
                         <tr>
                             <td>
                                 <div class="input-helpicon-flex">
-                                    <input type="number" name="deadband" step="1" min="0" max="32"/>
+                                    <input type="number" name="deadband" step="1" min="0" max="32" />
                                     <div class="helpicon cf_tip" i18n_title="receiverHelpDeadband"></div>
                                 </div>
                             </td>
                             <td>
                                 <div class="input-helpicon-flex">
-                                    <input type="number" name="yaw_deadband" step="1" min="0" max="100"/>
+                                    <input type="number" name="yaw_deadband" step="1" min="0" max="100" />
                                     <div class="helpicon cf_tip" i18n_title="receiverHelpYawDeadband"></div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="input-helpicon-flex">
-                                    <input type="number" name="3ddeadbandthrottle" step="1" min="0" max="100"/>
-                                    <div class="helpicon cf_tip" i18n_title="receiverHelp3dDeadbandThrottle"></div>
                                 </div>
                             </td>
                         </tr>
@@ -146,7 +139,8 @@
                             </td>
                         </tr>
                         <tr class="rcSmoothing-input-manual">
-                            <td class="rcSmoothing-input-cutoff"><input type="number" name="rcSmoothingInputHz-number" step="1" min="1" max="255"/></td>
+                            <td class="rcSmoothing-input-cutoff"><input type="number" name="rcSmoothingInputHz-number"
+                                    step="1" min="1" max="255" /></td>
                             <td class="rcSmoothing-input-cutoff" colspan="2">
                                 <div>
                                     <label>
@@ -193,7 +187,8 @@
                             </td>
                         </tr>
                         <tr class="rcSmoothing-derivative-manual">
-                            <td class="rcSmoothing-derivative-cutoff"><input type="number" name="rcSmoothingDerivativeCutoff-number" step="1" min="1" max="255"/></td>
+                            <td class="rcSmoothing-derivative-cutoff"><input type="number"
+                                    name="rcSmoothingDerivativeCutoff-number" step="1" min="1" max="255" /></td>
                             <td colspan="2" class="rcSmoothing-derivative-cutoff">
                                 <div>
                                     <label>
@@ -256,7 +251,8 @@
                             </td>
                         </tr>
                         <tr class="rcInterpolation">
-                            <td class="rc-interpolation-manual" colspan="1"><input type="number" name="rcInterpolationInterval-number" step="1" min="1" max="50" /></td>
+                            <td class="rc-interpolation-manual" colspan="1"><input type="number"
+                                    name="rcInterpolationInterval-number" step="1" min="1" max="50" /></td>
                             <td class="rc-interpolation-manual" colspan="2">
                                 <div>
                                     <label>
@@ -271,18 +267,18 @@
                 <div class="gui_box grey tunings topspacer">
                     <table class="pid_titlebar">
                         <thead>
-                        <tr>
-                            <th i18n="receiverModelPreview"></th>
-                        </tr>
+                            <tr>
+                                <th i18n="receiverModelPreview"></th>
+                            </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td class="model_preview_cell">
-                                <div class="model_preview background_paper">
-                                    <canvas id="canvas"></canvas>
-                                </div>
-                            </td>
-                        </tr>
+                            <tr>
+                                <td class="model_preview_cell">
+                                    <div class="model_preview background_paper">
+                                        <canvas id="canvas"></canvas>
+                                    </div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
