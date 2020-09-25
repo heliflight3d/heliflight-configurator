@@ -17,51 +17,12 @@ var Features = function (config) {
         { bit: 14, group: 'rxMode', mode: 'select', name: 'RX_MSP' },
         { bit: 15, group: 'rssi', name: 'RSSI_ADC' },
         { bit: 16, group: 'other', name: 'LED_STRIP' },
-        { bit: 17, group: 'other', name: 'DISPLAY', haveTip: true }
+        { bit: 17, group: 'other', name: 'DISPLAY', haveTip: true },
+        { bit: 19, group: 'other', name: 'BLACKBOX', haveTip: true },
+        { bit: 20, group: 'other', name: 'CHANNEL_FORWARDING' }
     ];
 
-    if (!semver.gte(config.apiVersion, "1.33.0")) {
-        features.push(
-            { bit: 19, group: 'other', name: 'BLACKBOX', haveTip: true }
-        );
-    }
-
-    if (semver.gte(config.apiVersion, "1.12.0")) {
-        features.push(
-            { bit: 20, group: 'other', name: 'CHANNEL_FORWARDING' }
-        );
-    }
-
-    if (semver.gte(CONFIG.apiVersion, "1.15.0") && !semver.gte(CONFIG.apiVersion, "1.36.0")) {
-        features.push(
-            { bit: 8, group: 'rxFailsafe', name: 'FAILSAFE', haveTip: true }
-        );
-    }
-
-    if (semver.gte(CONFIG.apiVersion, "1.16.0")) {
-        features.push(
-            { bit: 21, group: 'other', name: 'TRANSPONDER', haveTip: true }
-        );
-    }
-
     if (config.flightControllerVersion !== '') {
-        if (semver.gte(CONFIG.apiVersion, "1.16.0")) {
-            features.push(
-                { bit: 22, group: 'other', name: 'AIRMODE' }
-            );
-        }
-
-        if (semver.gte(CONFIG.apiVersion, "1.16.0")) {
-            if (semver.lt(CONFIG.apiVersion, "1.20.0")) {
-                features.push(
-                    { bit: 23, group: 'superexpoRates', name: 'SUPEREXPO_RATES' }
-                );
-            } else if (!semver.gte(config.apiVersion, "1.33.0")) {
-                features.push(
-                    { bit: 23, group: 'other', name: 'SDCARD' }
-                );
-            }
-        }
 
         if (semver.gte(CONFIG.apiVersion, "1.31.0")) {
             features.push(
@@ -72,15 +33,7 @@ var Features = function (config) {
 
         if (semver.gte(CONFIG.apiVersion, "1.36.0")) {
             features.push(
-                { bit: 28, group: 'antiGravity', name: 'ANTI_GRAVITY', haveTip: true, hideName: true },
                 { bit: 29, group: 'other', name: 'DYNAMIC_FILTER' }
-            );
-        }
-
-        if (!semver.gte(CONFIG.apiVersion, "1.36.0")) {
-            features.push(
-                { bit: 1, group: 'batteryVoltage', name: 'VBAT' },
-                { bit: 11, group: 'batteryCurrent', name: 'CURRENT_METER' }
             );
         }
     }
