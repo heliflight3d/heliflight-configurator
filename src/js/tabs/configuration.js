@@ -660,15 +660,6 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
             $('.hardwareSelection').hide();
         }
 
-        if (semver.gte(CONFIG.apiVersion, "1.31.0")) {
-            $('input[name="fpvCamAngleDegrees"]').val(RX_CONFIG.fpvCamAngleDegrees);
-            if (semver.gte(CONFIG.apiVersion, "1.41.0")) {
-                $('input[name="fpvCamAngleDegrees"]').attr("max", 90);
-            }
-        } else {
-            $('div.fpvCamAngleDegrees').hide();
-        }
-
         if (semver.lt(CONFIG.apiVersion, "1.20.0")) {
             $('.miscSettings').hide();
         }
@@ -1184,10 +1175,6 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
             PID_ADVANCED_CONFIG.digitalIdlePercent = parseFloat($('input[name="digitalIdlePercent"]').val());
             if (semver.gte(CONFIG.apiVersion, "1.25.0") && semver.lt(CONFIG.apiVersion, "1.41.0")) {
                 PID_ADVANCED_CONFIG.gyroUse32kHz = $('input[id="gyroUse32kHz"]').is(':checked') ? 1 : 0;
-            }
-
-            if (semver.gte(CONFIG.apiVersion, "1.31.0")) {
-                RX_CONFIG.fpvCamAngleDegrees = parseInt($('input[name="fpvCamAngleDegrees"]').val());
             }
 
             analytics.sendChangeEvents(analytics.EVENT_CATEGORIES.FLIGHT_CONTROLLER, self.analyticsChanges);
