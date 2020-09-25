@@ -7,7 +7,6 @@ var Features = function (config) {
         { bit: 0, group: 'rxMode', mode: 'select', name: 'RX_PPM' },
         { bit: 2, group: 'other', name: 'INFLIGHT_ACC_CAL' },
         { bit: 3, group: 'rxMode', mode: 'select', name: 'RX_SERIAL' },
-        { bit: 5, group: 'other', name: 'SERVO_TILT', haveTip: true },
         { bit: 6, group: 'other', name: 'SOFTSERIAL', haveTip: true },
         { bit: 7, group: 'gps', name: 'GPS', haveTip: true },
         { bit: 9, group: 'other', name: 'SONAR' },
@@ -16,9 +15,7 @@ var Features = function (config) {
         { bit: 14, group: 'rxMode', mode: 'select', name: 'RX_MSP' },
         { bit: 15, group: 'rssi', name: 'RSSI_ADC' },
         { bit: 16, group: 'other', name: 'LED_STRIP' },
-        { bit: 17, group: 'other', name: 'DISPLAY', haveTip: true },
-        { bit: 19, group: 'other', name: 'BLACKBOX', haveTip: true },
-        { bit: 20, group: 'other', name: 'CHANNEL_FORWARDING' }
+        { bit: 19, group: 'other', name: 'BLACKBOX', haveTip: true }
     ];
 
     if (config.flightControllerVersion !== '') {
