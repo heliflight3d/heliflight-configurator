@@ -121,9 +121,23 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
     }
 
     function load_sensor_alignment() {
-        var next_callback = load_rx_config;
+        var next_callback = load_name;
         if (semver.gte(CONFIG.apiVersion, "1.15.0")) {
             MSP.send_message(MSPCodes.MSP_SENSOR_ALIGNMENT, false, false, next_callback);
+        } else {
+            next_callback();
+        }
+    }
+
+    function load_name() {
+        var next_callback = load_rx_config;
+
+        if (self.SHOW_OLD_BATTERY_CONFIG) {
+            next_callback = load_battery;
+        }
+
+        if (semver.gte(CONFIG.apiVersion, "1.20.0")) {
+            MSP.send_message(MSPCodes.MSP_NAME, false, false, next_callback);
         } else {
             next_callback();
         }
@@ -659,6 +673,8 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
         if (semver.lt(CONFIG.apiVersion, "1.16.0")) {
             $('.hardwareSelection').hide();
         }
+
+        $('input[name="craftName"]').val(CONFIG.name);
 
         if (semver.gte(CONFIG.apiVersion, "1.31.0")) {
             $('input[name="fpvCamAngleDegrees"]').val(RX_CONFIG.fpvCamAngleDegrees);
@@ -1282,8 +1298,19 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
                 SENSOR_CONFIG.baro_hardware = $('input[id="baroHardwareSwitch"]').is(':checked') ? 0 : 1;
                 SENSOR_CONFIG.mag_hardware = $('input[id="magHardwareSwitch"]').is(':checked') ? 0 : 1;
 
-                var next_callback = save_rx_config;;
+                var next_callback = save_name;
                 MSP.send_message(MSPCodes.MSP_SET_SENSOR_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_SENSOR_CONFIG), false, next_callback);
+            }
+
+            function save_name() {
+                var next_callback = save_rx_config;
+
+                if (self.SHOW_OLD_BATTERY_CONFIG) {
+                    next_callback = save_battery;
+                }
+
+                CONFIG.name = $.trim($('input[name="craftName"]').val());
+                MSP.send_message(MSPCodes.MSP_SET_NAME, mspHelper.crunch(MSPCodes.MSP_SET_NAME), false, next_callback);
             }
 
             function save_battery() {
