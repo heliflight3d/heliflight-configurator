@@ -21,8 +21,7 @@ jobs:
         node-version: 10.16.3
 
     - name: Set build variables
-      run: |
-        echo ::set-env name=release::"${GITHUB_REF##*/}"
+      run: echo "release=${GITHUB_REF##*/}" >> ${GITHUB_ENV}
 
     - name: Initialise build environment
       run: yarn install
@@ -54,8 +53,7 @@ jobs:
         node-version: 10.16.3
 
     - name: Set build variables
-      run: |
-        echo ::set-env name=release::"${GITHUB_REF##*/}"
+      run: echo "release=${GITHUB_REF##*/}" >> ${GITHUB_ENV}
 
     - name: Initialise build environment
       run: yarn install
@@ -89,7 +87,7 @@ jobs:
     - name: Set build variables
       run: |
         $snapshot = $env:GITHUB_REF -replace '.*/',''
-        echo "::set-env name=release::$snapshot"
+        echo "release=$snapshot" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
 
     - name: Initialise build environment
       run: yarn install
